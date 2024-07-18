@@ -13,10 +13,14 @@ import {
   MenuItem,
   MenuList,
   useColorModeValue,
+  useColorMode,
 } from "@chakra-ui/react";
-import { FiMenu, FiBell, FiChevronDown } from "react-icons/fi";
+import { FiMenu, FiChevronDown } from "react-icons/fi";
+import { SunIcon, MoonIcon } from "@chakra-ui/icons";
 
 const MobileNav = ({ onOpen, ...rest }) => {
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -50,8 +54,9 @@ const MobileNav = ({ onOpen, ...rest }) => {
         <IconButton
           size="lg"
           variant="ghost"
-          aria-label="open menu"
-          icon={<FiBell />}
+          aria-label="toggle dark mode"
+          onClick={toggleColorMode}
+          icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
         />
         <Flex alignItems={"center"}>
           <Menu>
