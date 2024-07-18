@@ -1,5 +1,11 @@
 import React from "react";
-import { Box, CloseButton, Flex, Text } from "@chakra-ui/react";
+import {
+  Box,
+  CloseButton,
+  Flex,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import NavItem from "./NavItem";
 import LinkItems from "./LinkItems";
 
@@ -22,7 +28,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem key={link.name} icon={link.icon} path={link.path}>
           {link.name}
         </NavItem>
       ))}

@@ -1,11 +1,12 @@
 import React from "react";
 import { Box, Flex, Icon } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
-const NavItem = ({ icon, children, ...rest }) => {
+const NavItem = ({ icon, children, path, ...rest }) => {
   return (
     <Box
-      as="a"
-      href="#"
+      as={Link}
+      to={path}
       style={{ textDecoration: "none" }}
       _focus={{ boxShadow: "none" }}
     >
