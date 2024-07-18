@@ -37,7 +37,7 @@ const Dashboard = () => {
           data={data}
           totalCount={data.length}
           rowsPerPage={5}
-          onPageChange={null} // Sayfalama gerekmediğinde
+          onPageChange={null}
         />
       </VStack>
     </Box>
