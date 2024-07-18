@@ -31,7 +31,7 @@ const SidebarWithHeader = ({ children }) => {
         </DrawerContent>
       </Drawer>
       <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4" flex="1" bg="gray.100">
+      <Box ml={{ base: 0, md: 60 }} p="4" flex="1" bg="gray.100" minH={'100vh'}>
         {children}
       </Box>
     </Box>
