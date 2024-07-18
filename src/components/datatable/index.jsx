@@ -76,6 +76,69 @@ const DataTable = ({
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
   };
 
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+
+    if (totalPages <= 5) {
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(
+          <Button
+            key={i}
+            onClick={() => setCurrentPage(i)}
+            variant={currentPage === i ? "solid" : "outline"}
+          >
+            {i}
+          </Button>
+        );
+      }
+    } else {
+      pageNumbers.push(
+        <Button
+          key={1}
+          onClick={() => setCurrentPage(1)}
+          variant={currentPage === 1 ? "solid" : "outline"}
+        >
+          1
+        </Button>
+      );
+
+      if (currentPage > 3) {
+        pageNumbers.push(<span key="dots1">...</span>);
+      }
+
+      const startPage = Math.max(2, currentPage - 1);
+      const endPage = Math.min(totalPages - 1, currentPage + 1);
+
+      for (let i = startPage; i <= endPage; i++) {
+        pageNumbers.push(
+          <Button
+            key={i}
+            onClick={() => setCurrentPage(i)}
+            variant={currentPage === i ? "solid" : "outline"}
+          >
+            {i}
+          </Button>
+        );
+      }
+
+      if (currentPage < totalPages - 2) {
+        pageNumbers.push(<span key="dots2">...</span>);
+      }
+
+      pageNumbers.push(
+        <Button
+          key={totalPages}
+          onClick={() => setCurrentPage(totalPages)}
+          variant={currentPage === totalPages ? "solid" : "outline"}
+        >
+          {totalPages}
+        </Button>
+      );
+    }
+
+    return pageNumbers;
+  };
+
   return (
     <Box bg={tableBgColor} p={4} boxShadow="sm" borderRadius="md">
       <Flex justify="space-between" mb={4}>
@@ -133,15 +196,7 @@ const DataTable = ({
         >
           Önceki
         </Button>
-        {[...Array(totalPages).keys()].map((page) => (
-          <Button
-            key={page + 1}
-            onClick={() => setCurrentPage(page + 1)}
-            variant={currentPage === page + 1 ? "solid" : "outline"}
-          >
-            {page + 1}
-          </Button>
-        ))}
+        {renderPageNumbers()}
         <Button
           onClick={handleNextPage}
           isDisabled={currentPage === totalPages}
