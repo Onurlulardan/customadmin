@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, VStack, Heading } from "@chakra-ui/react";
 import DataTable from "../../../components/datatable";
 
@@ -32,7 +32,13 @@ const Dashboard = () => {
         <Heading as="h1" size="lg">
           Dashboard
         </Heading>
-        <DataTable columns={columns} data={data} rowsPerPage={5} />
+        <DataTable
+          columns={columns}
+          data={data}
+          totalCount={data.length}
+          rowsPerPage={5}
+          onPageChange={null} // Sayfalama gerekmediğinde
+        />
       </VStack>
     </Box>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   Table,
   Thead,
@@ -14,7 +14,13 @@ import {
   Flex,
 } from "@chakra-ui/react";
 
-const DataTable = ({ columns, data, rowsPerPage = 10 }) => {
+const DataTable = ({
+  columns,
+  data,
+  totalCount,
+  rowsPerPage = 10,
+  onPageChange,
+}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
@@ -22,9 +28,24 @@ const DataTable = ({ columns, data, rowsPerPage = 10 }) => {
   const tableBgColor = useColorModeValue("white", "gray.800");
   const tableBorderColor = useColorModeValue("gray.200", "gray.600");
 
-  const sortedData = React.useMemo(() => {
-    if (sortConfig.key) {
-      return [...data].sort((a, b) => {
+  useEffect(() => {
+    if (onPageChange) {
+      onPageChange(currentPage, rowsPerPage, searchTerm);
+    }
+  }, [currentPage, rowsPerPage, searchTerm, onPageChange]);
+
+  const requestSort = (key) => {
+    let direction = "ascending";
+    if (sortConfig.key === key && sortConfig.direction === "ascending") {
+      direction = "descending";
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const sortedData = useMemo(() => {
+    let sortableItems = [...data];
+    if (sortConfig.key !== null) {
+      sortableItems.sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
           return sortConfig.direction === "ascending" ? -1 : 1;
         }
@@ -34,7 +55,7 @@ const DataTable = ({ columns, data, rowsPerPage = 10 }) => {
         return 0;
       });
     }
-    return data;
+    return sortableItems;
   }, [data, sortConfig]);
 
   const filteredData = sortedData.filter((item) =>
@@ -43,7 +64,7 @@ const DataTable = ({ columns, data, rowsPerPage = 10 }) => {
     )
   );
 
-  const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+  const totalPages = Math.ceil(totalCount / rowsPerPage);
   const startIndex = (currentPage - 1) * rowsPerPage;
   const selectedData = filteredData.slice(startIndex, startIndex + rowsPerPage);
 
@@ -53,14 +74,6 @@ const DataTable = ({ columns, data, rowsPerPage = 10 }) => {
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-  };
-
-  const requestSort = (key) => {
-    let direction = "ascending";
-    if (sortConfig.key === key && sortConfig.direction === "ascending") {
-      direction = "descending";
-    }
-    setSortConfig({ key, direction });
   };
 
   return (
