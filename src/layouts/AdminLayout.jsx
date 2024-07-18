@@ -1,15 +1,15 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import SidebarWithHeader from "../components/sidebar";
+import AdminRoutes from "../routes/AdminRoutes";
 import Dashboard from "../admin/pages/dashboard";
 
 const AdminLayout = () => {
   return (
     <div>
       <SidebarWithHeader />
-      <Routes>
-        <Route path="dashboard" element={<Dashboard />} />
-      </Routes>
+      <AdminRoutes />
+      <Outlet />
     </div>
   );
 };
