@@ -17,18 +17,32 @@ import {
 const DataTable = ({ columns, data, rowsPerPage = 10 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
 
   const tableBgColor = useColorModeValue("white", "gray.800");
   const tableBorderColor = useColorModeValue("gray.200", "gray.600");
 
-  // Arama terimine göre filtreleme
-  const filteredData = data.filter((item) =>
+  const sortedData = React.useMemo(() => {
+    if (sortConfig.key) {
+      return [...data].sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === "ascending" ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === "ascending" ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    return data;
+  }, [data, sortConfig]);
+
+  const filteredData = sortedData.filter((item) =>
     columns.some((col) =>
       String(item[col.key]).toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
 
-  // Hesaplanmış veriler
   const totalPages = Math.ceil(filteredData.length / rowsPerPage);
   const startIndex = (currentPage - 1) * rowsPerPage;
   const selectedData = filteredData.slice(startIndex, startIndex + rowsPerPage);
@@ -39,6 +53,14 @@ const DataTable = ({ columns, data, rowsPerPage = 10 }) => {
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  };
+
+  const requestSort = (key) => {
+    let direction = "ascending";
+    if (sortConfig.key === key && sortConfig.direction === "ascending") {
+      direction = "descending";
+    }
+    setSortConfig({ key, direction });
   };
 
   return (
@@ -55,8 +77,21 @@ const DataTable = ({ columns, data, rowsPerPage = 10 }) => {
         <Thead>
           <Tr>
             {columns.map((col) => (
-              <Th key={col.key} border="1px solid" borderColor={tableBorderColor}>
+              <Th
+                key={col.key}
+                border="1px solid"
+                borderColor={tableBorderColor}
+                onClick={() => requestSort(col.key)}
+                cursor="pointer"
+              >
                 {col.header}
+                {sortConfig.key === col.key ? (
+                  sortConfig.direction === "ascending" ? (
+                    <span> ↑</span>
+                  ) : (
+                    <span> ↓</span>
+                  )
+                ) : null}
               </Th>
             ))}
           </Tr>
@@ -65,7 +100,11 @@ const DataTable = ({ columns, data, rowsPerPage = 10 }) => {
           {selectedData.map((item, rowIndex) => (
             <Tr key={rowIndex}>
               {columns.map((col) => (
-                <Td key={col.key} border="1px solid" borderColor={tableBorderColor}>
+                <Td
+                  key={col.key}
+                  border="1px solid"
+                  borderColor={tableBorderColor}
+                >
                   {col.render ? col.render(item[col.key], item) : item[col.key]}
                 </Td>
               ))}
