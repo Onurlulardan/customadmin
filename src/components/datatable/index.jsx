@@ -29,6 +29,7 @@ import {
 import { IoMdRefresh } from "react-icons/io";
 import { FaFilterCircleXmark } from "react-icons/fa6";
 import { BiHide } from "react-icons/bi";
+import { MdDeleteForever, MdEdit } from "react-icons/md";
 
 const DataTable = ({
   columns,
@@ -37,6 +38,10 @@ const DataTable = ({
   rowsPerPage = 10,
   onPageChange,
   onRefresh,
+  deleteActive = false,
+  onDelete,
+  editActive = false,
+  onEdit,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
@@ -161,6 +166,24 @@ const DataTable = ({
                   </Th>
                 )
             )}
+            {editActive && (
+              <Th
+                maxW={"20px"}
+                border="1px solid"
+                borderColor={tableBorderColor}
+              >
+                Edit
+              </Th>
+            )}
+            {deleteActive && (
+              <Th
+                maxW={"20px"}
+                border="1px solid"
+                borderColor={tableBorderColor}
+              >
+                Delete
+              </Th>
+            )}
           </Tr>
         </Thead>
         <Tbody>
@@ -175,6 +198,24 @@ const DataTable = ({
                         : item[col.key]}
                     </Td>
                   )
+              )}
+              {editActive && (
+                <Td maxW={"20px"}>
+                  <Flex justify="center">
+                    <Button colorScheme="blue" onClick={() => onEdit(item.id)}>
+                      <MdEdit />
+                    </Button>
+                  </Flex>
+                </Td>
+              )}
+              {deleteActive && (
+                <Td maxW={"20px"}>
+                  <Flex justify="center">
+                    <Button colorScheme="red" onClick={() => onDelete(item.id)}>
+                      <MdDeleteForever />
+                    </Button>
+                  </Flex>
+                </Td>
               )}
             </Tr>
           ))}

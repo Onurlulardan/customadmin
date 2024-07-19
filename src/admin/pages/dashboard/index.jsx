@@ -40,6 +40,14 @@ const Dashboard = () => {
           handleRefresh={() => {
             return data;
           }}
+          deleteActive={true}
+          onDelete={(e) => {
+            console.log(e);
+          }}
+          editActive={true}
+          onEdit={(e) => {
+            console.log(e);
+          }}
         />
       </VStack>
     </Box>
