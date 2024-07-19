@@ -13,11 +13,22 @@ import {
   Button,
   HStack,
   Tooltip,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Checkbox,
 } from "@chakra-ui/react";
 import Pagination from "./Pagination";
-import { requestSort, getSortedData, getFilteredData } from "./helpers";
+import {
+  requestSort,
+  getSortedData,
+  getFilteredData,
+  toggleColumnVisibility,
+} from "./helpers";
 import { IoMdRefresh } from "react-icons/io";
 import { FaFilterCircleXmark } from "react-icons/fa6";
+import { BiHide } from "react-icons/bi";
 
 const DataTable = ({
   columns,
@@ -30,6 +41,7 @@ const DataTable = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
+  const [hiddenColumns, setHiddenColumns] = useState([]);
 
   const tableBgColor = useColorModeValue("white", "gray.800");
   const tableBorderColor = useColorModeValue("gray.200", "gray.600");
@@ -92,39 +104,78 @@ const DataTable = ({
               <FaFilterCircleXmark />
             </Button>
           </Tooltip>
+          <Menu closeOnSelect={false}>
+            <Tooltip label="Hide/Show columns" placement="top-start">
+              <MenuButton as={Button}>
+                <BiHide />
+              </MenuButton>
+            </Tooltip>
+            <MenuList>
+              {columns.map((col) => (
+                <MenuItem key={col.key}>
+                  <Checkbox
+                    isChecked={!hiddenColumns.includes(col.key)}
+                    onChange={() =>
+                      toggleColumnVisibility(
+                        col.key,
+                        hiddenColumns,
+                        setHiddenColumns
+                      )
+                    }
+                  >
+                    {col.header}
+                  </Checkbox>
+                </MenuItem>
+              ))}
+            </MenuList>
+          </Menu>
         </HStack>
       </Flex>
       <Table variant="striped" colorScheme="gray" bg={tableBgColor}>
         <Thead>
           <Tr>
-            {columns.map((col) => (
-              <Th
-                key={col.key}
-                border="1px solid"
-                borderColor={tableBorderColor}
-                onClick={() => requestSort(col.key, sortConfig, setSortConfig)}
-                cursor="pointer"
-              >
-                {col.header}
-                {sortConfig.key === col.key ? (
-                  sortConfig.direction === "ascending" ? (
-                    <span> ↑</span>
-                  ) : (
-                    <span> ↓</span>
-                  )
-                ) : null}
-              </Th>
-            ))}
+            {columns.map(
+              (col) =>
+                !hiddenColumns.includes(col.key) && (
+                  <Th
+                    key={col.key}
+                    border="1px solid"
+                    borderColor={tableBorderColor}
+                    onClick={() =>
+                      requestSort(col.key, sortConfig, setSortConfig)
+                    }
+                    cursor="pointer"
+                  >
+                    {col.header}
+                    {sortConfig.key === col.key ? (
+                      sortConfig.direction === "ascending" ? (
+                        <span> ↑</span>
+                      ) : (
+                        <span> ↓</span>
+                      )
+                    ) : null}
+                  </Th>
+                )
+            )}
           </Tr>
         </Thead>
         <Tbody>
           {selectedData.map((item, rowIndex) => (
             <Tr key={rowIndex}>
-              {columns.map((col) => (
-                <Td key={col.key}>
-                  {col.render ? col.render(item[col.key], item) : item[col.key]}
-                </Td>
-              ))}
+              {columns.map(
+                (col) =>
+                  !hiddenColumns.includes(col.key) && (
+                    <Td
+                      key={col.key}
+                      border="1px solid"
+                      borderColor={tableBorderColor}
+                    >
+                      {col.render
+                        ? col.render(item[col.key], item)
+                        : item[col.key]}
+                    </Td>
+                  )
+              )}
             </Tr>
           ))}
         </Tbody>
