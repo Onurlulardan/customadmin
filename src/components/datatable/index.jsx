@@ -165,11 +165,7 @@ const DataTable = ({
               {columns.map(
                 (col) =>
                   !hiddenColumns.includes(col.key) && (
-                    <Td
-                      key={col.key}
-                      border="1px solid"
-                      borderColor={tableBorderColor}
-                    >
+                    <Td key={col.key}>
                       {col.render
                         ? col.render(item[col.key], item)
                         : item[col.key]}
