@@ -42,12 +42,15 @@ const DataTable = ({
   onDelete,
   editActive = false,
   onEdit,
+  selectable = false,
+  onDeleteSelected,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
   const [hiddenColumns, setHiddenColumns] = useState([]);
   const [rowsPerPageState, setRowsPerPageState] = useState(rowsPerPage);
+  const [selectedRows, setSelectedRows] = useState([]);
 
   const tableBgColor = useColorModeValue("white", "gray.800");
   const tableBorderColor = useColorModeValue("gray.200", "gray.600");
@@ -87,6 +90,22 @@ const DataTable = ({
     startIndex + rowsPerPageState
   );
 
+  const handleSelectRow = (id) => {
+    setSelectedRows((prevSelectedRows) =>
+      prevSelectedRows.includes(id)
+        ? prevSelectedRows.filter((rowId) => rowId !== id)
+        : [...prevSelectedRows, id]
+    );
+  };
+
+  const handleSelectAll = () => {
+    if (selectedRows.length === selectedData.length) {
+      setSelectedRows([]);
+    } else {
+      setSelectedRows(selectedData.map((item) => item.id));
+    }
+  };
+
   return (
     <Box
       bg={tableBgColor}
@@ -103,6 +122,16 @@ const DataTable = ({
           width="auto"
         />
         <HStack spacing={2}>
+          {selectable && selectedRows.length > 0 && (
+            <Tooltip label="Tümünü Sil" placement="top-start">
+              <Button
+                colorScheme="red"
+                onClick={() => onDeleteSelected(selectedRows)}
+              >
+                <MdDeleteForever />
+              </Button>
+            </Tooltip>
+          )}
           <Tooltip label="Refresh data" placement="top-start">
             <Button onClick={handleRefresh}>
               <IoMdRefresh />
@@ -143,6 +172,18 @@ const DataTable = ({
       <Table variant="striped" colorScheme="gray" bg={tableBgColor}>
         <Thead>
           <Tr>
+            {selectable && (
+              <Th
+                maxW={"20px"}
+                border="1px solid"
+                borderColor={tableBorderColor}
+              >
+                <Checkbox
+                  isChecked={selectedRows.length === selectedData.length}
+                  onChange={handleSelectAll}
+                />
+              </Th>
+            )}
             {columns.map(
               (col) =>
                 !hiddenColumns.includes(col.key) && (
@@ -189,6 +230,18 @@ const DataTable = ({
         <Tbody>
           {selectedData.map((item, rowIndex) => (
             <Tr key={rowIndex}>
+              {selectable && (
+                <Td
+                  maxW={"20px"}
+                  border="1px solid"
+                  borderColor={tableBorderColor}
+                >
+                  <Checkbox
+                    isChecked={selectedRows.includes(item.id)}
+                    onChange={() => handleSelectRow(item.id)}
+                  />
+                </Td>
+              )}
               {columns.map(
                 (col) =>
                   !hiddenColumns.includes(col.key) && (

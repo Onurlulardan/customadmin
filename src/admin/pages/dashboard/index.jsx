@@ -48,6 +48,10 @@ const Dashboard = () => {
           onEdit={(e) => {
             console.log(e);
           }}
+          selectable={true}
+          onDeleteSelected={(e) => {
+            console.log(e);
+          }}
         />
       </VStack>
     </Box>
