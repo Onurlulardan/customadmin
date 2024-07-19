@@ -2,8 +2,8 @@ import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminLayout from "./layouts/AdminLayout";
 import Home from "./pages/home";
-import Login from "./pages/auth/login";
-import Signup from "./pages/auth/signup";
+import Login from "./admin/pages/auth/login";
+import Signup from "./admin/pages/auth/signup";
 
 function App() {
   return (
