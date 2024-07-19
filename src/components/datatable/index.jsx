@@ -59,7 +59,7 @@ const DataTable = ({
 
   useEffect(() => {
     if (onDataChange) {
-      onDataChange(currentPage, rowsPerPageState, searchTerm);
+      onDataChange({ currentPage, rowsPerPageState, searchTerm });
     }
   }, [currentPage, rowsPerPageState, searchTerm, onDataChange]);
 
