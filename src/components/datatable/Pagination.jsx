@@ -99,7 +99,10 @@ const Pagination = ({
         </Button>
         <Select
           value={rowsPerPage}
-          onChange={(e) => setRowsPerPage(Number(e.target.value))}
+          onChange={(e) => {
+            setRowsPerPage(Number(e.target.value));
+            setCurrentPage(1);
+          }}
           width="auto"
         >
           <option value={5}>5</option>
