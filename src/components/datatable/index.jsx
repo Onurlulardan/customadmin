@@ -219,11 +219,7 @@ const DataTable = ({
           {selectedData.map((item, rowIndex) => (
             <Tr key={rowIndex}>
               {selectable && (
-                <Td
-                  maxW={"20px"}
-                  border="1px solid"
-                  borderColor={tableBorderColor}
-                >
+                <Td maxW={"20px"}>
                   <Checkbox
                     isChecked={selectedRows.includes(item.id)}
                     onChange={() =>
