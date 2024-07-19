@@ -1,7 +1,13 @@
 import React from "react";
-import { Button, HStack } from "@chakra-ui/react";
+import { Button, HStack, Select } from "@chakra-ui/react";
 
-const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
+const Pagination = ({
+  currentPage,
+  totalPages,
+  setCurrentPage,
+  rowsPerPage,
+  setRowsPerPage,
+}) => {
   const handlePreviousPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
@@ -74,22 +80,34 @@ const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
   };
 
   return (
-    <HStack justify="flex-end" mt={4}>
-      <Button
-        onClick={handlePreviousPage}
-        isDisabled={currentPage === 1}
-        variant="outline"
+    <HStack justify="space-between" mt={4}>
+      <HStack>
+        <Button
+          onClick={handlePreviousPage}
+          isDisabled={currentPage === 1}
+          variant="outline"
+        >
+          Önceki
+        </Button>
+        {renderPageNumbers()}
+        <Button
+          onClick={handleNextPage}
+          isDisabled={currentPage === totalPages}
+          variant="outline"
+        >
+          Sonraki
+        </Button>
+      </HStack>
+      <Select
+        value={rowsPerPage}
+        onChange={(e) => setRowsPerPage(Number(e.target.value))}
+        width="auto"
       >
-        Önceki
-      </Button>
-      {renderPageNumbers()}
-      <Button
-        onClick={handleNextPage}
-        isDisabled={currentPage === totalPages}
-        variant="outline"
-      >
-        Sonraki
-      </Button>
+        <option value={5}>5</option>
+        <option value={10}>10</option>
+        <option value={20}>20</option>
+        <option value={50}>50</option>
+      </Select>
     </HStack>
   );
 };
