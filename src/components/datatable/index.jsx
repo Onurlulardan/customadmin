@@ -58,21 +58,18 @@ const DataTable = ({
   const tableBorderColor = useColorModeValue("gray.200", "gray.600");
 
   useEffect(() => {
-    // Fetch data when page, rowsPerPage, or search term changes
     if (onDataChange) {
       onDataChange(currentPage, rowsPerPageState, searchTerm);
     }
   }, [currentPage, rowsPerPageState, searchTerm, onDataChange]);
 
   const handleRefresh = () => {
-    // Fetch data on refresh
     if (onRefresh) {
       onRefresh();
     }
   };
 
   const handleClearFilter = () => {
-    // Clear search term and reset pagination and sorting
     setSearchTerm("");
     setSortConfig({ key: null, direction: null });
     setCurrentPage(1);
