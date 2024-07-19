@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, VStack, Heading } from "@chakra-ui/react";
 import DataTable from "../../../components/datatable";
 import { data } from "../../../data/fakeUserData";
 import avatar from "../../../assets/pp.webp";
 
 const Dashboard = () => {
-  // Örnek veri ve sütunlar
-
   const columns = [
     {
       key: "avatar",
       header: "Avatar",
+      width: "100px",
       render: () => (
         <img
           src={avatar}
@@ -19,10 +18,10 @@ const Dashboard = () => {
         />
       ),
     },
-    { key: "id", header: "ID" },
-    { key: "name", header: "Name" },
-    { key: "age", header: "Age" },
-    { key: "email", header: "Email" },
+    { key: "id", header: "ID", width: "50px" },
+    { key: "name", header: "Name", width: "150px" },
+    { key: "age", header: "Age", width: "100px" },
+    { key: "email", header: "Email", width: "200px" },
   ];
 
   return (

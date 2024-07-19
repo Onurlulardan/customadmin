@@ -74,6 +74,7 @@ const DataTable = ({
                 borderColor={tableBorderColor}
                 onClick={() => requestSort(col.key, sortConfig, setSortConfig)}
                 cursor="pointer"
+                width={col.width ? col.width : "auto"}
               >
                 {col.header}
                 {sortConfig.key === col.key ? (
