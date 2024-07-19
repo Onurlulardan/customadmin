@@ -7,12 +7,12 @@ import {
   Th,
   Td,
   Box,
-  Button,
-  HStack,
-  useColorModeValue,
   Input,
   Flex,
+  useColorModeValue,
 } from "@chakra-ui/react";
+import Pagination from "./Pagination";
+import { requestSort, getSortedData, getFilteredData } from "./helpers";
 
 const DataTable = ({
   columns,
@@ -34,113 +34,28 @@ const DataTable = ({
     }
   }, [currentPage, rowsPerPage, searchTerm, onPageChange]);
 
-  const requestSort = (key) => {
-    let direction = "ascending";
-    if (sortConfig.key === key && sortConfig.direction === "ascending") {
-      direction = "descending";
-    }
-    setSortConfig({ key, direction });
-  };
+  const sortedData = useMemo(
+    () => getSortedData(data, sortConfig),
+    [data, sortConfig]
+  );
 
-  const sortedData = useMemo(() => {
-    let sortableItems = [...data];
-    if (sortConfig.key !== null) {
-      sortableItems.sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
-          return sortConfig.direction === "ascending" ? -1 : 1;
-        }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
-          return sortConfig.direction === "ascending" ? 1 : -1;
-        }
-        return 0;
-      });
-    }
-    return sortableItems;
-  }, [data, sortConfig]);
-
-  const filteredData = sortedData.filter((item) =>
-    columns.some((col) =>
-      String(item[col.key]).toLowerCase().includes(searchTerm.toLowerCase())
-    )
+  const filteredData = useMemo(
+    () => getFilteredData(sortedData, columns, searchTerm),
+    [sortedData, columns, searchTerm]
   );
 
   const totalPages = Math.ceil(totalCount / rowsPerPage);
   const startIndex = (currentPage - 1) * rowsPerPage;
   const selectedData = filteredData.slice(startIndex, startIndex + rowsPerPage);
 
-  const handlePreviousPage = () => {
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-  };
-
-  const handleNextPage = () => {
-    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-  };
-
-  const renderPageNumbers = () => {
-    const pageNumbers = [];
-
-    if (totalPages <= 5) {
-      for (let i = 1; i <= totalPages; i++) {
-        pageNumbers.push(
-          <Button
-            key={i}
-            onClick={() => setCurrentPage(i)}
-            variant={currentPage === i ? "solid" : "outline"}
-          >
-            {i}
-          </Button>
-        );
-      }
-    } else {
-      pageNumbers.push(
-        <Button
-          key={1}
-          onClick={() => setCurrentPage(1)}
-          variant={currentPage === 1 ? "solid" : "outline"}
-        >
-          1
-        </Button>
-      );
-
-      if (currentPage > 3) {
-        pageNumbers.push(<span key="dots1">...</span>);
-      }
-
-      const startPage = Math.max(2, currentPage - 1);
-      const endPage = Math.min(totalPages - 1, currentPage + 1);
-
-      for (let i = startPage; i <= endPage; i++) {
-        pageNumbers.push(
-          <Button
-            key={i}
-            onClick={() => setCurrentPage(i)}
-            variant={currentPage === i ? "solid" : "outline"}
-          >
-            {i}
-          </Button>
-        );
-      }
-
-      if (currentPage < totalPages - 2) {
-        pageNumbers.push(<span key="dots2">...</span>);
-      }
-
-      pageNumbers.push(
-        <Button
-          key={totalPages}
-          onClick={() => setCurrentPage(totalPages)}
-          variant={currentPage === totalPages ? "solid" : "outline"}
-        >
-          {totalPages}
-        </Button>
-      );
-    }
-
-    return pageNumbers;
-  };
-
   return (
-    <Box bg={tableBgColor} p={4} boxShadow="sm" borderRadius="md" overflow={'auto'}>
+    <Box
+      bg={tableBgColor}
+      p={4}
+      boxShadow="sm"
+      borderRadius="md"
+      overflow={"auto"}
+    >
       <Flex justify="space-between" mb={4}>
         <Input
           placeholder="Search..."
@@ -157,7 +72,7 @@ const DataTable = ({
                 key={col.key}
                 border="1px solid"
                 borderColor={tableBorderColor}
-                onClick={() => requestSort(col.key)}
+                onClick={() => requestSort(col.key, sortConfig, setSortConfig)}
                 cursor="pointer"
               >
                 {col.header}
@@ -188,23 +103,11 @@ const DataTable = ({
           ))}
         </Tbody>
       </Table>
-      <HStack justify="flex-end" mt={4}>
-        <Button
-          onClick={handlePreviousPage}
-          isDisabled={currentPage === 1}
-          variant="outline"
-        >
-          Önceki
-        </Button>
-        {renderPageNumbers()}
-        <Button
-          onClick={handleNextPage}
-          isDisabled={currentPage === totalPages}
-          variant="outline"
-        >
-          Sonraki
-        </Button>
-      </HStack>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        setCurrentPage={setCurrentPage}
+      />
     </Box>
   );
 };
