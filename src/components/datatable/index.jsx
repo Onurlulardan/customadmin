@@ -232,7 +232,12 @@ const DataTable = ({
               {columns.map(
                 (col) =>
                   !hiddenColumns.includes(col.key) && (
-                    <Td key={col.key}>
+                    <Td
+                      key={col.key}
+                      onClick={() =>
+                        handleSelectRow(item.id, selectedRows, setSelectedRows)
+                      }
+                    >
                       {col.render
                         ? col.render(item[col.key], item)
                         : item[col.key]}
