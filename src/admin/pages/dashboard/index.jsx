@@ -37,6 +37,9 @@ const Dashboard = () => {
           totalCount={data.length}
           rowsPerPage={5}
           onPageChange={null}
+          handleRefresh={() => {
+            return data;
+          }}
         />
       </VStack>
     </Box>
