@@ -46,6 +46,7 @@ const DataTable = ({
   onEdit,
   selectable = false,
   onDeleteSelected,
+  rowsPerPageOptions = [5, 10, 20, 50],
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
@@ -269,6 +270,7 @@ const DataTable = ({
         setCurrentPage={setCurrentPage}
         rowsPerPage={rowsPerPageState}
         setRowsPerPage={setRowsPerPageState}
+        rowsPerPageOptions={rowsPerPageOptions}
       />
     </Box>
   );

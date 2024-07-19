@@ -7,6 +7,7 @@ const Pagination = ({
   setCurrentPage,
   rowsPerPage,
   setRowsPerPage,
+  rowsPerPageOptions,
 }) => {
   const handlePreviousPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
@@ -78,11 +79,6 @@ const Pagination = ({
 
     return pageNumbers;
   };
-
-  const rowsPerPageOptions = Array.from(
-    { length: 5 },
-    (_, i) => rowsPerPage * (i + 1)
-  );
 
   return (
     <HStack justify="flex-end" mt={4} gap={4}>
