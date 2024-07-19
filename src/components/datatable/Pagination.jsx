@@ -80,7 +80,7 @@ const Pagination = ({
   };
 
   return (
-    <HStack justify="space-between" mt={4} gap={4}>
+    <HStack justify="flex-end" mt={4} gap={4}>
       <HStack>
         <Button
           onClick={handlePreviousPage}
@@ -97,17 +97,17 @@ const Pagination = ({
         >
           Sonraki
         </Button>
+        <Select
+          value={rowsPerPage}
+          onChange={(e) => setRowsPerPage(Number(e.target.value))}
+          width="auto"
+        >
+          <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={20}>20</option>
+          <option value={50}>50</option>
+        </Select>
       </HStack>
-      <Select
-        value={rowsPerPage}
-        onChange={(e) => setRowsPerPage(Number(e.target.value))}
-        width="auto"
-      >
-        <option value={5}>5</option>
-        <option value={10}>10</option>
-        <option value={20}>20</option>
-        <option value={50}>50</option>
-      </Select>
     </HStack>
   );
 };
