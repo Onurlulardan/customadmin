@@ -16,6 +16,7 @@ const columns = [
         style={{ maxWidth: "100px", height: "auto" }}
       />
     ),
+    width: "80px",
   },
   { key: "id", header: "ID" },
   { key: "name", header: "Name" },

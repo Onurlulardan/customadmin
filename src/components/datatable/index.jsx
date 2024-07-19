@@ -184,6 +184,7 @@ const DataTable = ({
                       requestSort(col.key, sortConfig, setSortConfig)
                     }
                     cursor="pointer"
+                    maxW={col.width ? col.width : "auto"}
                   >
                     {col.header}
                     {sortConfig.key === col.key ? (
@@ -237,6 +238,7 @@ const DataTable = ({
                       onClick={() =>
                         handleSelectRow(item.id, selectedRows, setSelectedRows)
                       }
+                      maxW={col.width ? col.width : "auto"}
                     >
                       {col.render
                         ? col.render(item[col.key], item)
