@@ -25,6 +25,8 @@ import {
   getSortedData,
   getFilteredData,
   toggleColumnVisibility,
+  handleSelectRow,
+  handleSelectAll,
 } from "./helpers";
 import { IoMdRefresh } from "react-icons/io";
 import { FaFilterCircleXmark } from "react-icons/fa6";
@@ -89,22 +91,6 @@ const DataTable = ({
     startIndex,
     startIndex + rowsPerPageState
   );
-
-  const handleSelectRow = (id) => {
-    setSelectedRows((prevSelectedRows) =>
-      prevSelectedRows.includes(id)
-        ? prevSelectedRows.filter((rowId) => rowId !== id)
-        : [...prevSelectedRows, id]
-    );
-  };
-
-  const handleSelectAll = () => {
-    if (selectedRows.length === selectedData.length) {
-      setSelectedRows([]);
-    } else {
-      setSelectedRows(selectedData.map((item) => item.id));
-    }
-  };
 
   return (
     <Box
@@ -180,7 +166,9 @@ const DataTable = ({
               >
                 <Checkbox
                   isChecked={selectedRows.length === selectedData.length}
-                  onChange={handleSelectAll}
+                  onChange={() =>
+                    handleSelectAll(selectedData, selectedRows, setSelectedRows)
+                  }
                 />
               </Th>
             )}
@@ -238,7 +226,9 @@ const DataTable = ({
                 >
                   <Checkbox
                     isChecked={selectedRows.includes(item.id)}
-                    onChange={() => handleSelectRow(item.id)}
+                    onChange={() =>
+                      handleSelectRow(item.id, selectedRows, setSelectedRows)
+                    }
                   />
                 </Td>
               )}

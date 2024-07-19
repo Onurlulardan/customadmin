@@ -36,3 +36,19 @@ export const toggleColumnVisibility = (key, hiddenColumns, setHiddenColumns) => 
         prev.includes(key) ? prev.filter((col) => col !== key) : [...prev, key]
     );
 };
+
+export const handleSelectRow = (id, selectedRows, setSelectedRows) => {
+    setSelectedRows((prevSelectedRows) =>
+        prevSelectedRows.includes(id)
+            ? prevSelectedRows.filter((rowId) => rowId !== id)
+            : [...prevSelectedRows, id]
+    );
+};
+
+export const handleSelectAll = (selectedData, selectedRows, setSelectedRows) => {
+    if (selectedRows.length === selectedData.length) {
+        setSelectedRows([]);
+    } else {
+        setSelectedRows(selectedData.map((item) => item.id));
+    }
+};
