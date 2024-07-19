@@ -23,6 +23,7 @@ export const getSortedData = (data, sortConfig) => {
 };
 
 export const getFilteredData = (data, columns, searchTerm) => {
+    if (!searchTerm) return data;
     return data.filter((item) =>
         columns.some((col) =>
             String(item[col.key]).toLowerCase().includes(searchTerm.toLowerCase())

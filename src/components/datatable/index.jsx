@@ -44,7 +44,7 @@ const DataTable = ({
     [sortedData, columns, searchTerm]
   );
 
-  const totalPages = Math.ceil(totalCount / rowsPerPage);
+  const totalPages = Math.ceil(filteredData.length / rowsPerPage);
   const startIndex = (currentPage - 1) * rowsPerPage;
   const selectedData = filteredData.slice(startIndex, startIndex + rowsPerPage);
 
