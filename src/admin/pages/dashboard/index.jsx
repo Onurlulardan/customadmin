@@ -36,7 +36,9 @@ const Dashboard = () => {
           data={data}
           totalCount={data.length}
           rowsPerPage={5}
-          onPageChange={null}
+          onDataChange={(e) => {
+            console.log(e);
+          }}
           handleRefresh={() => {
             return data;
           }}
