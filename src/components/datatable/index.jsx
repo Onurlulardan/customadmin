@@ -264,7 +264,10 @@ const DataTable = ({
               {deleteActive && (
                 <Td maxW={"20px"}>
                   <Flex justify="center">
-                    <Button colorScheme="red" onClick={() => onDelete(item.id)}>
+                    <Button
+                      colorScheme="red"
+                      onClick={() => onDelete([item.id])}
+                    >
                       <MdDeleteForever />
                     </Button>
                   </Flex>
