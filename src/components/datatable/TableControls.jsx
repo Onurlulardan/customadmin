@@ -65,22 +65,25 @@ const TableControls = ({
             </MenuButton>
           </Tooltip>
           <MenuList>
-            {columns.map((col) => (
-              <MenuItem key={col.key}>
-                <Checkbox
-                  isChecked={!hiddenColumns.includes(col.key)}
-                  onChange={() =>
-                    toggleColumnVisibility(
-                      col.key,
-                      hiddenColumns,
-                      setHiddenColumns
-                    )
-                  }
-                >
-                  {col.header}
-                </Checkbox>
-              </MenuItem>
-            ))}
+            {columns.map(
+              (col) =>
+                col.visible !== false && (
+                  <MenuItem key={col.key}>
+                    <Checkbox
+                      isChecked={!hiddenColumns.includes(col.key)}
+                      onChange={() =>
+                        toggleColumnVisibility(
+                          col.key,
+                          hiddenColumns,
+                          setHiddenColumns
+                        )
+                      }
+                    >
+                      {col.header}
+                    </Checkbox>
+                  </MenuItem>
+                )
+            )}
           </MenuList>
         </Menu>
       </HStack>

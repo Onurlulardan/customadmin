@@ -69,7 +69,8 @@ const TbodyComponent = ({
           )}
           {columns.map(
             (col) =>
-              !hiddenColumns.includes(col.key) && (
+              !hiddenColumns.includes(col.key) &&
+              col.visible !== false && (
                 <Td
                   key={col.key}
                   onClick={() =>

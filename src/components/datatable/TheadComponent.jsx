@@ -33,7 +33,8 @@ const TheadComponent = ({
       )}
       {columns.map(
         (col) =>
-          !hiddenColumns.includes(col.key) && (
+          !hiddenColumns.includes(col.key) &&
+          col.visible !== false && (
             <Th
               key={col.key}
               border="1px solid"
