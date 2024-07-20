@@ -14,6 +14,7 @@ import {
   MenuList,
   useColorModeValue,
   useColorMode,
+  Heading,
 } from "@chakra-ui/react";
 import { FiMenu, FiChevronDown } from "react-icons/fi";
 import { SunIcon, MoonIcon } from "@chakra-ui/icons";
@@ -49,7 +50,9 @@ const MobileNav = ({ onOpen, ...rest }) => {
         fontFamily="monospace"
         fontWeight="bold"
       >
-        {pageHeader ? pageHeader : " "}
+        <Heading as="h1" size="lg">
+          {pageHeader ? pageHeader : " "}
+        </Heading>
       </Text>
 
       <HStack spacing={{ base: "0", md: "6" }}>
