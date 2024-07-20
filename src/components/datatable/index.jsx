@@ -3,9 +3,6 @@ import {
   Table,
   Thead,
   Tbody,
-  Tr,
-  Th,
-  Td,
   Box,
   Input,
   Flex,
@@ -23,20 +20,19 @@ import {
 } from "@chakra-ui/react";
 import Pagination from "./Pagination";
 import {
-  requestSort,
   getSortedData,
   getFilteredData,
   toggleColumnVisibility,
   handleSelectRow,
-  handleSelectAll,
   useDeleteConfirmation,
 } from "./helpers";
 import { IoMdRefresh } from "react-icons/io";
 import { FaFilterCircleXmark } from "react-icons/fa6";
 import { BiHide } from "react-icons/bi";
-import { MdDeleteForever, MdEdit } from "react-icons/md";
 import ContextMenu from "./ContextMenu";
 import ShowConfirm from "./ShowConfirm";
+import TheadComponent from "./TheadComponent";
+import TbodyComponent from "./TbodyComponent";
 
 const DataTable = ({
   columns,
@@ -206,154 +202,37 @@ const DataTable = ({
       </Flex>
       <Table variant="striped" colorScheme="gray" bg={tableBgColor}>
         <Thead>
-          <Tr>
-            {selectable && (
-              <Th
-                maxW={"20px"}
-                border="1px solid"
-                borderColor={tableBorderColor}
-              >
-                <Checkbox
-                  isChecked={selectedRows.length === selectedData.length}
-                  onChange={() =>
-                    handleSelectAll(selectedData, selectedRows, setSelectedRows)
-                  }
-                />
-              </Th>
-            )}
-            {columns.map(
-              (col) =>
-                !hiddenColumns.includes(col.key) && (
-                  <Th
-                    key={col.key}
-                    border="1px solid"
-                    borderColor={tableBorderColor}
-                    onClick={() =>
-                      requestSort(col.key, sortConfig, setSortConfig)
-                    }
-                    cursor="pointer"
-                    maxW={col.width ? col.width : "auto"}
-                  >
-                    {col.header}
-                    {sortConfig.key === col.key ? (
-                      sortConfig.direction === "ascending" ? (
-                        <span> ↑</span>
-                      ) : (
-                        <span> ↓</span>
-                      )
-                    ) : null}
-                  </Th>
-                )
-            )}
-            {editActive && (
-              <Th
-                maxW={"20px"}
-                border="1px solid"
-                borderColor={tableBorderColor}
-              >
-                Edit
-              </Th>
-            )}
-            {deleteActive && (
-              <Th
-                maxW={"20px"}
-                border="1px solid"
-                borderColor={tableBorderColor}
-                onClick={() => handleDelete(selectedRows)}
-              >
-                Delete
-              </Th>
-            )}
-          </Tr>
+          <TheadComponent
+            columns={columns}
+            sortConfig={sortConfig}
+            setSortConfig={setSortConfig}
+            hiddenColumns={hiddenColumns}
+            selectable={selectable}
+            selectedData={selectedData}
+            selectedRows={selectedRows}
+            setSelectedRows={setSelectedRows}
+            tableBorderColor={tableBorderColor}
+            editActive={editActive}
+            deleteActive={deleteActive}
+            handleDelete={handleDelete}
+          />
         </Thead>
         <Tbody>
-          {loading ? (
-            <Tr>
-              <Td colSpan={columns.length + (selectable ? 3 : 2)}>
-                <Flex
-                  justifyContent="center"
-                  alignItems="center"
-                  minH={"300px"}
-                >
-                  <Spinner size="lg" />
-                </Flex>
-              </Td>
-            </Tr>
-          ) : selectedData.length === 0 ? (
-            <Tr>
-              <Td colSpan={columns.length + (selectable ? 3 : 2)}>
-                <Flex
-                  justifyContent="center"
-                  alignItems="center"
-                  minH={"300px"}
-                >
-                  <Text>No data available</Text>
-                </Flex>
-              </Td>
-            </Tr>
-          ) : (
-            selectedData.map((item, rowIndex) => (
-              <Tr
-                key={rowIndex}
-                onContextMenu={(event) => handleRightClick(event, item)}
-              >
-                {selectable && (
-                  <Td maxW={"20px"}>
-                    <Checkbox
-                      isChecked={selectedRows.includes(item.id)}
-                      onChange={() =>
-                        handleSelectRow(item.id, selectedRows, setSelectedRows)
-                      }
-                    />
-                  </Td>
-                )}
-                {columns.map(
-                  (col) =>
-                    !hiddenColumns.includes(col.key) && (
-                      <Td
-                        key={col.key}
-                        onClick={() =>
-                          handleSelectRow(
-                            item.id,
-                            selectedRows,
-                            setSelectedRows
-                          )
-                        }
-                        maxW={col.width ? col.width : "auto"}
-                      >
-                        {col.render
-                          ? col.render(item[col.key], item)
-                          : item[col.key]}
-                      </Td>
-                    )
-                )}
-                {editActive && (
-                  <Td maxW={"20px"}>
-                    <Flex justify="center">
-                      <Button
-                        colorScheme="blue"
-                        onClick={() => onEdit(item.id)}
-                      >
-                        <MdEdit />
-                      </Button>
-                    </Flex>
-                  </Td>
-                )}
-                {deleteActive && (
-                  <Td maxW={"20px"}>
-                    <Flex justify="center">
-                      <Button
-                        colorScheme="red"
-                        onClick={() => handleDelete([item.id])}
-                      >
-                        <MdDeleteForever />
-                      </Button>
-                    </Flex>
-                  </Td>
-                )}
-              </Tr>
-            ))
-          )}
+          <TbodyComponent
+            columns={columns}
+            selectedData={selectedData}
+            hiddenColumns={hiddenColumns}
+            selectable={selectable}
+            selectedRows={selectedRows}
+            setSelectedRows={setSelectedRows}
+            handleSelectRow={handleSelectRow}
+            handleRightClick={handleRightClick}
+            handleDelete={handleDelete}
+            editActive={editActive}
+            onEdit={onEdit}
+            deleteActive={deleteActive}
+            loading={loading}
+          />
         </Tbody>
       </Table>
       {contextMenu && (
