@@ -1,23 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Box,
-  Input,
-  Flex,
-  useColorModeValue,
-  Button,
-  HStack,
-  Tooltip,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Checkbox,
-  Spinner,
-  Text,
-} from "@chakra-ui/react";
+import { Table, Thead, Tbody, Box, useColorModeValue } from "@chakra-ui/react";
 import Pagination from "./Pagination";
 import {
   getSortedData,
@@ -26,13 +8,11 @@ import {
   handleSelectRow,
   useDeleteConfirmation,
 } from "./helpers";
-import { IoMdRefresh } from "react-icons/io";
-import { FaFilterCircleXmark } from "react-icons/fa6";
-import { BiHide } from "react-icons/bi";
 import ContextMenu from "./ContextMenu";
 import ShowConfirm from "./ShowConfirm";
 import TheadComponent from "./TheadComponent";
 import TbodyComponent from "./TbodyComponent";
+import TableControls from "./TableControls";
 
 const DataTable = ({
   columns,
@@ -145,61 +125,19 @@ const DataTable = ({
       borderRadius="md"
       overflow={"auto"}
     >
-      <Flex justify="space-between" mb={4} gap={4}>
-        <Input
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          width="auto"
-        />
-        <HStack spacing={2}>
-          {selectable && selectedRows.length > 0 && (
-            <Tooltip label="Tümünü Sil" placement="top-start">
-              <Button
-                colorScheme="red"
-                onClick={() => handleDeleteSelected(selectedRows)}
-              >
-                <MdDeleteForever />
-              </Button>
-            </Tooltip>
-          )}
-          <Tooltip label="Refresh data" placement="top-start">
-            <Button onClick={handleRefresh}>
-              <IoMdRefresh />
-            </Button>
-          </Tooltip>
-          <Tooltip label="Clear filter" placement="top-start">
-            <Button onClick={handleClearFilter}>
-              <FaFilterCircleXmark />
-            </Button>
-          </Tooltip>
-          <Menu closeOnSelect={false}>
-            <Tooltip label="Hide/Show columns" placement="top-start">
-              <MenuButton as={Button}>
-                <BiHide />
-              </MenuButton>
-            </Tooltip>
-            <MenuList>
-              {columns.map((col) => (
-                <MenuItem key={col.key}>
-                  <Checkbox
-                    isChecked={!hiddenColumns.includes(col.key)}
-                    onChange={() =>
-                      toggleColumnVisibility(
-                        col.key,
-                        hiddenColumns,
-                        setHiddenColumns
-                      )
-                    }
-                  >
-                    {col.header}
-                  </Checkbox>
-                </MenuItem>
-              ))}
-            </MenuList>
-          </Menu>
-        </HStack>
-      </Flex>
+      <TableControls
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        selectable={selectable}
+        selectedRows={selectedRows}
+        handleDeleteSelected={handleDeleteSelected}
+        handleRefresh={handleRefresh}
+        handleClearFilter={handleClearFilter}
+        columns={columns}
+        hiddenColumns={hiddenColumns}
+        toggleColumnVisibility={toggleColumnVisibility}
+        setHiddenColumns={setHiddenColumns}
+      />
       <Table variant="striped" colorScheme="gray" bg={tableBgColor}>
         <Thead>
           <TheadComponent
