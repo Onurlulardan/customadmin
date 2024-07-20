@@ -62,6 +62,7 @@ const DataTable = ({
   const [rowsPerPageState, setRowsPerPageState] = useState(rowsPerPage);
   const [selectedRows, setSelectedRows] = useState([]);
   const [contextMenu, setContextMenu] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const tableBgColor = useColorModeValue("white", "gray.800");
   const tableBorderColor = useColorModeValue("gray.200", "gray.600");
@@ -75,15 +76,19 @@ const DataTable = ({
   } = useDeleteConfirmation();
 
   useEffect(() => {
+    setLoading(true);
     if (onDataChange) {
       onDataChange({ currentPage, rowsPerPageState, searchTerm });
     }
+    setLoading(false);
   }, [currentPage, rowsPerPageState, searchTerm, onDataChange]);
 
   const handleRefresh = () => {
+    setLoading(true);
     if (onRefresh) {
       onRefresh();
     }
+    setLoading(false);
   };
 
   const handleClearFilter = () => {
@@ -262,10 +267,26 @@ const DataTable = ({
           </Tr>
         </Thead>
         <Tbody>
-          {data.length === 0 ? (
+          {loading ? (
             <Tr>
-              <Td colSpan={columns.length + (selectable ? 1 : 0)}>
-                <Flex justifyContent="center" alignItems="center">
+              <Td colSpan={columns.length + (selectable ? 3 : 2)}>
+                <Flex
+                  justifyContent="center"
+                  alignItems="center"
+                  minH={"300px"}
+                >
+                  <Spinner size="lg" />
+                </Flex>
+              </Td>
+            </Tr>
+          ) : selectedData.length === 0 ? (
+            <Tr>
+              <Td colSpan={columns.length + (selectable ? 3 : 2)}>
+                <Flex
+                  justifyContent="center"
+                  alignItems="center"
+                  minH={"300px"}
+                >
                   <Text>No data available</Text>
                 </Flex>
               </Td>
