@@ -44,16 +44,14 @@ const MobileNav = ({ onOpen, ...rest }) => {
         icon={<FiMenu />}
       />
 
-      <Text
+      <Heading
         display={{ base: "flex" }}
         fontSize="2xl"
         fontFamily="monospace"
         fontWeight="bold"
       >
-        <Heading as="h1" size="lg">
-          {pageHeader ? pageHeader : " "}
-        </Heading>
-      </Text>
+        {pageHeader ? pageHeader : " "}
+      </Heading>
 
       <HStack spacing={{ base: "0", md: "6" }}>
         <IconButton
