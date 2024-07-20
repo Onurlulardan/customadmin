@@ -32,7 +32,7 @@ const TableControls = ({
   return (
     <Flex justify="space-between" mb={4} gap={4}>
       <Input
-        placeholder="Search..."
+        placeholder="Ara..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         width="auto"
@@ -48,18 +48,18 @@ const TableControls = ({
             </Button>
           </Tooltip>
         )}
-        <Tooltip label="Refresh data" placement="top-start">
+        <Tooltip label="Yenile" placement="top-start">
           <Button onClick={handleRefresh}>
             <IoMdRefresh />
           </Button>
         </Tooltip>
-        <Tooltip label="Clear filter" placement="top-start">
+        <Tooltip label="Filtreleri Temizle" placement="top-start">
           <Button onClick={handleClearFilter}>
             <FaFilterCircleXmark />
           </Button>
         </Tooltip>
         <Menu closeOnSelect={false}>
-          <Tooltip label="Hide/Show columns" placement="top-start">
+          <Tooltip label="Kolonları Göster/Gizle" placement="top-start">
             <MenuButton as={Button}>
               <BiHide />
             </MenuButton>

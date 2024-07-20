@@ -55,7 +55,7 @@ const TheadComponent = ({
       )}
       {editActive && (
         <Th maxW={"20px"} border="1px solid" borderColor={tableBorderColor}>
-          Edit
+          Düzenle
         </Th>
       )}
       {deleteActive && (
@@ -65,7 +65,7 @@ const TheadComponent = ({
           borderColor={tableBorderColor}
           onClick={() => handleDelete(selectedRows)}
         >
-          Delete
+          Sil
         </Th>
       )}
     </Tr>
