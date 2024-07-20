@@ -52,3 +52,36 @@ export const handleSelectAll = (selectedData, selectedRows, setSelectedRows) => 
         setSelectedRows(selectedData.map((item) => item.id));
     }
 };
+
+export const useDeleteConfirmation = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [deletePromiseResolve, setDeletePromiseResolve] = useState(null);
+
+    const showConfirmModal = () => {
+        return new Promise((resolve) => {
+            setDeletePromiseResolve(() => resolve);
+            setIsModalOpen(true);
+        });
+    };
+
+    const handleModalClose = () => {
+        setIsModalOpen(false);
+        if (deletePromiseResolve) {
+            deletePromiseResolve(false);
+        }
+    };
+
+    const handleModalConfirm = () => {
+        setIsModalOpen(false);
+        if (deletePromiseResolve) {
+            deletePromiseResolve(true);
+        }
+    };
+
+    return {
+        isModalOpen,
+        showConfirmModal,
+        handleModalClose,
+        handleModalConfirm,
+    };
+};
