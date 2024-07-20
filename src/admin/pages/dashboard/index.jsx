@@ -29,8 +29,8 @@ const columns = [
 
 //ContexMenu items
 const contextMenuItems = [
-  { key: "edit", text: "Edit", icon: MdEdit },
-  { key: "delete", text: "Delete", icon: MdDeleteForever },
+  { key: "Edit", text: "Edit", icon: MdEdit },
+  { key: "Delete", text: "Delete", icon: MdDeleteForever },
 ];
 
 const Dashboard = () => {
@@ -54,10 +54,10 @@ const Dashboard = () => {
   };
 
   const handleItemClick = (key, rowData) => {
-    if (key === "edit") {
-      console.log("Edit", rowData);
-    } else if (key === "delete") {
-      console.log("Delete", rowData);
+    if (key === "Edit") {
+      console.log(key, rowData);
+    } else if (key === "Delete") {
+      console.log(key, rowData);
     }
   };
 
