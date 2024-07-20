@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export const requestSort = (key, sortConfig, setSortConfig) => {
     let direction = "ascending";
     if (sortConfig.key === key && sortConfig.direction === "ascending") {
