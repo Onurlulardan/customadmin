@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, VStack, Heading } from "@chakra-ui/react";
-import DataTable from "../../../components/datatable";
+import DataTable from "../../../components/datatable/table/DataTable";
 import { data } from "../../../data/fakeUserData";
 import avatar from "../../../assets/pp.webp";
 import { setPageHeader } from "../../../store/root/rootSlice";

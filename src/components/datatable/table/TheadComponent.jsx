@@ -1,6 +1,6 @@
 import React from "react";
 import { Th, Tr, Checkbox } from "@chakra-ui/react";
-import { requestSort, handleSelectAll } from "./helpers";
+import { requestSort, handleSelectAll } from "../functions/helpers";
 
 const TheadComponent = ({
   columns,
