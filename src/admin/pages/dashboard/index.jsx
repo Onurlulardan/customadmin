@@ -20,7 +20,7 @@ const columns = [
     ),
     width: "80px",
   },
-  { key: "id", header: "ID" },
+  { key: "id", header: "ID", primaryKey: true },
   { key: "name", header: "Name" },
   { key: "age", header: "Age" },
   { key: "email", header: "Email" },
