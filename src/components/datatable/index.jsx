@@ -69,6 +69,7 @@ const DataTable = ({
     showConfirmModal,
     handleModalClose,
     handleModalConfirm,
+    deleteTarget,
   } = useDeleteConfirmation();
 
   useEffect(() => {
@@ -103,14 +104,14 @@ const DataTable = ({
   };
 
   const handleDeleteSelected = async (selectedRows) => {
-    const confirm = await showConfirmModal();
+    const confirm = await showConfirmModal(selectedRows);
     if (confirm) {
       onDeleteSelected(selectedRows);
     }
   };
 
   const handleDelete = async (rowId) => {
-    const confirm = await showConfirmModal();
+    const confirm = await showConfirmModal([rowId]);
     if (confirm) {
       onDelete(rowId);
     }
@@ -328,6 +329,7 @@ const DataTable = ({
         isOpen={isModalOpen}
         onClose={handleModalClose}
         onConfirm={handleModalConfirm}
+        deleteTarget={deleteTarget}
       />
       <Pagination
         currentPage={currentPage}

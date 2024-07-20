@@ -58,10 +58,12 @@ export const handleSelectAll = (selectedData, selectedRows, setSelectedRows) => 
 export const useDeleteConfirmation = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [deletePromiseResolve, setDeletePromiseResolve] = useState(null);
+    const [deleteTarget, setDeleteTarget] = useState([]);
 
-    const showConfirmModal = () => {
+    const showConfirmModal = (target) => {
         return new Promise((resolve) => {
             setDeletePromiseResolve(() => resolve);
+            setDeleteTarget(target);
             setIsModalOpen(true);
         });
     };
@@ -85,5 +87,6 @@ export const useDeleteConfirmation = () => {
         showConfirmModal,
         handleModalClose,
         handleModalConfirm,
+        deleteTarget,
     };
 };
