@@ -5,6 +5,7 @@ import { data } from "../../../data/fakeUserData";
 import avatar from "../../../assets/pp.webp";
 import { setPageHeader } from "../../../store/root/rootSlice";
 import { useDispatch } from "react-redux";
+import { MdEdit, MdDeleteForever } from "react-icons/md";
 
 // Örnek veri ve sütunlar
 const columns = [
@@ -26,6 +27,12 @@ const columns = [
   { key: "email", header: "Email" },
 ];
 
+//ContexMenu items
+const contextMenuItems = [
+  { key: "edit", text: "Edit", icon: MdEdit },
+  { key: "delete", text: "Delete", icon: MdDeleteForever },
+];
+
 const Dashboard = () => {
   const dispatch = useDispatch();
   const [tableData, setTableData] = useState(data);
@@ -44,6 +51,14 @@ const Dashboard = () => {
 
     setTableData(data);
     setTotalCount(data.length);
+  };
+
+  const handleItemClick = (key, rowData) => {
+    if (key === "edit") {
+      console.log("Edit", rowData);
+    } else if (key === "delete") {
+      console.log("Delete", rowData);
+    }
   };
 
   return (
@@ -70,6 +85,8 @@ const Dashboard = () => {
           onDeleteSelected={(e) => {
             console.log(e);
           }}
+          contextMenuItems={contextMenuItems}
+          onItemClick={handleItemClick}
         />
       </VStack>
     </Box>

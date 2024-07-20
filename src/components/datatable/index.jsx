@@ -32,6 +32,7 @@ import { IoMdRefresh } from "react-icons/io";
 import { FaFilterCircleXmark } from "react-icons/fa6";
 import { BiHide } from "react-icons/bi";
 import { MdDeleteForever, MdEdit } from "react-icons/md";
+import ContextMenu from "./ContextMenu";
 
 const DataTable = ({
   columns,
@@ -47,6 +48,8 @@ const DataTable = ({
   selectable = false,
   onDeleteSelected,
   rowsPerPageOptions = [5, 10, 20, 50],
+  contextMenuItems = [],
+  onItemClick,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
@@ -54,6 +57,7 @@ const DataTable = ({
   const [hiddenColumns, setHiddenColumns] = useState([]);
   const [rowsPerPageState, setRowsPerPageState] = useState(rowsPerPage);
   const [selectedRows, setSelectedRows] = useState([]);
+  const [contextMenu, setContextMenu] = useState(null);
 
   const tableBgColor = useColorModeValue("white", "gray.800");
   const tableBorderColor = useColorModeValue("gray.200", "gray.600");
@@ -74,6 +78,19 @@ const DataTable = ({
     setSearchTerm("");
     setSortConfig({ key: null, direction: null });
     setCurrentPage(1);
+  };
+
+  const handleRightClick = (event, item) => {
+    event.preventDefault();
+    setContextMenu({
+      mouseX: event.clientX - 2,
+      mouseY: event.clientY - 4,
+      rowData: item,
+    });
+  };
+
+  const handleClose = () => {
+    setContextMenu(null);
   };
 
   const sortedData = useMemo(
@@ -219,7 +236,10 @@ const DataTable = ({
         </Thead>
         <Tbody>
           {selectedData.map((item, rowIndex) => (
-            <Tr key={rowIndex}>
+            <Tr
+              key={rowIndex}
+              onContextMenu={(event) => handleRightClick(event, item)}
+            >
               {selectable && (
                 <Td maxW={"20px"}>
                   <Checkbox
@@ -271,6 +291,15 @@ const DataTable = ({
           ))}
         </Tbody>
       </Table>
+      {contextMenu && (
+        <ContextMenu
+          items={contextMenuItems}
+          onClose={handleClose}
+          rowData={contextMenu.rowData}
+          position={contextMenu}
+          onItemClick={onItemClick}
+        />
+      )}
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
