@@ -18,6 +18,8 @@ import {
   MenuList,
   MenuItem,
   Checkbox,
+  Spinner,
+  Text,
 } from "@chakra-ui/react";
 import Pagination from "./Pagination";
 import {
@@ -260,60 +262,77 @@ const DataTable = ({
           </Tr>
         </Thead>
         <Tbody>
-          {selectedData.map((item, rowIndex) => (
-            <Tr
-              key={rowIndex}
-              onContextMenu={(event) => handleRightClick(event, item)}
-            >
-              {selectable && (
-                <Td maxW={"20px"}>
-                  <Checkbox
-                    isChecked={selectedRows.includes(item.id)}
-                    onChange={() =>
-                      handleSelectRow(item.id, selectedRows, setSelectedRows)
-                    }
-                  />
-                </Td>
-              )}
-              {columns.map(
-                (col) =>
-                  !hiddenColumns.includes(col.key) && (
-                    <Td
-                      key={col.key}
-                      onClick={() =>
+          {data.length === 0 ? (
+            <Tr>
+              <Td colSpan={columns.length + (selectable ? 1 : 0)}>
+                <Flex justifyContent="center" alignItems="center">
+                  <Text>No data available</Text>
+                </Flex>
+              </Td>
+            </Tr>
+          ) : (
+            selectedData.map((item, rowIndex) => (
+              <Tr
+                key={rowIndex}
+                onContextMenu={(event) => handleRightClick(event, item)}
+              >
+                {selectable && (
+                  <Td maxW={"20px"}>
+                    <Checkbox
+                      isChecked={selectedRows.includes(item.id)}
+                      onChange={() =>
                         handleSelectRow(item.id, selectedRows, setSelectedRows)
                       }
-                      maxW={col.width ? col.width : "auto"}
-                    >
-                      {col.render
-                        ? col.render(item[col.key], item)
-                        : item[col.key]}
-                    </Td>
-                  )
-              )}
-              {editActive && (
-                <Td maxW={"20px"}>
-                  <Flex justify="center">
-                    <Button colorScheme="blue" onClick={() => onEdit(item.id)}>
-                      <MdEdit />
-                    </Button>
-                  </Flex>
-                </Td>
-              )}
-              {deleteActive && (
-                <Td maxW={"20px"}>
-                  <Flex justify="center">
-                    <Button
-                      colorScheme="red"
-                      onClick={() => handleDelete([item.id])}
-                    >
-                      <MdDeleteForever />
-                    </Button>
-                  </Flex>
-                </Td>
-              )}
-            </Tr>
-          ))}
+                    />
+                  </Td>
+                )}
+                {columns.map(
+                  (col) =>
+                    !hiddenColumns.includes(col.key) && (
+                      <Td
+                        key={col.key}
+                        onClick={() =>
+                          handleSelectRow(
+                            item.id,
+                            selectedRows,
+                            setSelectedRows
+                          )
+                        }
+                        maxW={col.width ? col.width : "auto"}
+                      >
+                        {col.render
+                          ? col.render(item[col.key], item)
+                          : item[col.key]}
+                      </Td>
+                    )
+                )}
+                {editActive && (
+                  <Td maxW={"20px"}>
+                    <Flex justify="center">
+                      <Button
+                        colorScheme="blue"
+                        onClick={() => onEdit(item.id)}
+                      >
+                        <MdEdit />
+                      </Button>
+                    </Flex>
+                  </Td>
+                )}
+                {deleteActive && (
+                  <Td maxW={"20px"}>
+                    <Flex justify="center">
+                      <Button
+                        colorScheme="red"
+                        onClick={() => handleDelete([item.id])}
+                      >
+                        <MdDeleteForever />
+                      </Button>
+                    </Flex>
+                  </Td>
+                )}
+              </Tr>
+            ))
+          )}
         </Tbody>
       </Table>
       {contextMenu && (
