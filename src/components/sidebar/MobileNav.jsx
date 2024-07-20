@@ -17,9 +17,11 @@ import {
 } from "@chakra-ui/react";
 import { FiMenu, FiChevronDown } from "react-icons/fi";
 import { SunIcon, MoonIcon } from "@chakra-ui/icons";
+import { useSelector } from "react-redux";
 
 const MobileNav = ({ onOpen, ...rest }) => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const { pageHeader } = useSelector((state) => state.root);
 
   return (
     <Flex
@@ -30,7 +32,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
       bg={useColorModeValue("white", "gray.900")}
       borderBottomWidth="1px"
       borderBottomColor={useColorModeValue("gray.200", "gray.700")}
-      justifyContent={{ base: "space-between", md: "flex-end" }}
+      justifyContent={{ base: "space-between" }}
       {...rest}
     >
       <IconButton
@@ -42,12 +44,12 @@ const MobileNav = ({ onOpen, ...rest }) => {
       />
 
       <Text
-        display={{ base: "flex", md: "none" }}
+        display={{ base: "flex" }}
         fontSize="2xl"
         fontFamily="monospace"
         fontWeight="bold"
       >
-        Logo
+        {pageHeader ? pageHeader : " "}
       </Text>
 
       <HStack spacing={{ base: "0", md: "6" }}>
