@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { Box, Button, useColorModeValue } from "@chakra-ui/react";
 import TextBox from "../../../components/textbox/TextBox";
 
 const MyForm = () => {
@@ -25,24 +25,27 @@ const MyForm = () => {
   return (
     <Box bg={bgColor} color={textColor} p={4}>
       <TextBox
-        label="Name"
+        label="İsim"
         name="name"
-        placeholder="Enter your name"
+        placeholder="İsminizi girin"
         initialValue={name}
         getFinalValue={handleNameChange}
         isRequired={true}
+        maxLength={20}
+        helpText="Tam isminiz"
       />
       <TextBox
-        label="Email"
+        label="E-posta"
         name="email"
-        placeholder="Enter your email"
+        placeholder="E-posta adresinizi girin"
         initialValue={email}
         getFinalValue={handleEmailChange}
         type="email"
         isRequired={true}
+        helpText="E-posta adresiniz"
       />
       <Button mt={4} onClick={handleSubmit}>
-        Submit
+        Gönder
       </Button>
     </Box>
   );
