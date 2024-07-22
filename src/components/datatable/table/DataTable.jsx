@@ -97,6 +97,8 @@ const DataTable = ({
   };
 
   const handleDelete = async (rowId) => {
+    const primaryKey = columns.find((col) => col.primaryKey).key;
+    const rowData = data.find((row) => row[primaryKey] === rowId);
     const confirm = await showConfirmModal([rowId]);
     if (confirm) {
       onDelete(rowId);
@@ -104,7 +106,10 @@ const DataTable = ({
   };
 
   const handleToolbarButtonClick = (key) => {
-    const selectedData = data.filter((row) => selectedRows.includes(row.id));
+    const primaryKey = columns.find((col) => col.primaryKey).key;
+    const selectedData = data.filter((row) =>
+      selectedRows.includes(row[primaryKey])
+    );
     console.log("Seçili Satırlar:", key, selectedData);
   };
 

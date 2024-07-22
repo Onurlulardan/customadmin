@@ -85,7 +85,15 @@ const TbodyComponent = ({
           {editActive && (
             <Td maxW={"20px"}>
               <Flex justify="center">
-                <Button colorScheme="blue" onClick={() => onEdit(item.id)}>
+                <Button
+                  colorScheme="blue"
+                  onClick={() => {
+                    const primaryKey = columns.find(
+                      (col) => col.primaryKey
+                    ).key;
+                    onEdit(item[primaryKey]);
+                  }}
+                >
                   <MdEdit />
                 </Button>
               </Flex>
