@@ -47,7 +47,6 @@ const MyForm = () => {
         helpText="Tam isminiz"
         showCharacterCount={true}
         leftAddon="#"
-        rightAddon="tl"
       />
       <TextBox
         label="E-posta"
