@@ -32,7 +32,7 @@ const TableControls = ({
   return (
     <Flex justify="space-between" mb={4} gap={4} align={"center"}>
       <HStack spacing={2}>
-        <Tooltip label="Yeni Kayıt Ekle" placement="top-start">
+        <Tooltip label="Yeni Kayıt Ekle" placement="top">
           <Button>
             <IoIosAdd size={30} />
           </Button>
@@ -40,7 +40,7 @@ const TableControls = ({
       </HStack>
       <HStack spacing={2}>
         {selectable && selectedRows.length > 0 && (
-          <Tooltip label="Tümünü Sil" placement="top-start">
+          <Tooltip label="Tümünü Sil" placement="top">
             <Button
               colorScheme="red"
               onClick={() => handleDeleteSelected(selectedRows)}
@@ -49,18 +49,18 @@ const TableControls = ({
             </Button>
           </Tooltip>
         )}
-        <Tooltip label="Yenile" placement="top-start">
+        <Tooltip label="Yenile" placement="top">
           <Button onClick={handleRefresh}>
             <IoMdRefresh />
           </Button>
         </Tooltip>
-        <Tooltip label="Filtreleri Temizle" placement="top-start">
+        <Tooltip label="Filtreleri Temizle" placement="top">
           <Button onClick={handleClearFilter}>
             <FaFilterCircleXmark />
           </Button>
         </Tooltip>
         <Menu closeOnSelect={false}>
-          <Tooltip label="Kolonları Göster/Gizle" placement="top-start">
+          <Tooltip label="Kolonları Göster/Gizle" placement="top">
             <MenuButton as={Button}>
               <BiHide />
             </MenuButton>
