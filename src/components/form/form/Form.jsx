@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 
-const Form = ({ onSubmit, children }) => {
+const Form = ({ onSubmit, children, buttonPosition = "right" }) => {
   const [values, setValues] = useState({});
 
   const handleChange = (name, value) => {
@@ -27,12 +27,18 @@ const Form = ({ onSubmit, children }) => {
     return child;
   });
 
+  const justifyContentMap = {
+    left: "flex-start",
+    center: "center",
+    right: "flex-end",
+  };
+
   return (
     <Box as="form" onSubmit={handleSubmit}>
       {enhancedChildren}
-      <Button type="submit" mt={4}>
-        Gönder
-      </Button>
+      <Flex justify={justifyContentMap[buttonPosition]} mt={4}>
+        <Button type="submit">Gönder</Button>
+      </Flex>
     </Box>
   );
 };
@@ -40,6 +46,7 @@ const Form = ({ onSubmit, children }) => {
 Form.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
+  buttonPosition: PropTypes.oneOf(["left", "center", "right"]),
 };
 
 export default Form;
