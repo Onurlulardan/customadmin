@@ -15,7 +15,6 @@ import {
   TagLabel,
   TagCloseButton,
   InputGroup,
-  InputRightElement,
   Flex,
 } from "@chakra-ui/react";
 import { FaChevronDown, FaTimes, FaChevronUp } from "react-icons/fa";
@@ -24,7 +23,7 @@ const SelectBox = ({
   name,
   label,
   placeholder,
-  initialValue = isMulti ? [] : "",
+  initialValue,
   getFinalValue,
   isRequired = false,
   disabled = false,
@@ -38,7 +37,9 @@ const SelectBox = ({
   isSearchable = true,
   ...props
 }) => {
-  const [value, setValue] = useState(initialValue);
+  const [value, setValue] = useState(
+    isMulti ? initialValue || [] : initialValue || ""
+  );
   const [error, setError] = useState("");
   const [isTouched, setIsTouched] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
