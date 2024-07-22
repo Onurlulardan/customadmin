@@ -33,7 +33,7 @@ const MyForm = () => {
           maxLength={20}
           helpText="Tam isminiz"
           showCharacterCount={true}
-          leftAddon="@"
+          leftAddon="#"
         />
         <TextBox
           label="E-posta"

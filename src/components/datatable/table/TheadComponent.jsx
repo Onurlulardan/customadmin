@@ -64,7 +64,6 @@ const TheadComponent = ({
           maxW={"20px"}
           border="1px solid"
           borderColor={tableBorderColor}
-          onClick={() => handleDelete(selectedRows)}
         >
           Sil
         </Th>
