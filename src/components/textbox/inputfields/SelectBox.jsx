@@ -24,7 +24,7 @@ const SelectBox = ({
   name,
   label,
   placeholder,
-  initialValue = [],
+  initialValue = isMulti ? [] : "",
   getFinalValue,
   isRequired = false,
   disabled = false,
@@ -60,7 +60,7 @@ const SelectBox = ({
           : [...prev, selectedValue]
       );
     } else {
-      setValue([selectedValue]);
+      setValue(selectedValue);
       setIsOpen(false);
     }
     setSearchTerm("");
@@ -78,19 +78,23 @@ const SelectBox = ({
   };
 
   const handleRemove = (removedValue) => {
-    setValue((prev) => prev.filter((v) => v !== removedValue));
+    if (isMulti) {
+      setValue((prev) => prev.filter((v) => v !== removedValue));
+    } else {
+      setValue("");
+    }
   };
 
   useEffect(() => {
     if (getFinalValue) {
-      getFinalValue(isMulti ? value : value[0] || "");
+      getFinalValue(isMulti ? value : value || "");
     }
   }, [value, getFinalValue, isMulti]);
 
   const validateInput = () => {
     if (
       isRequired &&
-      (!value || (Array.isArray(value) && value.length === 0))
+      (!value || (isMulti && Array.isArray(value) && value.length === 0))
     ) {
       setError(`${label} zorunludur`);
     } else if (customValidation && !customValidation(value)) {
@@ -135,7 +139,10 @@ const SelectBox = ({
           flexWrap="wrap"
           position="relative"
           borderColor={
-            error && isTouched && !isFocused && value.length <= 0
+            error &&
+            isTouched &&
+            !isFocused &&
+            (!value || (isMulti && value.length <= 0))
               ? "red.500"
               : borderColor
           }
@@ -148,9 +155,31 @@ const SelectBox = ({
           }}
           width="100%"
         >
-          {value.map((val) => (
+          {isMulti &&
+            value.map((val) => (
+              <Tag
+                key={val}
+                size="sm"
+                borderRadius="full"
+                variant="solid"
+                mr={1}
+                mb={1}
+                px={3}
+                py={1}
+              >
+                <TagLabel>
+                  {options.find((option) => option.value === val)?.label}
+                </TagLabel>
+                <TagCloseButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleRemove(val);
+                  }}
+                />
+              </Tag>
+            ))}
+          {!isMulti && value && (
             <Tag
-              key={val}
               size="sm"
               borderRadius="full"
               variant="solid"
@@ -160,20 +189,22 @@ const SelectBox = ({
               py={1}
             >
               <TagLabel>
-                {options.find((option) => option.value === val)?.label}
+                {options.find((option) => option.value === value)?.label}
               </TagLabel>
               <TagCloseButton
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleRemove(val);
+                  handleRemove(value);
                 }}
               />
             </Tag>
-          ))}
+          )}
           <Input
             ref={inputRef}
             name={name}
-            placeholder={value.length === 0 ? placeholder : ""}
+            placeholder={
+              !value || (isMulti && value.length === 0) ? placeholder : ""
+            }
             value={searchTerm}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -190,10 +221,12 @@ const SelectBox = ({
             minW="50px"
             {...props}
           />
-          {value.length > 0 && (
+          {((isMulti && value.length > 0) || (!isMulti && value)) && (
             <IconButton
               icon={<FaTimes />}
-              onClick={() => setValue([])}
+              onClick={() => {
+                setValue(isMulti ? [] : "");
+              }}
               aria-label="Clear selection"
               size="sm"
               variant="ghost"
@@ -242,9 +275,11 @@ const SelectBox = ({
         </Box>
       )}
       {helpText && !error && <FormHelperText>{helpText}</FormHelperText>}
-      {isTouched && !isFocused && value.length <= 0 && (
-        <FormErrorMessage>{error}</FormErrorMessage>
-      )}
+      {isTouched &&
+        !isFocused &&
+        (!value || (isMulti && value.length === 0)) && (
+          <FormErrorMessage>{error}</FormErrorMessage>
+        )}
     </FormControl>
   );
 };

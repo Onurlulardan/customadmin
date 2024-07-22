@@ -14,6 +14,7 @@ const MyForm = () => {
   const [description, setDescription] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState([]);
+  const [country, setCountry] = useState("");
 
   const handleNameChange = (value) => {
     setName(value);
@@ -35,12 +36,17 @@ const MyForm = () => {
     setGender(value);
   };
 
+  const handleCountryChange = (value) => {
+    setCountry(value);
+  };
+
   const handleSubmit = () => {
     console.log("Final submitted name:", name);
     console.log("Final submitted email:", email);
     console.log("Final submitted description:", description);
     console.log("Final submitted age:", age);
     console.log("Final submitted gender:", gender);
+    console.log("Final submitted country:", country);
   };
 
   const bgColor = useColorModeValue("white", "gray.800");
@@ -110,6 +116,22 @@ const MyForm = () => {
         isMulti={true}
         isSearchable={true}
         helpText="Cinsiyetiniz"
+      />
+      <SelectBox
+        label="Ülke"
+        name="country"
+        placeholder="Ülkenizi seçin"
+        initialValue={country}
+        getFinalValue={handleCountryChange}
+        isRequired={true}
+        options={[
+          { value: "tr", label: "Türkiye" },
+          { value: "us", label: "ABD" },
+          { value: "de", label: "Almanya" },
+        ]}
+        isMulti={false}
+        isSearchable={true}
+        helpText="Ülkeniz"
       />
       <Button mt={4} onClick={handleSubmit}>
         Gönder
