@@ -14,19 +14,19 @@ const TextBox = ({
   name,
   label,
   placeholder,
-  initialValue,
+  initialValue = "",
   getFinalValue,
-  isRequired,
-  type,
-  disabled,
-  readOnly,
+  isRequired = false,
+  type = "text",
+  disabled = false,
+  readOnly = false,
   maxLength,
   minLength,
   helpText,
-  autoFocus,
+  autoFocus = false,
   customValidation,
-  customErrorMessage,
-  showCharacterCount,
+  customErrorMessage = "",
+  showCharacterCount = false,
   ...props
 }) => {
   const [value, setValue] = useState(initialValue);
@@ -126,16 +126,6 @@ TextBox.propTypes = {
   customValidation: PropTypes.func,
   customErrorMessage: PropTypes.string,
   showCharacterCount: PropTypes.bool,
-};
-
-TextBox.defaultProps = {
-  initialValue: "",
-  isRequired: false,
-  type: "text",
-  disabled: false,
-  readOnly: false,
-  autoFocus: false,
-  showCharacterCount: false,
 };
 
 export default TextBox;

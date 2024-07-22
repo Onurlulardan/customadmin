@@ -12,17 +12,17 @@ const CustomTextArea = ({
   name,
   label,
   placeholder,
-  initialValue,
+  initialValue = "",
   getFinalValue,
-  isRequired,
-  disabled,
-  readOnly,
+  isRequired = false,
+  disabled = false,
+  readOnly = false,
   maxLength,
   minLength,
   helpText,
-  autoFocus,
+  autoFocus = false,
   customValidation,
-  customErrorMessage,
+  customErrorMessage = "",
   ...props
 }) => {
   const [value, setValue] = useState(initialValue);
@@ -105,14 +105,6 @@ CustomTextArea.propTypes = {
   autoFocus: PropTypes.bool,
   customValidation: PropTypes.func,
   customErrorMessage: PropTypes.string,
-};
-
-CustomTextArea.defaultProps = {
-  initialValue: "",
-  isRequired: false,
-  disabled: false,
-  readOnly: false,
-  autoFocus: false,
 };
 
 export default CustomTextArea;
