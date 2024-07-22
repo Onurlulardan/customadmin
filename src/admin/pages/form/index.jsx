@@ -6,6 +6,7 @@ import {
   TextArea,
   SelectBox,
 } from "../../../components/textbox";
+import { FaGenderless } from "react-icons/fa";
 
 const MyForm = () => {
   const [name, setName] = useState("");
@@ -57,7 +58,7 @@ const MyForm = () => {
         maxLength={20}
         helpText="Tam isminiz"
         showCharacterCount={true}
-        leftAddon="#"
+        leftAddon="@"
       />
       <TextBox
         label="E-posta"
@@ -106,6 +107,7 @@ const MyForm = () => {
           { value: "female", label: "Kadın" },
           { value: "other", label: "Diğer" },
         ]}
+        icon={<FaGenderless />}
         helpText="Cinsiyetiniz"
       />
       <Button mt={4} onClick={handleSubmit}>
