@@ -123,7 +123,6 @@ const DataTable = ({
       bg={tableBgColor}
       p={4}
       boxShadow="sm"
-      borderRadius="md"
       overflow={"auto"}
     >
       <TableControls
