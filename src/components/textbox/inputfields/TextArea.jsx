@@ -95,14 +95,14 @@ const CustomTextArea = ({
         />
         {rightAddon && <InputRightAddon>{rightAddon}</InputRightAddon>}
       </InputGroup>
-      {showCharacterCount && maxLength && (
-        <Flex justify="flex-end" mt={2} mr={2}>
+      <Flex justify="space-between" mr={2}>
+        {helpText && !error && <FormHelperText>{helpText}</FormHelperText>}
+        {showCharacterCount && maxLength && (
           <FormHelperText>
             {value.length}/{maxLength}
           </FormHelperText>
-        </Flex>
-      )}
-      {helpText && !error && <FormHelperText>{helpText}</FormHelperText>}
+        )}
+      </Flex>
       {isTouched && !isFocused && <FormErrorMessage>{error}</FormErrorMessage>}
     </FormControl>
   );
