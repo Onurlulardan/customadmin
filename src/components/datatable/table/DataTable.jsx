@@ -31,6 +31,7 @@ const DataTable = ({
   rowsPerPageOptions = [5, 10, 20, 50],
   contextMenuItems = [],
   onItemClick,
+  toolbarButtons = [],
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
@@ -101,6 +102,11 @@ const DataTable = ({
     }
   };
 
+  const handleToolbarButtonClick = (key) => {
+    console.log("Tıklanan Buton:", key);
+    console.log("Seçili Satırlar:", selectedRows);
+  };
+
   const sortedData = useMemo(
     () => getSortedData(data, sortConfig),
     [data, sortConfig]
@@ -119,12 +125,7 @@ const DataTable = ({
   );
 
   return (
-    <Box
-      bg={tableBgColor}
-      p={4}
-      boxShadow="sm"
-      overflow={"auto"}
-    >
+    <Box bg={tableBgColor} p={4} boxShadow="sm" overflow={"auto"}>
       <TableControls
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
@@ -137,6 +138,8 @@ const DataTable = ({
         hiddenColumns={hiddenColumns}
         toggleColumnVisibility={toggleColumnVisibility}
         setHiddenColumns={setHiddenColumns}
+        toolbarButtons={toolbarButtons}
+        onToolbarButtonClick={handleToolbarButtonClick}
       />
       <Table variant="striped" colorScheme="gray" bg={tableBgColor}>
         <Thead>
@@ -231,6 +234,13 @@ DataTable.propTypes = {
     })
   ),
   onItemClick: PropTypes.func.isRequired,
+  toolbarButtons: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      header: PropTypes.string.isRequired,
+      icon: PropTypes.elementType,
+    })
+  ),
 };
 
 export default DataTable;

@@ -5,7 +5,13 @@ import { data } from "../../../data/fakeUserData";
 import avatar from "../../../assets/pp.webp";
 import { setPageHeader } from "../../../store/root/rootSlice";
 import { useDispatch } from "react-redux";
-import { MdEdit, MdDeleteForever } from "react-icons/md";
+import {
+  MdEdit,
+  MdDeleteForever,
+  MdFileDownload,
+  MdFileUpload,
+} from "react-icons/md";
+import { IoIosAdd } from "react-icons/io";
 
 // Örnek veri ve sütunlar
 const columns = [
@@ -27,10 +33,17 @@ const columns = [
   { key: "email", header: "Email" },
 ];
 
-//ContexMenu items
+//ContexMenu itemleri
 const contextMenuItems = [
   { key: "Edit", text: "Düzenle", icon: MdEdit },
   { key: "Delete", text: "Sil", icon: MdDeleteForever },
+];
+
+// Toolbar butonları
+const toolbarButtons = [
+  { key: "Add", header: "Yeni Ekle", icon: IoIosAdd },
+  { key: "Export", header: "Export", icon: MdFileDownload },
+  { key: "Import", header: "Import", icon: MdFileUpload },
 ];
 
 const Dashboard = () => {
@@ -61,6 +74,14 @@ const Dashboard = () => {
     }
   };
 
+  const handleToolbarButtonClick = (key) => {
+    console.log("Tıklanan Buton:", key);
+    console.log(
+      "Seçili Satırlar:",
+      tableData.filter((row) => row.selected)
+    );
+  };
+
   return (
     <Box p={4}>
       <VStack spacing={4} align="stretch">
@@ -87,6 +108,8 @@ const Dashboard = () => {
           }}
           contextMenuItems={contextMenuItems}
           onItemClick={handleItemClick}
+          toolbarButtons={toolbarButtons}
+          onToolbarButtonClick={handleToolbarButtonClick}
         />
       </VStack>
     </Box>

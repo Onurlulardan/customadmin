@@ -10,6 +10,7 @@ import {
   MenuList,
   MenuItem,
   Checkbox,
+  Icon,
 } from "@chakra-ui/react";
 import { IoMdRefresh, IoIosAdd } from "react-icons/io";
 import { FaFilterCircleXmark } from "react-icons/fa6";
@@ -28,15 +29,20 @@ const TableControls = ({
   hiddenColumns,
   toggleColumnVisibility,
   setHiddenColumns,
+  toolbarButtons,
+  onToolbarButtonClick,
 }) => {
   return (
     <Flex justify="space-between" mb={4} gap={4} align={"center"}>
       <HStack spacing={2}>
-        <Tooltip label="Yeni Kayıt Ekle" placement="top">
-          <Button>
-            <IoIosAdd size={30} />
-          </Button>
-        </Tooltip>
+        {toolbarButtons.map((button) => (
+          <Tooltip key={button.key} label={button.header} placement="top">
+            <Button onClick={() => onToolbarButtonClick(button.key)}>
+              {button.icon && <Icon as={button.icon} mr={2} />}
+              {button.header}
+            </Button>
+          </Tooltip>
+        ))}
       </HStack>
       <HStack spacing={2}>
         {selectable && selectedRows.length > 0 && (
