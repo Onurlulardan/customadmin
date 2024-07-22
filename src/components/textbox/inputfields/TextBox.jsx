@@ -102,7 +102,7 @@ const TextBox = ({
         />
         {rightAddon && <InputRightAddon>{rightAddon}</InputRightAddon>}
         {showCharacterCount && maxLength && (
-          <InputRightElement width="4.5rem">
+          <InputRightElement width="4.5rem" mr={rightAddon ? 10 : 0}>
             <FormHelperText mt={0}>
               {value.length}/{maxLength}
             </FormHelperText>

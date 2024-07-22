@@ -97,7 +97,7 @@ const CustomTextArea = ({
       </InputGroup>
       {showCharacterCount && maxLength && (
         <Flex justify="flex-end" mt={2} mr={2}>
-          <FormHelperText >
+          <FormHelperText>
             {value.length}/{maxLength}
           </FormHelperText>
         </Flex>
