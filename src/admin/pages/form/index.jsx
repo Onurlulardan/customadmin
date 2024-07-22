@@ -69,6 +69,7 @@ const MyForm = () => {
           isMulti={true}
           isSearchable={true}
           helpText="Cinsiyetiniz"
+          isRequired={true}
         />
         <SelectBox
           label="Ülke"
