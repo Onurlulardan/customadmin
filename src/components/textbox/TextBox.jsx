@@ -13,24 +13,34 @@ const TextBox = ({
   initialValue = "",
   getFinalValue,
   isRequired = false,
-  error = "",
   type = "text",
   ...props
 }) => {
   const [value, setValue] = useState(initialValue);
+  const [error, setError] = useState("");
+  const [isTouched, setIsTouched] = useState(false);
 
   const handleChange = (e) => {
     setValue(e.target.value);
+  };
+
+  const handleBlur = () => {
+    setIsTouched(true);
   };
 
   useEffect(() => {
     if (getFinalValue) {
       getFinalValue(value);
     }
-  }, [value, getFinalValue]);
+    if (isRequired && isTouched && !value) {
+      setError(`${label} is required`);
+    } else {
+      setError("");
+    }
+  }, [value, getFinalValue, isRequired, label, isTouched]);
 
   return (
-    <FormControl isRequired={isRequired} isInvalid={error} my={4}>
+    <FormControl isRequired={isRequired} isInvalid={!!error} my={4}>
       {label && <FormLabel>{label}</FormLabel>}
       <Input
         type={type}
@@ -38,9 +48,10 @@ const TextBox = ({
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
+        onBlur={handleBlur}
         {...props}
       />
-      {error && <FormErrorMessage>{error}</FormErrorMessage>}
+      {isTouched && <FormErrorMessage>{error}</FormErrorMessage>}
     </FormControl>
   );
 };

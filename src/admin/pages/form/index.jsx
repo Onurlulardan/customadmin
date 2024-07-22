@@ -5,7 +5,6 @@ import TextBox from "../../../components/textbox/TextBox";
 const MyForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
 
   const handleNameChange = (value) => {
     setName(value);
@@ -16,13 +15,8 @@ const MyForm = () => {
   };
 
   const handleSubmit = () => {
-    if (!name) {
-      setError("Name is required");
-    } else {
-      setError("");
-      console.log("Final submitted name:", name);
-      console.log("Final submitted email:", email);
-    }
+    console.log("Final submitted name:", name);
+    console.log("Final submitted email:", email);
   };
 
   const bgColor = useColorModeValue("white", "gray.800");
@@ -37,7 +31,6 @@ const MyForm = () => {
         initialValue={name}
         getFinalValue={handleNameChange}
         isRequired={true}
-        error={name ? "" : error}
       />
       <TextBox
         label="Email"
@@ -47,7 +40,6 @@ const MyForm = () => {
         getFinalValue={handleEmailChange}
         type="email"
         isRequired={true}
-        error={email ? "" : error}
       />
       <Button mt={4} onClick={handleSubmit}>
         Submit
