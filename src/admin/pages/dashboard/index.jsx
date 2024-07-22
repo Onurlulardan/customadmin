@@ -74,12 +74,9 @@ const Dashboard = () => {
     }
   };
 
-  const handleToolbarButtonClick = (key) => {
+  const handleToolbarButtonClick = (key, selectedRowsData) => {
     console.log("Tıklanan Buton:", key);
-    console.log(
-      "Seçili Satırlar:",
-      tableData.filter((row) => row.selected)
-    );
+    console.log("Seçili Satırlar:", selectedRowsData);
   };
 
   return (
@@ -109,7 +106,12 @@ const Dashboard = () => {
           contextMenuItems={contextMenuItems}
           onItemClick={handleItemClick}
           toolbarButtons={toolbarButtons}
-          onToolbarButtonClick={handleToolbarButtonClick}
+          onToolbarButtonClick={(key) =>
+            handleToolbarButtonClick(
+              key,
+              tableData.filter((row) => row.selected)
+            )
+          }
         />
       </VStack>
     </Box>

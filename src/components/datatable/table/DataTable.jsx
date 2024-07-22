@@ -32,6 +32,7 @@ const DataTable = ({
   contextMenuItems = [],
   onItemClick,
   toolbarButtons = [],
+  onToolbarButtonClick,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
@@ -103,8 +104,8 @@ const DataTable = ({
   };
 
   const handleToolbarButtonClick = (key) => {
-    console.log("Tıklanan Buton:", key);
-    console.log("Seçili Satırlar:", selectedRows);
+    const selectedData = data.filter((row) => selectedRows.includes(row.id));
+    console.log("Seçili Satırlar:", key, selectedData);
   };
 
   const sortedData = useMemo(
@@ -241,6 +242,7 @@ DataTable.propTypes = {
       icon: PropTypes.elementType,
     })
   ),
+  onToolbarButtonClick: PropTypes.func.isRequired,
 };
 
 export default DataTable;
