@@ -45,6 +45,12 @@ const TableControls = ({
         ))}
       </HStack>
       <HStack spacing={2}>
+        <Input
+          placeholder="Ara..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          width="auto"
+        />
         {selectable && selectedRows.length > 0 && (
           <Tooltip label="Tümünü Sil" placement="top">
             <Button
@@ -93,12 +99,6 @@ const TableControls = ({
             )}
           </MenuList>
         </Menu>
-        <Input
-          placeholder="Ara..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          width="auto"
-        />
       </HStack>
     </Flex>
   );
