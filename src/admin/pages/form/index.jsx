@@ -1,4 +1,3 @@
-// MyForm.js
 import React, { useState } from "react";
 import { Box, Button, useColorModeValue } from "@chakra-ui/react";
 import { TextBox, NumberBox, TextArea } from "../../../components/textbox";
@@ -30,7 +29,6 @@ const MyForm = () => {
     console.log("Final submitted email:", email);
     console.log("Final submitted description:", description);
     console.log("Final submitted age:", age);
-    // Burada submit işlemi yapılabilir
   };
 
   const bgColor = useColorModeValue("white", "gray.800");
@@ -48,6 +46,7 @@ const MyForm = () => {
         maxLength={20}
         helpText="Tam isminiz"
         showCharacterCount={true}
+        leftAddon="#"
       />
       <TextBox
         label="E-posta"
@@ -58,6 +57,7 @@ const MyForm = () => {
         type="email"
         isRequired={true}
         helpText="E-posta adresiniz"
+        rightAddon="@example.com"
       />
       <TextArea
         label="Açıklama"

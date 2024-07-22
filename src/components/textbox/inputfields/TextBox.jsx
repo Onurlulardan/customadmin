@@ -8,6 +8,8 @@ import {
   FormHelperText,
   InputGroup,
   InputRightElement,
+  InputLeftAddon,
+  InputRightAddon,
 } from "@chakra-ui/react";
 
 const TextBox = ({
@@ -27,6 +29,8 @@ const TextBox = ({
   customValidation,
   customErrorMessage = "",
   showCharacterCount = false,
+  leftAddon,
+  rightAddon,
   ...props
 }) => {
   const [value, setValue] = useState(initialValue);
@@ -81,6 +85,7 @@ const TextBox = ({
     >
       {label && <FormLabel>{label}</FormLabel>}
       <InputGroup>
+        {leftAddon && <InputLeftAddon>{leftAddon}</InputLeftAddon>}
         <Input
           type={type}
           name={name}
@@ -95,6 +100,7 @@ const TextBox = ({
           borderColor={error && isTouched && !isFocused ? "red.500" : undefined}
           {...props}
         />
+        {rightAddon && <InputRightAddon>{rightAddon}</InputRightAddon>}
         {showCharacterCount && maxLength && (
           <InputRightElement width="4.5rem">
             <FormHelperText mt={0}>
@@ -126,6 +132,8 @@ TextBox.propTypes = {
   customValidation: PropTypes.func,
   customErrorMessage: PropTypes.string,
   showCharacterCount: PropTypes.bool,
+  leftAddon: PropTypes.node,
+  rightAddon: PropTypes.node,
 };
 
 export default TextBox;
