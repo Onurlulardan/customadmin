@@ -30,7 +30,7 @@ const TableControls = ({
   setHiddenColumns,
 }) => {
   return (
-    <Flex justify="space-between" mb={4} gap={4}>
+    <Flex justify="space-between" mb={4} gap={4} align={"center"}>
       <HStack spacing={2}>
         <Tooltip label="Yeni Kayıt Ekle" placement="top-start">
           <Button>
