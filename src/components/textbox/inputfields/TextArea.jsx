@@ -113,7 +113,7 @@ CustomTextArea.propTypes = {
   label: PropTypes.string,
   placeholder: PropTypes.string,
   initialValue: PropTypes.string,
-  getFinalValue: PropTypes.func.isRequired,
+  getFinalValue: PropTypes.func,
   isRequired: PropTypes.bool,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,

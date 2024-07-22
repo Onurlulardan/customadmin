@@ -120,7 +120,7 @@ TextBox.propTypes = {
   label: PropTypes.string,
   placeholder: PropTypes.string,
   initialValue: PropTypes.string,
-  getFinalValue: PropTypes.func.isRequired,
+  getFinalValue: PropTypes.func,
   isRequired: PropTypes.bool,
   type: PropTypes.oneOf(["text", "email", "password", "number"]),
   disabled: PropTypes.bool,

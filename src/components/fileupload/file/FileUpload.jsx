@@ -181,7 +181,7 @@ FileUpload.propTypes = {
     FileTypes.EXCEL,
   ]).isRequired,
   maxFileSize: PropTypes.number,
-  getFinalValue: PropTypes.func.isRequired,
+  getFinalValue: PropTypes.func,
   isRequired: PropTypes.bool,
   valueType: PropTypes.oneOf(["base64", "file"]),
   helpText: PropTypes.string,
