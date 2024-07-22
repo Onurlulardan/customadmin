@@ -7,8 +7,8 @@ import {
   FormErrorMessage,
   FormHelperText,
   Box,
-  useColorModeValue,
   Text,
+  useColorModeValue,
   VStack,
   HStack,
   Icon,
@@ -26,9 +26,10 @@ const FileUpload = ({
   isRequired = false,
   valueType = "base64",
   helpText,
+  initialValue = null,
   ...props
 }) => {
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState(initialValue);
   const [error, setError] = useState("");
   const [isTouched, setIsTouched] = useState(false);
 
@@ -36,32 +37,11 @@ const FileUpload = ({
     const selectedFile = e.target.files[0];
 
     if (selectedFile) {
-      const fileExtension = selectedFile.name.split(".").pop().toLowerCase();
-      const acceptedExtensions = acceptedFileTypes.split(",").map((type) => {
-        const [mainType, subType] = type.trim().split("/");
-        return subType === "*" ? mainType : subType;
-      });
-
-      const mainType = selectedFile.type.split("/")[0];
-
-      if (
-        !acceptedExtensions.includes(fileExtension) &&
-        !acceptedExtensions.includes(mainType)
-      ) {
-        setError(
-          `Bu dosya türü kabul edilmiyor. Kabul edilen dosya türleri: ${acceptedFileTypes}`
-        );
-        setFile(null);
-        setIsTouched(true);
-        return;
-      }
-
       const maxFileSizeInBytes = maxFileSize * 1024 * 1024;
 
       if (maxFileSize && selectedFile.size > maxFileSizeInBytes) {
         setError(`Dosya boyutu ${maxFileSize} MB'dan büyük olamaz.`);
         setFile(null);
-        setIsTouched(true);
         return;
       }
 
@@ -86,7 +66,6 @@ const FileUpload = ({
       }
 
       setError("");
-      setIsTouched(false);
     }
   };
 
@@ -98,7 +77,7 @@ const FileUpload = ({
   const validateInput = () => {
     if (isRequired && !file) {
       setError(`${label} zorunludur.`);
-    } else if (!file) {
+    } else {
       setError("");
     }
   };
@@ -108,8 +87,6 @@ const FileUpload = ({
     if (getFinalValue) {
       getFinalValue(null);
     }
-    setError("");
-    setIsTouched(false);
   };
 
   const bgColor = useColorModeValue("gray.100", "gray.700");
@@ -119,7 +96,7 @@ const FileUpload = ({
   return (
     <FormControl
       isRequired={isRequired}
-      isInvalid={!!error}
+      isInvalid={!!error && isTouched}
       my={4}
       onBlur={handleBlur}
       {...props}
@@ -165,7 +142,7 @@ const FileUpload = ({
           </HStack>
         )}
       </VStack>
-      {helpText && !error && <FormHelperText>{helpText}</FormHelperText>}
+      {helpText && !error && !file && <FormHelperText>{helpText}</FormHelperText>}
       {isTouched && error && <FormErrorMessage>{error}</FormErrorMessage>}
     </FormControl>
   );
@@ -181,10 +158,11 @@ FileUpload.propTypes = {
     FileTypes.EXCEL,
   ]).isRequired,
   maxFileSize: PropTypes.number,
-  getFinalValue: PropTypes.func,
+  getFinalValue: PropTypes.func.isRequired,
   isRequired: PropTypes.bool,
   valueType: PropTypes.oneOf(["base64", "file"]),
   helpText: PropTypes.string,
+  initialValue: PropTypes.any,
 };
 
 export default FileUpload;
