@@ -97,7 +97,7 @@ const TextBox = ({
         />
         {showCharacterCount && maxLength && (
           <InputRightElement width="4.5rem">
-            <FormHelperText>
+            <FormHelperText mt={0}>
               {value.length}/{maxLength}
             </FormHelperText>
           </InputRightElement>
