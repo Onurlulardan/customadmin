@@ -30,7 +30,7 @@ const TextBox = ({
   }, [value, getFinalValue]);
 
   return (
-    <FormControl isRequired={isRequired} isInvalid={error}>
+    <FormControl isRequired={isRequired} isInvalid={error} my={4}>
       {label && <FormLabel>{label}</FormLabel>}
       <Input
         type={type}

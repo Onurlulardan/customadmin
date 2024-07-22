@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import TextBox from "../../../components/textbox/TextBox";
 
 const MyForm = () => {
@@ -25,8 +25,11 @@ const MyForm = () => {
     }
   };
 
+  const bgColor = useColorModeValue("white", "gray.800");
+  const textColor = useColorModeValue("black", "white");
+
   return (
-    <Box>
+    <Box bg={bgColor} color={textColor} p={4}>
       <TextBox
         label="Name"
         name="name"
