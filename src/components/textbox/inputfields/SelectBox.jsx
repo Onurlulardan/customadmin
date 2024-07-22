@@ -18,7 +18,7 @@ import {
   InputRightElement,
   Flex,
 } from "@chakra-ui/react";
-import { FaChevronDown, FaTimes } from "react-icons/fa";
+import { FaChevronDown, FaTimes, FaChevronUp } from "react-icons/fa";
 
 const SelectBox = ({
   name,
@@ -190,18 +190,27 @@ const SelectBox = ({
             minW="50px"
             {...props}
           />
-        </Flex>
-        <InputRightElement>
+          {value.length > 0 && (
+            <IconButton
+              icon={<FaTimes />}
+              onClick={() => setValue([])}
+              aria-label="Clear selection"
+              size="sm"
+              variant="ghost"
+              disabled={disabled || readOnly}
+              _hover={{ bg: "transparent" }}
+            />
+          )}
           <IconButton
-            icon={isOpen ? <FaTimes /> : <FaChevronDown />}
+            icon={isOpen ? <FaChevronUp /> : <FaChevronDown />}
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle dropdown"
             size="sm"
             variant="ghost"
             disabled={disabled || readOnly}
-            top={2}
+            _hover={{ bg: "transparent" }}
           />
-        </InputRightElement>
+        </Flex>
       </InputGroup>
       {isOpen && (
         <Box
