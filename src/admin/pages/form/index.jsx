@@ -13,7 +13,7 @@ const MyForm = () => {
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
   const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState([]);
 
   const handleNameChange = (value) => {
     setName(value);
@@ -107,7 +107,8 @@ const MyForm = () => {
           { value: "female", label: "Kadın" },
           { value: "other", label: "Diğer" },
         ]}
-        icon={<FaGenderless />}
+        isMulti={true}
+        isSearchable={true}
         helpText="Cinsiyetiniz"
       />
       <Button mt={4} onClick={handleSubmit}>
