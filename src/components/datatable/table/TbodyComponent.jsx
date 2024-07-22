@@ -52,67 +52,70 @@ const TbodyComponent = ({
 
   return (
     <>
-      {selectedData.map((item, rowIndex) => (
-        <Tr
-          key={rowIndex}
-          onContextMenu={(event) => handleRightClick(event, item)}
-        >
-          {selectable && (
-            <Td maxW={"20px"}>
-              <Checkbox
-                isChecked={selectedRows.includes(item.id)}
-                onChange={() =>
-                  handleSelectRow(item.id, selectedRows, setSelectedRows)
-                }
-              />
-            </Td>
-          )}
-          {columns.map(
-            (col) =>
-              !hiddenColumns.includes(col.key) &&
-              col.visible !== false && (
-                <Td
-                  key={col.key}
-                  onClick={() =>
+      {selectedData.map((item, rowIndex) => {
+        const primaryKey = columns.find((col) => col.primaryKey).key;
+        const primaryKeyValue = item[primaryKey];
+        return (
+          <Tr
+            key={rowIndex}
+            onContextMenu={(event) => handleRightClick(event, item)}
+          >
+            {selectable && (
+              <Td maxW={"20px"}>
+                <Checkbox
+                  isChecked={selectedRows.includes(item.id)}
+                  onChange={() =>
                     handleSelectRow(item.id, selectedRows, setSelectedRows)
                   }
-                  maxW={col.width ? col.width : "auto"}
-                >
-                  {col.render ? col.render(item[col.key], item) : item[col.key]}
-                </Td>
-              )
-          )}
-          {editActive && (
-            <Td maxW={"20px"}>
-              <Flex justify="center">
-                <Button
-                  colorScheme="blue"
-                  onClick={() => {
-                    const primaryKey = columns.find(
-                      (col) => col.primaryKey
-                    ).key;
-                    onEdit(item[primaryKey]);
-                  }}
-                >
-                  <MdEdit />
-                </Button>
-              </Flex>
-            </Td>
-          )}
-          {deleteActive && (
-            <Td maxW={"20px"}>
-              <Flex justify="center">
-                <Button
-                  colorScheme="red"
-                  onClick={() => handleDelete([item.id])}
-                >
-                  <MdDeleteForever />
-                </Button>
-              </Flex>
-            </Td>
-          )}
-        </Tr>
-      ))}
+                />
+              </Td>
+            )}
+            {columns.map(
+              (col) =>
+                !hiddenColumns.includes(col.key) &&
+                col.visible !== false && (
+                  <Td
+                    key={col.key}
+                    onClick={() =>
+                      handleSelectRow(item.id, selectedRows, setSelectedRows)
+                    }
+                    maxW={col.width ? col.width : "auto"}
+                  >
+                    {col.render
+                      ? col.render(item[col.key], item)
+                      : item[col.key]}
+                  </Td>
+                )
+            )}
+            {editActive && (
+              <Td maxW={"20px"}>
+                <Flex justify="center">
+                  <Button
+                    colorScheme="blue"
+                    onClick={() => {
+                      onEdit(primaryKeyValue);
+                    }}
+                  >
+                    <MdEdit />
+                  </Button>
+                </Flex>
+              </Td>
+            )}
+            {deleteActive && (
+              <Td maxW={"20px"}>
+                <Flex justify="center">
+                  <Button
+                    colorScheme="red"
+                    onClick={() => handleDelete([primaryKeyValue])}
+                  >
+                    <MdDeleteForever />
+                  </Button>
+                </Flex>
+              </Td>
+            )}
+          </Tr>
+        );
+      })}
     </>
   );
 };
