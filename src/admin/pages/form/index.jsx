@@ -68,6 +68,7 @@ const MyForm = () => {
         isRequired={true}
         maxLength={100}
         helpText="Açıklamanız"
+        showCharacterCount={true}
       />
       <NumberBox
         label="Yaş"

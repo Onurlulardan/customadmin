@@ -6,6 +6,10 @@ import {
   Textarea,
   FormErrorMessage,
   FormHelperText,
+  InputGroup,
+  InputLeftAddon,
+  InputRightAddon,
+  Flex,
 } from "@chakra-ui/react";
 
 const CustomTextArea = ({
@@ -23,6 +27,9 @@ const CustomTextArea = ({
   autoFocus = false,
   customValidation,
   customErrorMessage = "",
+  showCharacterCount = false,
+  leftAddon,
+  rightAddon,
   ...props
 }) => {
   const [value, setValue] = useState(initialValue);
@@ -71,19 +78,30 @@ const CustomTextArea = ({
       my={4}
     >
       {label && <FormLabel>{label}</FormLabel>}
-      <Textarea
-        name={name}
-        placeholder={placeholder}
-        value={value}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
-        disabled={disabled}
-        readOnly={readOnly}
-        autoFocus={autoFocus}
-        borderColor={error && isTouched && !isFocused ? "red.500" : undefined}
-        {...props}
-      />
+      <InputGroup>
+        {leftAddon && <InputLeftAddon>{leftAddon}</InputLeftAddon>}
+        <Textarea
+          name={name}
+          placeholder={placeholder}
+          value={value}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          disabled={disabled}
+          readOnly={readOnly}
+          autoFocus={autoFocus}
+          borderColor={error && isTouched && !isFocused ? "red.500" : undefined}
+          {...props}
+        />
+        {rightAddon && <InputRightAddon>{rightAddon}</InputRightAddon>}
+      </InputGroup>
+      {showCharacterCount && maxLength && (
+        <Flex justify="flex-end" mt={2} mr={2}>
+          <FormHelperText >
+            {value.length}/{maxLength}
+          </FormHelperText>
+        </Flex>
+      )}
       {helpText && !error && <FormHelperText>{helpText}</FormHelperText>}
       {isTouched && !isFocused && <FormErrorMessage>{error}</FormErrorMessage>}
     </FormControl>
@@ -105,6 +123,9 @@ CustomTextArea.propTypes = {
   autoFocus: PropTypes.bool,
   customValidation: PropTypes.func,
   customErrorMessage: PropTypes.string,
+  showCharacterCount: PropTypes.bool,
+  leftAddon: PropTypes.node,
+  rightAddon: PropTypes.node,
 };
 
 export default CustomTextArea;
