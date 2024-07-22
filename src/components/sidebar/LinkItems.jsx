@@ -8,8 +8,8 @@ import {
 
 const LinkItems = [
   { name: "Home", icon: FiHome, path: "/" },
-  { name: "Trending", icon: FiTrendingUp, path: "/trending" },
-  { name: "Explore", icon: FiCompass, path: "/explore" },
+  { name: "Dashboard", icon: FiTrendingUp, path: "/admin/dashboard" },
+  { name: "Form", icon: FiCompass, path: "/admin/form" },
   { name: "Favourites", icon: FiStar, path: "/favourites" },
   { name: "Settings", icon: FiSettings, path: "/settings" },
 ];
