@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Button, useColorModeValue } from "@chakra-ui/react";
 import { TextBox, NumberBox, TextArea } from "../../../components/textbox";
 import SelectBox from "../../../components/selectbox";
 import { FaGenderless } from "react-icons/fa";
 import { FileUpload, FileTypes } from "../../../components/fileupload";
 import Form from "../../../components/form";
+import { useDispatch } from "react-redux";
+import { setPageHeader } from "../../../store/root/rootSlice";
 
 const MyForm = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setPageHeader("Form"));
+  }, []);
+
   const handleSubmit = (values) => {
     console.log("Form values:", values);
     alert(JSON.stringify(values, null, 2));
@@ -89,7 +96,6 @@ const MyForm = () => {
           name="file"
           acceptedFileTypes={FileTypes.IMAGE}
           maxFileSize={2}
-          getFinalValue={(value) => handleChange("file", value)}
           isRequired={true}
           valueType="base64"
           helpText="Yüklemek istediğiniz dosyayı seçin."

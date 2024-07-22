@@ -142,7 +142,9 @@ const FileUpload = ({
           </HStack>
         )}
       </VStack>
-      {helpText && !error && !file && <FormHelperText>{helpText}</FormHelperText>}
+      {helpText && !error && !file && (
+        <FormHelperText>{helpText}</FormHelperText>
+      )}
       {isTouched && error && <FormErrorMessage>{error}</FormErrorMessage>}
     </FormControl>
   );
@@ -158,7 +160,7 @@ FileUpload.propTypes = {
     FileTypes.EXCEL,
   ]).isRequired,
   maxFileSize: PropTypes.number,
-  getFinalValue: PropTypes.func.isRequired,
+  getFinalValue: PropTypes.func,
   isRequired: PropTypes.bool,
   valueType: PropTypes.oneOf(["base64", "file"]),
   helpText: PropTypes.string,
