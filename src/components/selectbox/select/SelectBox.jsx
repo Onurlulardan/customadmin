@@ -212,6 +212,7 @@ const SelectBox = ({
             onFocus={handleFocus}
             disabled={disabled}
             readOnly={readOnly}
+            required={false}
             autoFocus={autoFocus}
             border="none"
             outline="none"
