@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Drawer,
   DrawerBody,
@@ -10,7 +10,6 @@ import {
   Button,
   Box,
   useColorModeValue,
-  Flex,
 } from "@chakra-ui/react";
 import Form from "../../form";
 import { TextBox, NumberBox, TextArea } from "../../../components/textbox";
@@ -18,22 +17,13 @@ import SelectBox from "../../../components/selectbox";
 import { FileTypes, FileUpload } from "../../../components/fileupload";
 
 const DataTableDrawer = ({ isOpen, onClose, columnsOptions, onSave }) => {
-  const [formData, setFormData] = useState({});
+  const bgColor = useColorModeValue("white", "gray.800");
+  const textColor = useColorModeValue("black", "white");
 
-  const handleChange = (name, value) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = () => {
+  const handleSubmit = (formData) => {
     onSave(formData);
     onClose();
   };
-
-  const bgColor = useColorModeValue("white", "gray.800");
-  const textColor = useColorModeValue("black", "white");
 
   const renderInput = (option) => {
     switch (option.type) {
@@ -117,20 +107,15 @@ const DataTableDrawer = ({ isOpen, onClose, columnsOptions, onSave }) => {
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
-        <DrawerHeader>
-          Yeni Kayıt Ekle
-          <Flex my={2}>
-            <Button colorScheme="blue" onClick={handleSubmit}>
-              Kaydet
-            </Button>
-          </Flex>
-        </DrawerHeader>
+        <DrawerHeader>Yeni Kayıt Ekle</DrawerHeader>
         <DrawerBody>
           <Box bg={bgColor} color={textColor} p={4}>
             <Form
               onSubmit={handleSubmit}
-              buttonPosition="left"
-              defaultButton={false}
+              buttonPositionY="top"
+              buttonPositionX="left"
+              buttonLabel="Kaydet"
+              colorScheme="blue"
             >
               {columnsOptions.map((option) => renderInput(option))}
             </Form>

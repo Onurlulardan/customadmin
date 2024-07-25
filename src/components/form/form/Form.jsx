@@ -5,8 +5,11 @@ import { Box, Button, Flex } from "@chakra-ui/react";
 const Form = ({
   onSubmit,
   children,
-  buttonPosition = "right",
+  buttonPositionX = "left",
+  buttonPositionY = "bottom",
   defaultButton = true,
+  buttonLabel = "Gönder",
+  colorScheme = "gray",
 }) => {
   const [values, setValues] = useState({});
 
@@ -40,10 +43,20 @@ const Form = ({
 
   return (
     <Box as="form" onSubmit={handleSubmit}>
+      {defaultButton && buttonPositionY === "top" && (
+        <Flex justify={justifyContentMap[buttonPositionX]} mb={4}>
+          <Button colorScheme={colorScheme} type="submit">
+            {" "}
+            {buttonLabel}{" "}
+          </Button>
+        </Flex>
+      )}
       {enhancedChildren}
-      {defaultButton && (
-        <Flex justify={justifyContentMap[buttonPosition]} mt={4}>
-          <Button type="submit">Gönder</Button>
+      {defaultButton && buttonPositionY === "bottom" && (
+        <Flex justify={justifyContentMap[buttonPositionX]} mt={4}>
+          <Button colorScheme={colorScheme} type="submit">
+            {buttonLabel}
+          </Button>
         </Flex>
       )}
     </Box>
