@@ -56,7 +56,7 @@ const TextBox = ({
     if (getFinalValue) {
       getFinalValue(value);
     }
-  }, [value, getFinalValue]);
+  }, [value]);
 
   const validateInput = () => {
     if (isRequired && !value) {

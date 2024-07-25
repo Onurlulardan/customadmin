@@ -54,7 +54,7 @@ const NumberBox = ({
     if (getFinalValue) {
       getFinalValue(value);
     }
-  }, [value, getFinalValue]);
+  }, [value]);
 
   const validateInput = () => {
     const numValue = parseFloat(value);
