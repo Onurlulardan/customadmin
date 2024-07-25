@@ -14,6 +14,7 @@ import ShowConfirm from "../plugin/ShowConfirm";
 import TheadComponent from "./TheadComponent";
 import TbodyComponent from "./TbodyComponent";
 import TableControls from "./TableControls";
+import DataTableDrawer from "../plugin/DataTableDrawer";
 
 const DataTable = ({
   columns,
@@ -34,6 +35,7 @@ const DataTable = ({
   toolbarButtons = [],
   onToolbarButtonClick,
   defaultAddButton = false,
+  columnsOptions = [],
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
@@ -43,6 +45,8 @@ const DataTable = ({
   const [selectedRows, setSelectedRows] = useState([]);
   const [contextMenu, setContextMenu] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [tableData, setTableData] = useState(data);
 
   const tableBgColor = useColorModeValue("white", "gray.800");
   const tableBorderColor = useColorModeValue("gray.200", "gray.600");
@@ -107,11 +111,18 @@ const DataTable = ({
   };
 
   const handleToolbarButtonClick = (key) => {
+    if (key === "DefaultAdd") {
+      setIsDrawerOpen(true);
+    }
     const primaryKey = columns.find((col) => col.primaryKey).key;
     const selectedData = data.filter((row) =>
       selectedRows.includes(row[primaryKey])
     );
     console.log("Seçili Satırlar:", key, selectedData);
+  };
+
+  const handleSave = (newData) => {
+    setTableData((prevData) => [...prevData, newData]);
   };
 
   const sortedData = useMemo(
@@ -147,7 +158,7 @@ const DataTable = ({
         setHiddenColumns={setHiddenColumns}
         toolbarButtons={toolbarButtons}
         onToolbarButtonClick={handleToolbarButtonClick}
-        defaultAddButton={defaultAddButton}
+        defaultAddButton={defaultAddButton} // Yeni prop
       />
       <Table variant="striped" colorScheme="gray" bg={tableBgColor}>
         <Thead>
@@ -207,6 +218,12 @@ const DataTable = ({
         setRowsPerPage={setRowsPerPageState}
         rowsPerPageOptions={rowsPerPageOptions}
       />
+      <DataTableDrawer
+        isOpen={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+        columnsOptions={columnsOptions} // Yeni prop
+        onSave={handleSave}
+      />
     </Box>
   );
 };
@@ -251,6 +268,13 @@ DataTable.propTypes = {
   ),
   onToolbarButtonClick: PropTypes.func.isRequired,
   defaultAddButton: PropTypes.bool,
+  columnsOptions: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+    })
+  ),
 };
 
 export default DataTable;
