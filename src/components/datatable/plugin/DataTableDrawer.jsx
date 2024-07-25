@@ -50,7 +50,6 @@ const DataTableDrawer = ({ isOpen, onClose, columnsOptions, onSave }) => {
             showCharacterCount={option.showCharacterCount || false}
             leftAddon={option.leftAddon || null}
             rightAddon={option.rightAddon || null}
-            onChange={(e) => handleChange(option.key, e.target.value)}
           />
         );
       case "Number":
@@ -66,9 +65,6 @@ const DataTableDrawer = ({ isOpen, onClose, columnsOptions, onSave }) => {
             precision={option.precision || undefined}
             step={option.step || undefined}
             helpText={option.helpText || ""}
-            onChange={(e) =>
-              handleChange(option.key, parseFloat(e.target.value))
-            }
           />
         );
       case "TextArea":
@@ -82,7 +78,6 @@ const DataTableDrawer = ({ isOpen, onClose, columnsOptions, onSave }) => {
             maxLength={option.maxLength || undefined}
             helpText={option.helpText || ""}
             showCharacterCount={option.showCharacterCount || false}
-            onChange={(e) => handleChange(option.key, e.target.value)}
           />
         );
       case "Select":
@@ -97,7 +92,6 @@ const DataTableDrawer = ({ isOpen, onClose, columnsOptions, onSave }) => {
             isSearchable={option.isSearchable || false}
             helpText={option.helpText || ""}
             isRequired={option.isRequired || false}
-            onChange={(value) => handleChange(option.key, value)}
           />
         );
       case "File":
@@ -111,7 +105,6 @@ const DataTableDrawer = ({ isOpen, onClose, columnsOptions, onSave }) => {
             isRequired={option.isRequired || false}
             valueType={option.valueType || "base64"}
             helpText={option.helpText || ""}
-            onChange={(file) => handleChange(option.key, file)}
           />
         );
       default:
