@@ -36,6 +36,7 @@ const DataTable = ({
   onToolbarButtonClick,
   defaultAddButton = false,
   columnsOptions = [],
+  onSave,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
@@ -222,7 +223,7 @@ const DataTable = ({
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
         columnsOptions={columnsOptions}
-        onSave={handleSave}
+        onSave={onSave}
       />
     </Box>
   );
@@ -275,6 +276,7 @@ DataTable.propTypes = {
       type: PropTypes.string.isRequired,
     })
   ),
+  onSave: PropTypes.func,
 };
 
 export default DataTable;

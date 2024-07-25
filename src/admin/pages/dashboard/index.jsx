@@ -100,6 +100,10 @@ const Dashboard = () => {
     console.log("Seçili Satırlar:", selectedRowsData);
   };
 
+  const handleSaveData = (newData) => {
+    console.log("Eklenen Yeni Veri:", newData);
+  };
+
   return (
     <Box p={4}>
       <VStack spacing={4} align="stretch">
@@ -135,6 +139,7 @@ const Dashboard = () => {
           }
           defaultAddButton={true}
           columnsOptions={columnsOptions}
+          onSave={handleSaveData}
         />
       </VStack>
     </Box>
