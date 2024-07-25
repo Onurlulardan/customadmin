@@ -31,10 +31,19 @@ const TableControls = ({
   setHiddenColumns,
   toolbarButtons,
   onToolbarButtonClick,
+  defaultAddButton,
 }) => {
   return (
     <Flex justify="space-between" mb={4} gap={4} align={"center"}>
       <HStack spacing={2}>
+        {defaultAddButton && (
+          <Tooltip label="Yeni" placement="top">
+            <Button onClick={() => onToolbarButtonClick("DefaultAdd")}>
+              <Icon as={IoIosAdd} mr={2} />
+              Yeni
+            </Button>
+          </Tooltip>
+        )}
         {toolbarButtons.map((button) => (
           <Tooltip key={button.key} label={button.header} placement="top">
             <Button onClick={() => onToolbarButtonClick(button.key)}>

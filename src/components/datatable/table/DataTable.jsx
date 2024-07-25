@@ -33,6 +33,7 @@ const DataTable = ({
   onItemClick,
   toolbarButtons = [],
   onToolbarButtonClick,
+  defaultAddButton = false,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
@@ -146,6 +147,7 @@ const DataTable = ({
         setHiddenColumns={setHiddenColumns}
         toolbarButtons={toolbarButtons}
         onToolbarButtonClick={handleToolbarButtonClick}
+        defaultAddButton={defaultAddButton}
       />
       <Table variant="striped" colorScheme="gray" bg={tableBgColor}>
         <Thead>
@@ -248,6 +250,7 @@ DataTable.propTypes = {
     })
   ),
   onToolbarButtonClick: PropTypes.func.isRequired,
+  defaultAddButton: PropTypes.bool,
 };
 
 export default DataTable;
