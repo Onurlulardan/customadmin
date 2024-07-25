@@ -12,10 +12,11 @@ import {
   MdFileUpload,
 } from "react-icons/md";
 import { IoIosAdd } from "react-icons/io";
+import { FileTypes } from "../../../components/fileupload";
 
 // Örnek veri ve sütunlar
 const columns = [
-  { key: "id", header: "ID", primaryKey: true, visible: false, type: "Number" },
+  { key: "id", header: "ID", primaryKey: true, visible: false },
   {
     key: "avatar",
     header: "Avatar",
@@ -27,11 +28,10 @@ const columns = [
       />
     ),
     width: "80px",
-    type: "File",
   },
-  { key: "name", header: "Ad", type: "String" },
-  { key: "age", header: "Yaş", type: "Number" },
-  { key: "email", header: "Email", type: "String" },
+  { key: "name", header: "Ad" },
+  { key: "age", header: "Yaş" },
+  { key: "email", header: "Email" },
 ];
 
 //ContexMenu itemleri
@@ -46,6 +46,27 @@ const toolbarButtons = [
   { key: "Import", header: "Import", icon: MdFileUpload },
 ];
 
+// columnsOptions ayarları
+const columnsOptions = [
+  { key: "name", label: "Ad", type: "String", isRequired: true },
+  {
+    key: "age",
+    label: "Yaş",
+    type: "Number",
+    isRequired: true,
+    min: 0,
+    max: 120,
+  },
+  { key: "email", label: "Email", type: "String", isRequired: true },
+  {
+    key: "avatar",
+    label: "Avatar",
+    type: "File",
+    acceptedFileTypes: "image/*",
+    valueType: "base64",
+    isRequired: true,
+  },
+];
 const Dashboard = () => {
   const dispatch = useDispatch();
   const [tableData, setTableData] = useState(data);
@@ -113,6 +134,7 @@ const Dashboard = () => {
             )
           }
           defaultAddButton={true}
+          columnsOptions={columnsOptions}
         />
       </VStack>
     </Box>
