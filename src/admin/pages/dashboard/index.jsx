@@ -15,7 +15,7 @@ import { IoIosAdd } from "react-icons/io";
 
 // Örnek veri ve sütunlar
 const columns = [
-  { key: "id", header: "ID", primaryKey: true, visible: false },
+  { key: "id", header: "ID", primaryKey: true, visible: false, type: "Number" },
   {
     key: "avatar",
     header: "Avatar",
@@ -27,10 +27,11 @@ const columns = [
       />
     ),
     width: "80px",
+    type: "File"
   },
-  { key: "name", header: "Ad" },
-  { key: "age", header: "Yaş" },
-  { key: "email", header: "Email" },
+  { key: "name", header: "Ad" , type: "String" },
+  { key: "age", header: "Yaş" , type: "Number" },
+  { key: "email", header: "Email" , type: "String" },
 ];
 
 //ContexMenu itemleri
