@@ -158,7 +158,7 @@ const DataTable = ({
         setHiddenColumns={setHiddenColumns}
         toolbarButtons={toolbarButtons}
         onToolbarButtonClick={handleToolbarButtonClick}
-        defaultAddButton={defaultAddButton} // Yeni prop
+        defaultAddButton={defaultAddButton}
       />
       <Table variant="striped" colorScheme="gray" bg={tableBgColor}>
         <Thead>
@@ -221,7 +221,7 @@ const DataTable = ({
       <DataTableDrawer
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
-        columnsOptions={columnsOptions} // Yeni prop
+        columnsOptions={columnsOptions}
         onSave={handleSave}
       />
     </Box>
