@@ -33,7 +33,6 @@ const DataTableDrawer = ({
       formData.id = editData.id;
     }
     onSave(formData);
-    // onClose();
   };
 
   const renderInput = (column) => {
