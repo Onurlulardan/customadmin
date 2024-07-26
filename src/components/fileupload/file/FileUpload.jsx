@@ -27,11 +27,16 @@ const FileUpload = ({
   valueType = "base64",
   helpText,
   initialValue = null,
+  defaultValue,
   ...props
 }) => {
   const [file, setFile] = useState(initialValue);
   const [error, setError] = useState("");
   const [isTouched, setIsTouched] = useState(false);
+
+  useEffect(() => {
+    if (defaultValue) setFile(defaultValue);
+  }, [defaultValue]);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -165,6 +170,7 @@ FileUpload.propTypes = {
   valueType: PropTypes.oneOf(["base64", "file"]),
   helpText: PropTypes.string,
   initialValue: PropTypes.any,
+  defaultValue: PropTypes.any,
 };
 
 export default FileUpload;

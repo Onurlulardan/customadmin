@@ -17,6 +17,7 @@ const NumberBox = ({
   label,
   placeholder,
   initialValue = "",
+  defaultValue,
   getFinalValue,
   isRequired = false,
   disabled = false,
@@ -36,6 +37,10 @@ const NumberBox = ({
   const [isTouched, setIsTouched] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
+  useEffect(() => {
+    if (defaultValue) setValue(defaultValue);
+  }, [defaultValue]);
+
   const handleChange = (valueString) => {
     setValue(valueString);
   };
@@ -49,8 +54,6 @@ const NumberBox = ({
   const handleFocus = () => {
     setIsFocused(true);
   };
-
-
 
   useEffect(() => {
     if (getFinalValue) {
@@ -115,6 +118,7 @@ NumberBox.propTypes = {
   label: PropTypes.string,
   placeholder: PropTypes.string,
   initialValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   getFinalValue: PropTypes.func,
   isRequired: PropTypes.bool,
   disabled: PropTypes.bool,
