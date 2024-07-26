@@ -13,11 +13,11 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import Form from "../../form";
-import { TextBox, NumberBox, TextArea } from "../../../components/textbox";
-import SelectBox from "../../../components/selectbox";
-import { FileTypes, FileUpload } from "../../../components/fileupload";
+import { TextBox, NumberBox, TextArea } from "../../textbox";
+import SelectBox from "../../selectbox";
+import { FileTypes, FileUpload } from "../../fileupload";
 
-const DataTableDrawer = ({
+const DataTableForm = ({
   isOpen,
   onClose,
   columns,
@@ -150,4 +150,4 @@ const DataTableDrawer = ({
   );
 };
 
-export default DataTableDrawer;
+export default DataTableForm;

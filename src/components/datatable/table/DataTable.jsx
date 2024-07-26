@@ -14,7 +14,7 @@ import ShowConfirm from "../plugin/ShowConfirm";
 import TheadComponent from "./TheadComponent";
 import TbodyComponent from "./TbodyComponent";
 import TableControls from "./TableControls";
-import DataTableDrawer from "../plugin/DataTableDrawer";
+import DataTableForm from "../plugin/DataTableForm";
 
 const DataTable = ({
   columns,
@@ -228,7 +228,7 @@ const DataTable = ({
         setRowsPerPage={setRowsPerPageState}
         rowsPerPageOptions={rowsPerPageOptions}
       />
-      <DataTableDrawer
+      <DataTableForm
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
         columns={columns}
