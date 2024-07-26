@@ -120,9 +120,6 @@ const Dashboard = () => {
             console.log(e);
           }}
           editActive={true}
-          onEdit={(e) => {
-            console.log(e);
-          }}
           selectable={true}
           onDeleteSelected={(e) => {
             console.log(e);

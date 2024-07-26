@@ -271,7 +271,6 @@ DataTable.propTypes = {
   deleteActive: PropTypes.bool,
   onDelete: PropTypes.func,
   editActive: PropTypes.bool,
-  onEdit: PropTypes.func,
   selectable: PropTypes.bool,
   onDeleteSelected: PropTypes.func,
   rowsPerPageOptions: PropTypes.arrayOf(PropTypes.number),
