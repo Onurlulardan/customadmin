@@ -52,6 +52,10 @@ const CustomTextArea = ({
   };
 
   useEffect(() => {
+    setValue(initialValue);
+  }, [initialValue]);
+
+  useEffect(() => {
     if (getFinalValue) {
       getFinalValue(value);
     }

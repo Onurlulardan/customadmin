@@ -51,6 +51,10 @@ const NumberBox = ({
   };
 
   useEffect(() => {
+    setValue(initialValue);
+  }, [initialValue]);
+
+  useEffect(() => {
     if (getFinalValue) {
       getFinalValue(value);
     }

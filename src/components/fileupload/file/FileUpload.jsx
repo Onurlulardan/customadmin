@@ -33,6 +33,10 @@ const FileUpload = ({
   const [error, setError] = useState("");
   const [isTouched, setIsTouched] = useState(false);
 
+  useEffect(() => {
+    setFile(initialValue);
+  }, [initialValue]);
+
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
 
