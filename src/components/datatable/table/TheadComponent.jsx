@@ -19,7 +19,12 @@ const TheadComponent = ({
   return (
     <Tr>
       {selectable && (
-        <Th maxW={"20px"} border="1px solid" borderColor={tableBorderColor}>
+        <Th
+          maxW={"20px"}
+          w={"auto"}
+          border="1px solid"
+          borderColor={tableBorderColor}
+        >
           <Checkbox
             isChecked={
               selectedRows.length === selectedData.length &&
@@ -41,7 +46,7 @@ const TheadComponent = ({
               borderColor={tableBorderColor}
               onClick={() => requestSort(col.key, sortConfig, setSortConfig)}
               cursor="pointer"
-              maxW={col.width ? col.width : "auto"}
+              w={col.width ? col.width : "auto"}
             >
               {col.header}
               {sortConfig.key === col.key ? (
@@ -55,13 +60,19 @@ const TheadComponent = ({
           )
       )}
       {editActive && (
-        <Th maxW={"20px"} border="1px solid" borderColor={tableBorderColor}>
+        <Th
+          maxW={"20px"}
+          w={"auto"}
+          border="1px solid"
+          borderColor={tableBorderColor}
+        >
           Düzenle
         </Th>
       )}
       {deleteActive && (
         <Th
           maxW={"20px"}
+          w={"auto"}
           border="1px solid"
           borderColor={tableBorderColor}
         >
