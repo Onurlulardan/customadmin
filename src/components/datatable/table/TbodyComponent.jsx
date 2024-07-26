@@ -57,12 +57,17 @@ const TbodyComponent = ({
           )}
           {editActive && (
             <Td>
-              <IconButton icon={<MdEdit />} onClick={() => onEdit(row)} />
+              <IconButton
+                colorScheme="blue"
+                icon={<MdEdit />}
+                onClick={() => onEdit(row)}
+              />
             </Td>
           )}
           {deleteActive && (
             <Td>
               <IconButton
+                colorScheme="red"
                 icon={<MdDelete />}
                 onClick={() => handleDelete(row.id)}
               />
