@@ -48,9 +48,6 @@ const SelectBox = ({
   const wrapperRef = useRef(null);
   const inputRef = useRef(null);
 
-  useEffect(() => {
-    setValue(initialValue);
-  }, [initialValue]);
 
   const handleChange = (e) => {
     const { value } = e.target;

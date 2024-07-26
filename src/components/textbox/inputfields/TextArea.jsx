@@ -51,9 +51,7 @@ const CustomTextArea = ({
     setIsFocused(true);
   };
 
-  useEffect(() => {
-    setValue(initialValue);
-  }, [initialValue]);
+
 
   useEffect(() => {
     if (getFinalValue) {

@@ -50,9 +50,7 @@ const NumberBox = ({
     setIsFocused(true);
   };
 
-  useEffect(() => {
-    setValue(initialValue);
-  }, [initialValue]);
+
 
   useEffect(() => {
     if (getFinalValue) {
