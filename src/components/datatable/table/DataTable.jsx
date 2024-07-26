@@ -35,6 +35,7 @@ const DataTable = ({
   onToolbarButtonClick,
   defaultAddButton = false,
   onSave,
+  showOn,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
@@ -235,6 +236,7 @@ const DataTable = ({
         onSave={handleSave}
         editMode={editMode}
         editData={drawerData}
+        showOn={showOn}
       />
     </Box>
   );
@@ -288,6 +290,7 @@ DataTable.propTypes = {
     })
   ),
   onSave: PropTypes.func,
+  showOn: PropTypes.oneOf(["modal", "drawer"]),
 };
 
 export default DataTable;

@@ -7,6 +7,13 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
   Button,
   Box,
   useColorModeValue,
@@ -24,6 +31,7 @@ const DataTableForm = ({
   onSave,
   editMode,
   editData,
+  showOn = "drawer",
 }) => {
   const bgColor = useColorModeValue("white", "gray.800");
   const textColor = useColorModeValue("black", "white");
@@ -122,8 +130,38 @@ const DataTableForm = ({
     }
   };
 
+  const renderForm = () => (
+    <Box bg={bgColor} color={textColor} p={4}>
+      <Form
+        onSubmit={handleSubmit}
+        buttonPositionY="top"
+        buttonPositionX="left"
+        buttonLabel={editMode ? "Güncelle" : "Kaydet"}
+        colorScheme="blue"
+      >
+        {columns.map((column) => renderInput(column))}
+      </Form>
+    </Box>
+  );
+
+  if (showOn === "modal") {
+    return (
+      <Modal isOpen={isOpen} onClose={onClose} size="lg">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalCloseButton />
+          <ModalHeader>
+            {editMode ? "Kaydı Düzenle" : "Yeni Kayıt Ekle"}
+          </ModalHeader>
+          <Divider />
+          <ModalBody>{renderForm()}</ModalBody>
+        </ModalContent>
+      </Modal>
+    );
+  }
+
   return (
-    <Drawer isOpen={isOpen} placement="right" onClose={onClose} size={"lg"}>
+    <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="xl">
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
@@ -131,20 +169,7 @@ const DataTableForm = ({
           {editMode ? "Kaydı Düzenle" : "Yeni Kayıt Ekle"}
         </DrawerHeader>
         <Divider />
-        <DrawerBody>
-          <Box bg={bgColor} color={textColor} p={4}>
-            <Form
-              onSubmit={handleSubmit}
-              buttonPositionY="top"
-              buttonPositionX="left"
-              buttonLabel={editMode ? "Güncelle" : "Kaydet"}
-              colorScheme="blue"
-            >
-              {columns.map((column) => renderInput(column))}
-            </Form>
-          </Box>
-        </DrawerBody>
-        <DrawerFooter></DrawerFooter>
+        <DrawerBody>{renderForm()}</DrawerBody>
       </DrawerContent>
     </Drawer>
   );

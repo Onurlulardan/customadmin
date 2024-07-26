@@ -131,6 +131,7 @@ const Dashboard = () => {
           }
           defaultAddButton={true}
           onSave={handleSaveData}
+          showOn={"drawer"}
         />
       </VStack>
     </Box>
