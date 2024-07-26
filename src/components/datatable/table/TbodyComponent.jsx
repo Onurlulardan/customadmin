@@ -69,7 +69,7 @@ const TbodyComponent = ({
               <IconButton
                 colorScheme="red"
                 icon={<MdDelete />}
-                onClick={() => handleDelete(row.id)}
+                onClick={() => handleDelete([row.id])}
               />
             </Td>
           )}
@@ -93,7 +93,7 @@ TbodyComponent.propTypes = {
   selectedData: PropTypes.array.isRequired,
   hiddenColumns: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectable: PropTypes.bool,
-  selectedRows: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectedRows: PropTypes.arrayOf(PropTypes.number).isRequired,
   setSelectedRows: PropTypes.func.isRequired,
   handleSelectRow: PropTypes.func.isRequired,
   handleRightClick: PropTypes.func.isRequired,
