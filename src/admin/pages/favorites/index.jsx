@@ -2,6 +2,7 @@ import React from "react";
 import { Menu } from "../../../components/menu";
 import { FaChevronDown } from "react-icons/fa6";
 import { Accordion } from "../../../components/accordion";
+import { Modal } from "../../../components/modal";
 
 const menuItems = [
   { label: "Profile", key: "profile" },
@@ -55,6 +56,15 @@ const Favorites = () => {
         items={accordionItems}
         allowMultiple={true}
         defaultIndex={[0]}
+      />
+      <Modal
+        title="Başlık"
+        bodyContent={<p>Modal içeriği</p>}
+        footerContent={<p>Footer içeriği</p>}
+        size="lg"
+        closeButton={true}
+        triggerButtonLabel="Modalı Aç"
+        triggerButtonProps={{ colorScheme: "blue" }}
       />
     </div>
   );
