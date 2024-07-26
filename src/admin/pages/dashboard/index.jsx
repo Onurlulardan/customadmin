@@ -97,11 +97,6 @@ const Dashboard = () => {
 
   const handleSaveData = (formData) => {
     console.log("Form Verileri:", formData);
-    setTableData((prevData) => [
-      ...prevData,
-      { id: totalCount + 1, ...formData },
-    ]);
-    setTotalCount(totalCount + 1);
   };
 
   return (
