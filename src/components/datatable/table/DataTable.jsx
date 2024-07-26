@@ -45,8 +45,8 @@ const DataTable = ({
   const [contextMenu, setContextMenu] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [drawerData, setDrawerData] = useState({});
   const [editMode, setEditMode] = useState(false);
-  const [editData, setEditData] = useState(null);
 
   const tableBgColor = useColorModeValue("white", "gray.800");
   const tableBorderColor = useColorModeValue("gray.200", "gray.600");
@@ -112,6 +112,7 @@ const DataTable = ({
 
   const handleToolbarButtonClick = (key) => {
     if (key === "DefaultAdd") {
+      setDrawerData({});
       setEditMode(false);
       setIsDrawerOpen(true);
     }
@@ -122,23 +123,25 @@ const DataTable = ({
     console.log("Seçili Satırlar:", key, selectedData);
   };
 
+  const handleEdit = (rowData) => {
+    setDrawerData(rowData);
+    setEditMode(true);
+    setIsDrawerOpen(true);
+  };
+
   const handleSave = (newData) => {
     if (editMode) {
-      setTableData((prevData) =>
-        prevData.map((item) => (item.id === newData.id ? newData : item))
+      const updatedData = tableData.map((item) =>
+        item.id === newData.id ? newData : item
       );
+      setTableData(updatedData);
     } else {
       setTableData((prevData) => [
         ...prevData,
         { id: totalCount + 1, ...newData },
       ]);
+      setTotalCount(totalCount + 1);
     }
-  };
-
-  const handleEdit = (rowData) => {
-    setEditMode(true);
-    setEditData(rowData);
-    setIsDrawerOpen(true);
   };
 
   const sortedData = useMemo(
@@ -191,7 +194,6 @@ const DataTable = ({
             editActive={editActive}
             deleteActive={deleteActive}
             handleDelete={handleDelete}
-            handleEdit={handleEdit}
           />
         </Thead>
         <Tbody>
@@ -241,7 +243,7 @@ const DataTable = ({
         columns={columns}
         onSave={handleSave}
         editMode={editMode}
-        editData={editData}
+        editData={drawerData}
       />
     </Box>
   );
@@ -287,7 +289,7 @@ DataTable.propTypes = {
   ),
   onToolbarButtonClick: PropTypes.func.isRequired,
   defaultAddButton: PropTypes.bool,
-  onSave: PropTypes.func,
+  onSave: PropTypes.func.isRequired,
 };
 
 export default DataTable;
