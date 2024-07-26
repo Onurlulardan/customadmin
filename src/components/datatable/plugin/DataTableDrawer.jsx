@@ -16,7 +16,7 @@ import { TextBox, NumberBox, TextArea } from "../../../components/textbox";
 import SelectBox from "../../../components/selectbox";
 import { FileTypes, FileUpload } from "../../../components/fileupload";
 
-const DataTableDrawer = ({ isOpen, onClose, columnsOptions, onSave }) => {
+const DataTableDrawer = ({ isOpen, onClose, columns, onSave }) => {
   const bgColor = useColorModeValue("white", "gray.800");
   const textColor = useColorModeValue("black", "white");
 
@@ -25,76 +25,80 @@ const DataTableDrawer = ({ isOpen, onClose, columnsOptions, onSave }) => {
     onClose();
   };
 
-  const renderInput = (option) => {
-    switch (option.type) {
+  const renderInput = (column) => {
+    if (column.primaryKey) {
+      return null;
+    }
+
+    switch (column.type) {
       case "String":
         return (
           <TextBox
-            key={option.key}
-            label={option.label}
-            name={option.key}
-            placeholder={option.placeholder || ""}
-            isRequired={option.isRequired || false}
-            maxLength={option.maxLength || undefined}
-            helpText={option.helpText || ""}
-            showCharacterCount={option.showCharacterCount || false}
-            leftAddon={option.leftAddon || null}
-            rightAddon={option.rightAddon || null}
+            key={column.key}
+            label={column.header}
+            name={column.key}
+            placeholder={column.placeholder || ""}
+            isRequired={column.isRequired || false}
+            maxLength={column.maxLength || undefined}
+            helpText={column.helpText || ""}
+            showCharacterCount={column.showCharacterCount || false}
+            leftAddon={column.leftAddon || null}
+            rightAddon={column.rightAddon || null}
           />
         );
       case "Number":
         return (
           <NumberBox
-            key={option.key}
-            label={option.label}
-            name={option.key}
-            placeholder={option.placeholder || ""}
-            isRequired={option.isRequired || false}
-            min={option.min || undefined}
-            max={option.max || undefined}
-            precision={option.precision || undefined}
-            step={option.step || undefined}
-            helpText={option.helpText || ""}
+            key={column.key}
+            label={column.header}
+            name={column.key}
+            placeholder={column.placeholder || ""}
+            isRequired={column.isRequired || false}
+            min={column.min || undefined}
+            max={column.max || undefined}
+            precision={column.precision || undefined}
+            step={column.step || undefined}
+            helpText={column.helpText || ""}
           />
         );
       case "TextArea":
         return (
           <TextArea
-            key={option.key}
-            label={option.label}
-            name={option.key}
-            placeholder={option.placeholder || ""}
-            isRequired={option.isRequired || false}
-            maxLength={option.maxLength || undefined}
-            helpText={option.helpText || ""}
-            showCharacterCount={option.showCharacterCount || false}
+            key={column.key}
+            label={column.header}
+            name={column.key}
+            placeholder={column.placeholder || ""}
+            isRequired={column.isRequired || false}
+            maxLength={column.maxLength || undefined}
+            helpText={column.helpText || ""}
+            showCharacterCount={column.showCharacterCount || false}
           />
         );
       case "Select":
         return (
           <SelectBox
-            key={option.key}
-            label={option.label}
-            name={option.key}
-            placeholder={option.placeholder || ""}
-            options={option.options || []}
-            isMulti={option.isMulti || false}
-            isSearchable={option.isSearchable || false}
-            helpText={option.helpText || ""}
-            isRequired={option.isRequired || false}
+            key={column.key}
+            label={column.header}
+            name={column.key}
+            placeholder={column.placeholder || ""}
+            options={column.options || []}
+            isMulti={column.isMulti || false}
+            isSearchable={column.isSearchable || false}
+            helpText={column.helpText || ""}
+            isRequired={column.isRequired || false}
           />
         );
       case "File":
         return (
           <FileUpload
-            key={option.key}
-            label={option.label}
-            name={option.key}
-            acceptedFileTypes={option.acceptedFileTypes || FileTypes.ALL}
-            maxFileSize={option.maxFileSize || undefined}
-            isRequired={option.isRequired || false}
-            valueType={option.valueType || "base64"}
-            helpText={option.helpText || ""}
+            key={column.key}
+            label={column.header}
+            name={column.key}
+            acceptedFileTypes={column.acceptedFileTypes || FileTypes.ALL}
+            maxFileSize={column.maxFileSize || undefined}
+            isRequired={column.isRequired || false}
+            valueType={column.valueType || "base64"}
+            helpText={column.helpText || ""}
           />
         );
       default:
@@ -117,7 +121,7 @@ const DataTableDrawer = ({ isOpen, onClose, columnsOptions, onSave }) => {
               buttonLabel="Kaydet"
               colorScheme="blue"
             >
-              {columnsOptions.map((option) => renderInput(option))}
+              {columns.map((column) => renderInput(column))}
             </Form>
           </Box>
         </DrawerBody>

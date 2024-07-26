@@ -35,7 +35,6 @@ const DataTable = ({
   toolbarButtons = [],
   onToolbarButtonClick,
   defaultAddButton = false,
-  columnsOptions = [],
   onSave,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -120,10 +119,6 @@ const DataTable = ({
       selectedRows.includes(row[primaryKey])
     );
     console.log("Seçili Satırlar:", key, selectedData);
-  };
-
-  const handleSave = (newData) => {
-    setTableData((prevData) => [...prevData, newData]);
   };
 
   const sortedData = useMemo(
@@ -222,7 +217,7 @@ const DataTable = ({
       <DataTableDrawer
         isOpen={isDrawerOpen}
         onClose={() => setIsDrawerOpen(false)}
-        columnsOptions={columnsOptions}
+        columns={columns}
         onSave={onSave}
       />
     </Box>
@@ -238,6 +233,7 @@ DataTable.propTypes = {
       visible: PropTypes.bool,
       render: PropTypes.func,
       width: PropTypes.string,
+      type: PropTypes.string.isRequired,
     })
   ).isRequired,
   data: PropTypes.array.isRequired,

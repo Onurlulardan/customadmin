@@ -158,7 +158,7 @@ FileUpload.propTypes = {
     FileTypes.PDF,
     FileTypes.WORD,
     FileTypes.EXCEL,
-  ]).isRequired,
+  ]),
   maxFileSize: PropTypes.number,
   getFinalValue: PropTypes.func,
   isRequired: PropTypes.bool,
