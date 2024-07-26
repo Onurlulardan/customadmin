@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Drawer,
   DrawerBody,
@@ -16,20 +16,35 @@ import { TextBox, NumberBox, TextArea } from "../../../components/textbox";
 import SelectBox from "../../../components/selectbox";
 import { FileTypes, FileUpload } from "../../../components/fileupload";
 
-const DataTableDrawer = ({ isOpen, onClose, columns, onSave }) => {
+const DataTableDrawer = ({
+  isOpen,
+  onClose,
+  columns,
+  onSave,
+  editMode,
+  editData,
+}) => {
   const bgColor = useColorModeValue("white", "gray.800");
   const textColor = useColorModeValue("black", "white");
 
-  const handleSubmit = (formData) => {
-    onSave(formData);
+  const [formData, setFormData] = useState({});
+
+  useEffect(() => {
+    if (editMode && editData) {
+      setFormData(editData);
+    }
+  }, [editMode, editData]);
+
+  const handleSubmit = (newData) => {
+    onSave({ ...formData, ...newData });
     onClose();
   };
 
   const renderInput = (column) => {
+    const value = formData[column.key] || "";
     if (column.primaryKey) {
       return null;
     }
-
     switch (column.type) {
       case "String":
         return (
@@ -44,6 +59,7 @@ const DataTableDrawer = ({ isOpen, onClose, columns, onSave }) => {
             showCharacterCount={column.showCharacterCount || false}
             leftAddon={column.leftAddon || null}
             rightAddon={column.rightAddon || null}
+            initialValue={value}
           />
         );
       case "Number":
@@ -59,6 +75,7 @@ const DataTableDrawer = ({ isOpen, onClose, columns, onSave }) => {
             precision={column.precision || undefined}
             step={column.step || undefined}
             helpText={column.helpText || ""}
+            initialValue={value}
           />
         );
       case "TextArea":
@@ -72,6 +89,7 @@ const DataTableDrawer = ({ isOpen, onClose, columns, onSave }) => {
             maxLength={column.maxLength || undefined}
             helpText={column.helpText || ""}
             showCharacterCount={column.showCharacterCount || false}
+            initialValue={value}
           />
         );
       case "Select":
@@ -86,6 +104,7 @@ const DataTableDrawer = ({ isOpen, onClose, columns, onSave }) => {
             isSearchable={column.isSearchable || false}
             helpText={column.helpText || ""}
             isRequired={column.isRequired || false}
+            initialValue={value}
           />
         );
       case "File":
@@ -99,6 +118,7 @@ const DataTableDrawer = ({ isOpen, onClose, columns, onSave }) => {
             isRequired={column.isRequired || false}
             valueType={column.valueType || "base64"}
             helpText={column.helpText || ""}
+            initialValue={value}
           />
         );
       default:
@@ -111,7 +131,9 @@ const DataTableDrawer = ({ isOpen, onClose, columns, onSave }) => {
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
-        <DrawerHeader>Yeni Kayıt Ekle</DrawerHeader>
+        <DrawerHeader>
+          {editMode ? "Kaydı Düzenle" : "Yeni Kayıt Ekle"}
+        </DrawerHeader>
         <DrawerBody>
           <Box bg={bgColor} color={textColor} p={4}>
             <Form
