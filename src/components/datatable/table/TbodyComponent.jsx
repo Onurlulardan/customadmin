@@ -46,7 +46,8 @@ const TbodyComponent = ({
           )}
           {columns.map(
             (column) =>
-              !hiddenColumns.includes(column.key) && (
+              !hiddenColumns.includes(column.key) &&
+              !column.primaryKey && (
                 <Td key={column.key}>
                   {column.render
                     ? column.render(row[column.key], row)
