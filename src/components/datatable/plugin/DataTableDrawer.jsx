@@ -29,19 +29,17 @@ const DataTableDrawer = ({
 
   const handleSubmit = (formData) => {
     if (editMode) {
-      formData.id = editData.id; // Güncellenen veri için ID'yi ekle
+      formData.id = editData.id;
     }
     onSave(formData);
     onClose();
   };
 
   const renderInput = (column) => {
-    if (column.primaryKey) return null; // Primary key alanını render etme
+    if (column.primaryKey) return null;
 
     const initialValue =
       editMode && editData[column.key] ? editData[column.key] : "";
-
-    console.log("initialValue", initialValue);
 
     switch (column.type) {
       case "String":
