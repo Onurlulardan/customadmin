@@ -3,6 +3,7 @@ import { Menu } from "../../../components/menu";
 import { FaChevronDown } from "react-icons/fa6";
 import { Accordion } from "../../../components/accordion";
 import { Modal } from "../../../components/modal";
+import { Box, Flex } from "@chakra-ui/react";
 
 const menuItems = [
   { label: "Profile", key: "profile" },
@@ -43,30 +44,35 @@ const Favorites = () => {
   };
 
   return (
-    <div>
-      {" "}
-      <Menu
-        buttonLabel="Menu"
-        items={menuItems}
-        onItemClick={handleItemClick}
-        rightIcon={<FaChevronDown />}
-        colorScheme={"blue"}
-      />
-      <Accordion
-        items={accordionItems}
-        allowMultiple={true}
-        defaultIndex={[0]}
-      />
-      <Modal
-        title="Başlık"
-        bodyContent={<p>Modal içeriği</p>}
-        footerContent={<p>Footer içeriği</p>}
-        size="lg"
-        closeButton={true}
-        triggerButtonLabel="Modalı Aç"
-        triggerButtonProps={{ colorScheme: "blue" }}
-      />
-    </div>
+    <Flex gap={4} direction={"column"} bg={"white"} p={4}>
+      <Box mb={4}>
+        <Menu
+          buttonLabel="Menu"
+          items={menuItems}
+          onItemClick={handleItemClick}
+          rightIcon={<FaChevronDown />}
+          colorScheme={"blue"}
+        />
+      </Box>
+      <Box mb={4}>
+        <Accordion
+          items={accordionItems}
+          allowMultiple={true}
+          defaultIndex={[0]}
+        />
+      </Box>
+      <Box mb={4}>
+        <Modal
+          title="Başlık"
+          bodyContent={<p>Modal içeriği</p>}
+          footerContent={<p>Footer içeriği</p>}
+          size="lg"
+          closeButton={true}
+          triggerButtonLabel="Modalı Aç"
+          triggerButtonProps={{ colorScheme: "blue" }}
+        />
+      </Box>
+    </Flex>
   );
 };
 
