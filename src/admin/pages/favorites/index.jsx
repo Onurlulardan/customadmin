@@ -2,16 +2,36 @@ import React from "react";
 import { Menu } from "../../../components/menu";
 
 const menuItems = [
-  { label: "Profile", onClick: () => alert("Profile clicked") },
-  { label: "Settings", onClick: () => alert("Settings clicked") },
-  { label: "Logout", onClick: () => alert("Logout clicked") },
+  { label: "Profile", key: "profile" },
+  { label: "Settings", key: "settings" },
+  { label: "Logout", key: "logout" },
 ];
 
 const Favorites = () => {
+  const handleItemClick = (item) => {
+    switch (item.key) {
+      case "profile":
+        alert("Profile clicked");
+        break;
+      case "settings":
+        alert("Settings clicked");
+        break;
+      case "logout":
+        alert("Logout clicked");
+        break;
+      default:
+        alert("Unknown action");
+    }
+  };
+
   return (
     <div>
       {" "}
-      <Menu buttonLabel="Menu" items={menuItems} />
+      <Menu
+        buttonLabel="Menu"
+        items={menuItems}
+        onItemClick={handleItemClick}
+      />
     </div>
   );
 };

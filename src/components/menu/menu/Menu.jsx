@@ -7,13 +7,13 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-const Menu = ({ buttonLabel, items }) => {
+const Menu = ({ buttonLabel, items, onItemClick }) => {
   return (
     <ChakraMenu>
       <MenuButton as={Button}>{buttonLabel}</MenuButton>
       <MenuList>
         {items.map((item, index) => (
-          <MenuItem key={index} onClick={item.onClick}>
+          <MenuItem key={index} onClick={() => onItemClick(item)}>
             {item.label}
           </MenuItem>
         ))}
