@@ -34,7 +34,7 @@ const MyForm = () => {
           helpText="Tam isminiz"
           showCharacterCount={true}
           leftAddon="#"
-          initialValue="onur" // burada bug var
+          defaultValue="onur"
         />
         <TextBox
           label="E-posta"
@@ -44,6 +44,7 @@ const MyForm = () => {
           isRequired={true}
           helpText="E-posta adresiniz"
           rightAddon="@example.com"
+          initialValue="onur"
         />
         <TextArea
           label="Açıklama"

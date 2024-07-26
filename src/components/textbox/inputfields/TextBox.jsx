@@ -31,12 +31,17 @@ const TextBox = ({
   showCharacterCount = false,
   leftAddon,
   rightAddon,
+  defaultValue,
   ...props
 }) => {
   const [value, setValue] = useState(initialValue);
   const [error, setError] = useState("");
   const [isTouched, setIsTouched] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+
+  useEffect(() => {
+    if (defaultValue) setValue(defaultValue);
+  }, [defaultValue]);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -104,7 +109,7 @@ const TextBox = ({
         {showCharacterCount && maxLength && (
           <InputRightElement width="4.5rem" mr={rightAddon ? 10 : 0}>
             <FormHelperText mt={0}>
-              {value.length}/{maxLength}
+              {value?.length}/{maxLength}
             </FormHelperText>
           </InputRightElement>
         )}
@@ -120,6 +125,7 @@ TextBox.propTypes = {
   label: PropTypes.string,
   placeholder: PropTypes.string,
   initialValue: PropTypes.string,
+  defaultValue: PropTypes.string,
   getFinalValue: PropTypes.func,
   isRequired: PropTypes.bool,
   type: PropTypes.oneOf(["text", "email", "password", "number"]),
