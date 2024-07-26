@@ -10,7 +10,7 @@ const LinkItems = [
   { name: "Home", icon: FiHome, path: "/" },
   { name: "Dashboard", icon: FiTrendingUp, path: "/admin/dashboard" },
   { name: "Form", icon: FiCompass, path: "/admin/form" },
-  { name: "Favourites", icon: FiStar, path: "/favourites" },
+  { name: "Favourites", icon: FiStar, path: "/admin/favorites" },
   { name: "Settings", icon: FiSettings, path: "/settings" },
 ];
 
