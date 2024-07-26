@@ -10,6 +10,7 @@ import {
   Button,
   Box,
   useColorModeValue,
+  Divider,
 } from "@chakra-ui/react";
 import Form from "../../form";
 import { TextBox, NumberBox, TextArea } from "../../../components/textbox";
@@ -32,8 +33,7 @@ const DataTableDrawer = ({
       formData.id = editData.id;
     }
     onSave(formData);
-    console.log(formData);
-    onClose();
+    // onClose();
   };
 
   const renderInput = (column) => {
@@ -131,6 +131,7 @@ const DataTableDrawer = ({
         <DrawerHeader>
           {editMode ? "Kaydı Düzenle" : "Yeni Kayıt Ekle"}
         </DrawerHeader>
+        <Divider />
         <DrawerBody>
           <Box bg={bgColor} color={textColor} p={4}>
             <Form

@@ -96,6 +96,7 @@ const Dashboard = () => {
   };
 
   const handleSaveData = (newData) => {
+    console.log("Düzenlenmiş Veri:", newData);
     setTableData((prevData) => [
       ...prevData,
       { id: totalCount + 1, ...newData },
