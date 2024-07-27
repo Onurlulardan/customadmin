@@ -14,7 +14,7 @@ Bu proje, kişisel kullanım için hazırlanmış bir yönetim panelidir. İçer
 Projeyi klonlayın ve bağımlılıkları yükleyin:
 
 ```bash
-git clone [https://github.com/kullanici-adi/yonetim-paneli.git](https://github.com/Onurlulardan/customadmin.git)
+git clone https://github.com/Onurlulardan/customadmin.git
 cd customadmin
 npm install
 ```
