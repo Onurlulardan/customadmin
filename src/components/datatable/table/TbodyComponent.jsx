@@ -40,7 +40,9 @@ const TbodyComponent = ({
             <Td>
               <Checkbox
                 isChecked={selectedRows.includes(row.id)}
-                onChange={() => handleSelectRow(row.id)}
+                onChange={() =>
+                  handleSelectRow(row.id, selectedRows, setSelectedRows)
+                }
               />
             </Td>
           )}
@@ -48,7 +50,12 @@ const TbodyComponent = ({
             (column) =>
               !hiddenColumns.includes(column.key) &&
               !column.primaryKey && (
-                <Td key={column.key}>
+                <Td
+                  key={column.key}
+                  onClick={() =>
+                    handleSelectRow(row.id, selectedRows, setSelectedRows)
+                  }
+                >
                   {column.render
                     ? column.render(row[column.key], row)
                     : row[column.key]}
