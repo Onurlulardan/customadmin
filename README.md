@@ -139,7 +139,8 @@ Form bileşeni, dinamik form oluşturma ve yönetme imkanı sağlar. Kullanıcı
 
 #### Props
 
-- **columns (array)**: Tablonun sütunlarını tanımlar. Her sütun için `key`, `header`, `type`, `isRequired` gibi özellikler belirtilir.
+- **columns (array)**: Tablonun sütunlarını tanımlar. Her sütun için `key`, `header`, `type`, `order` gibi özellikler belirtilir.
+- **columns (defaultAdd)**: Tablonun sütunlarınından yola çıkarak otomatik form oluşturmak için form bileşenlerini propslarınıda belirtebilirsiniz.
 - **data (array)**: Tablo verileri.
 - **contextMenuItems (array)**: Satırlara sağ tıklama menüsü eklemek için öğeler.
 - **toolbarButtons (array)**: Tablo üzerinde çeşitli araç çubuğu düğmeleri eklemek için öğeler.
