@@ -139,7 +139,9 @@ const DataTableForm = ({
         buttonLabel={editMode ? "Güncelle" : "Kaydet"}
         colorScheme="blue"
       >
-        {columns.map((column) => renderInput(column))}
+        {columns
+          .sort((a, b) => a.order - b.order)
+          .map((column) => renderInput(column))}
       </Form>
     </Box>
   );

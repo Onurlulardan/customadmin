@@ -31,6 +31,7 @@ const columns = [
     type: "File",
     acceptedFileTypes: "image/*",
     valueType: "base64",
+    order: 4,
   },
   {
     key: "name",
@@ -38,6 +39,7 @@ const columns = [
     type: "String",
     isRequired: true,
     maxLength: 50,
+    order: 1,
   },
   {
     key: "age",
@@ -46,8 +48,9 @@ const columns = [
     isRequired: true,
     min: 0,
     max: 120,
+    order: 2,
   },
-  { key: "email", header: "Email", type: "String", isRequired: true },
+  { key: "email", header: "Email", type: "String", isRequired: true, order: 3 },
 ];
 
 //ContexMenu itemleri
