@@ -8,7 +8,11 @@ import Form from "../../../components/form";
 import { useDispatch } from "react-redux";
 import { setPageHeader } from "../../../store/root/rootSlice";
 import { DateTimePicker } from "../../../components/timepicker";
-import { RadioGroup, SwitchGroup } from "../../../components/selectioncontrol";
+import {
+  RadioGroup,
+  SwitchGroup,
+  CheckboxGroup,
+} from "../../../components/selectioncontrol";
 
 const MyForm = () => {
   const dispatch = useDispatch();
@@ -143,6 +147,18 @@ const MyForm = () => {
           name="isActive"
           helpText="Aktif misiniz?"
           defaultValue={true}
+        />
+        <CheckboxGroup
+          label="Hobiler"
+          name="hobbies"
+          options={[
+            { value: "football", label: "Futbol" },
+            { value: "basketball", label: "Basketbol" },
+            { value: "swimming", label: "Yüzme" },
+          ]}
+          isRequired={true}
+          helpText="Hobileriniz"
+          defaultValue={["football"]}
         />
       </Form>
     </Box>
