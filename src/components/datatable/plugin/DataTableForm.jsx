@@ -21,8 +21,10 @@ import {
 } from "@chakra-ui/react";
 import Form from "../../form";
 import { TextBox, NumberBox, TextArea } from "../../textbox";
-import { AutoComplate } from "../../selectbox";
+import { AutoComplate, SelectBox } from "../../selectbox";
 import { FileTypes, FileUpload } from "../../fileupload";
+import { DateTimePicker } from "../../timepicker";
+import { RadioGroup, SwitchGroup, CheckboxGroup } from "../../selectioncontrol";
 
 const DataTableForm = ({
   isOpen,
@@ -121,6 +123,68 @@ const DataTableForm = ({
             maxFileSize={column.maxFileSize || undefined}
             isRequired={column.isRequired || false}
             valueType={column.valueType || "base64"}
+            helpText={column.helpText || ""}
+            defaultValue={defaultValue}
+          />
+        );
+      case "SelectBox":
+        return (
+          <SelectBox
+            key={column.key}
+            label={column.header}
+            name={column.key}
+            placeholder={column.placeholder || ""}
+            options={column.options || []}
+            isRequired={column.isRequired || false}
+            helpText={column.helpText || ""}
+            defaultValue={defaultValue}
+          />
+        );
+      case "DateTimePicker":
+        return (
+          <DateTimePicker
+            key={column.key}
+            label={column.header}
+            name={column.key}
+            placeholder={column.placeholder || ""}
+            isRequired={column.isRequired || false}
+            helpText={column.helpText || ""}
+            leftAddon={column.leftAddon || null}
+            setTodayAsDefault={column.setTodayAsDefault || false}
+            includeTime={column.includeTime || true}
+            defaultValue={defaultValue}
+          />
+        );
+      case "RadioGroup":
+        return (
+          <RadioGroup
+            key={column.key}
+            label={column.header}
+            name={column.key}
+            options={column.options || []}
+            isRequired={column.isRequired || false}
+            helpText={column.helpText || ""}
+            defaultValue={defaultValue}
+          />
+        );
+      case "SwitchGroup":
+        return (
+          <SwitchGroup
+            key={column.key}
+            label={column.header}
+            name={column.key}
+            helpText={column.helpText || ""}
+            defaultValue={defaultValue}
+          />
+        );
+      case "CheckboxGroup":
+        return (
+          <CheckboxGroup
+            key={column.key}
+            label={column.header}
+            name={column.key}
+            options={column.options || []}
+            isRequired={column.isRequired || false}
             helpText={column.helpText || ""}
             defaultValue={defaultValue}
           />
