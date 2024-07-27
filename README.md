@@ -2,6 +2,7 @@
 # Yönetim Paneli
 
 Bu proje, kişisel kullanım için hazırlanmış bir yönetim panelidir. İçerisinde Chakra UI ile yapılmış özelleştirilmiş bileşenler bulunur. Projedeki en önemli bileşenler `DataTable` ve `Form` bileşenleridir.
+**Link:** [Demo](https://customadmin.vercel.app/admin/dashboard).
 
 ## Özellikler
 
