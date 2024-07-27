@@ -7,6 +7,7 @@ import { FileUpload, FileTypes } from "../../../components/fileupload";
 import Form from "../../../components/form";
 import { useDispatch } from "react-redux";
 import { setPageHeader } from "../../../store/root/rootSlice";
+import { DateTimePicker } from "../../../components/timepicker";
 
 const MyForm = () => {
   const dispatch = useDispatch();
@@ -101,6 +102,14 @@ const MyForm = () => {
           isRequired={true}
           valueType="base64"
           helpText="Yüklemek istediğiniz dosyayı seçin."
+        />
+        <DateTimePicker
+          label="Doğum Tarihi"
+          name="birthDate"
+          placeholder="Doğum tarihinizi seçin"
+          isRequired={true}
+          helpText="Doğum tarihiniz"
+          leftAddon={"#"}
         />
       </Form>
     </Box>
