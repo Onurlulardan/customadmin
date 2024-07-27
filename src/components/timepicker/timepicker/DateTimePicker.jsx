@@ -22,6 +22,14 @@ const getCurrentDateTime = () => {
   return `${year}-${month}-${date}T${hours}:${minutes}`;
 };
 
+const getCurrentDate = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const date = String(now.getDate()).padStart(2, "0");
+  return `${year}-${month}-${date}`;
+};
+
 const DateTimePicker = ({
   name,
   label,
@@ -39,6 +47,7 @@ const DateTimePicker = ({
   rightAddon,
   defaultValue,
   setTodayAsDefault = false,
+  includeTime = true,
   ...props
 }) => {
   const [value, setValue] = useState(initialValue);
@@ -48,11 +57,11 @@ const DateTimePicker = ({
 
   useEffect(() => {
     if (setTodayAsDefault && !defaultValue && !initialValue) {
-      setValue(getCurrentDateTime());
+      setValue(includeTime ? getCurrentDateTime() : getCurrentDate());
     } else if (defaultValue) {
       setValue(defaultValue);
     }
-  }, [defaultValue, initialValue, setTodayAsDefault]);
+  }, [defaultValue, initialValue, setTodayAsDefault, includeTime]);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -94,7 +103,7 @@ const DateTimePicker = ({
       <InputGroup>
         {leftAddon && <InputLeftAddon>{leftAddon}</InputLeftAddon>}
         <Input
-          type="datetime-local"
+          type={includeTime ? "datetime-local" : "date"}
           name={name}
           placeholder={placeholder}
           value={value}
@@ -132,6 +141,7 @@ DateTimePicker.propTypes = {
   leftAddon: PropTypes.node,
   rightAddon: PropTypes.node,
   setTodayAsDefault: PropTypes.bool,
+  includeTime: PropTypes.bool,
 };
 
 export default DateTimePicker;

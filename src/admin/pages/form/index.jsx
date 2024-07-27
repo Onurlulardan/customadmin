@@ -111,6 +111,7 @@ const MyForm = () => {
           helpText="Doğum tarihiniz"
           leftAddon={"#"}
           setTodayAsDefault={true}
+          includeTime={false}
         />
       </Form>
     </Box>
