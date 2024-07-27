@@ -89,6 +89,7 @@ const CheckboxGroup = ({
               isDisabled={disabled}
               isReadOnly={readOnly}
               autoFocus={autoFocus}
+              isRequired={false}
             >
               {option.label}
             </ChakraCheckbox>
