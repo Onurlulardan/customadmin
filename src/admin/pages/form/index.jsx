@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, useColorModeValue } from "@chakra-ui/react";
 import { TextBox, NumberBox, TextArea } from "../../../components/textbox";
-import { AutoComplate } from "../../../components/selectbox";
+import { AutoComplate, SelectBox } from "../../../components/selectbox";
 import { FaGenderless } from "react-icons/fa";
 import { FileUpload, FileTypes } from "../../../components/fileupload";
 import Form from "../../../components/form";
@@ -112,6 +112,19 @@ const MyForm = () => {
           leftAddon={"#"}
           setTodayAsDefault={true}
           includeTime={false}
+        />
+        <SelectBox
+          label="Şehir"
+          name="city"
+          placeholder="Şehrinizi seçin"
+          options={[
+            { value: "ist", label: "İstanbul" },
+            { value: "skr", label: "Sakarya" },
+            { value: "kce", label: "Kocaeli" },
+          ]}
+          isRequired={false}
+          helpText="Şehir"
+          defaultValue="ist"
         />
       </Form>
     </Box>
