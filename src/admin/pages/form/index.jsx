@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button, useColorModeValue } from "@chakra-ui/react";
 import { TextBox, NumberBox, TextArea } from "../../../components/textbox";
-import SelectBox from "../../../components/selectbox";
+import { AutoComplate } from "../../../components/selectbox";
 import { FaGenderless } from "react-icons/fa";
 import { FileUpload, FileTypes } from "../../../components/fileupload";
 import Form from "../../../components/form";
@@ -67,7 +67,7 @@ const MyForm = () => {
           step={0.2}
           helpText="Yaşınız"
         />
-        <SelectBox
+        <AutoComplate
           label="Cinsiyet"
           name="gender"
           placeholder="Cinsiyetinizi seçin"
@@ -81,7 +81,7 @@ const MyForm = () => {
           helpText="Cinsiyetiniz"
           isRequired={true}
         />
-        <SelectBox
+        <AutoComplate
           label="Ülke"
           name="country"
           placeholder="Ülkenizi seçin"

@@ -21,7 +21,7 @@ import {
 } from "@chakra-ui/react";
 import Form from "../../form";
 import { TextBox, NumberBox, TextArea } from "../../textbox";
-import SelectBox from "../../selectbox";
+import { AutoComplate } from "../../selectbox";
 import { FileTypes, FileUpload } from "../../fileupload";
 
 const DataTableForm = ({
@@ -98,7 +98,7 @@ const DataTableForm = ({
         );
       case "Select":
         return (
-          <SelectBox
+          <AutoComplate
             key={column.key}
             label={column.header}
             name={column.key}
