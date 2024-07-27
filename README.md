@@ -150,4 +150,44 @@ Form bileşeni, dinamik form oluşturma ve yönetme imkanı sağlar. Kullanıcı
 - **onSave (func)**: Veri kaydedildiğinde çağrılacak fonksiyon.
 - **showOn (string)**: Veri ekleme/düzenleme formunun nasıl gösterileceği. Değerler: `"drawer"`, `"modal"`.
 
+#### Örnek veri ve sütunlar
+```bash
+const columns = [
+  { key: "id", header: "ID", primaryKey: true, visible: false, type: "Number" },
+  {
+    key: "avatar",
+    header: "Avatar",
+    render: () => (
+      <img
+        src={avatar}
+        alt="user"
+        style={{ maxWidth: "100px", height: "auto" }}
+      />
+    ),
+    width: "80px",
+    type: "File",
+    acceptedFileTypes: "image/*",
+    valueType: "base64",
+    order: 0,
+  },
+  {
+    key: "name",
+    header: "Ad",
+    type: "String",
+    isRequired: true,
+    maxLength: 50,
+    order: 1,
+  },
+  {
+    key: "age",
+    header: "Yaş",
+    type: "Number",
+    isRequired: true,
+    min: 0,
+    max: 120,
+    order: 2,
+  },
+  { key: "email", header: "Email", type: "String", isRequired: true, order: 3 },
+];
+```
 Daha fazla bilgi ve bileşenlerin detayları için proje dosyalarını inceleyebilirsiniz.
