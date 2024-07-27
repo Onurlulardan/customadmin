@@ -7,11 +7,7 @@ import {
   Radio as ChakraRadio,
   FormErrorMessage,
   FormHelperText,
-  InputGroup,
-  InputLeftAddon,
-  InputRightAddon,
   Box,
-  Stack,
 } from "@chakra-ui/react";
 
 const RadioGroup = ({
@@ -27,8 +23,6 @@ const RadioGroup = ({
   autoFocus = false,
   customValidation,
   customErrorMessage = "",
-  leftAddon,
-  rightAddon,
   defaultValue,
   spacing = 4,
   ...props
@@ -79,36 +73,28 @@ const RadioGroup = ({
       my={4}
     >
       {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
-      <InputGroup>
-        {leftAddon && <InputLeftAddon>{leftAddon}</InputLeftAddon>}
-        <Box
-          spacing={spacing}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
+      <Box
+        spacing={spacing}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
+        {...props}
+      >
+        <ChakraRadioGroup
+          id={name}
+          value={value}
+          onChange={handleChange}
+          isDisabled={disabled}
+          display={"flex"}
+          gap={spacing}
           {...props}
         >
-          <ChakraRadioGroup
-            id={name}
-            value={value}
-            onChange={handleChange}
-            isDisabled={disabled}
-            display={"flex"}
-            gap={spacing}
-            {...props}
-          >
-            {options.map((option, index) => (
-              <ChakraRadio
-                key={index}
-                value={option.value}
-                isReadOnly={readOnly}
-              >
-                {option.label}
-              </ChakraRadio>
-            ))}
-          </ChakraRadioGroup>
-        </Box>
-        {rightAddon && <InputRightAddon>{rightAddon}</InputRightAddon>}
-      </InputGroup>
+          {options.map((option, index) => (
+            <ChakraRadio key={index} value={option.value} isReadOnly={readOnly}>
+              {option.label}
+            </ChakraRadio>
+          ))}
+        </ChakraRadioGroup>
+      </Box>
       {helpText && !error && <FormHelperText>{helpText}</FormHelperText>}
       {isTouched && !isFocused && <FormErrorMessage>{error}</FormErrorMessage>}
     </FormControl>
@@ -134,8 +120,6 @@ RadioGroup.propTypes = {
   autoFocus: PropTypes.bool,
   customValidation: PropTypes.func,
   customErrorMessage: PropTypes.string,
-  leftAddon: PropTypes.node,
-  rightAddon: PropTypes.node,
 };
 
 export default RadioGroup;
