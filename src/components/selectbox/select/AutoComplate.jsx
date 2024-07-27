@@ -19,7 +19,7 @@ import {
 } from "@chakra-ui/react";
 import { FaChevronDown, FaTimes, FaChevronUp } from "react-icons/fa";
 
-const SelectBox = ({
+const AutoComplate = ({
   name,
   label,
   placeholder,
@@ -291,7 +291,7 @@ const SelectBox = ({
   );
 };
 
-SelectBox.propTypes = {
+AutoComplate.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string,
   placeholder: PropTypes.string,
@@ -315,4 +315,4 @@ SelectBox.propTypes = {
   isSearchable: PropTypes.bool,
 };
 
-export default SelectBox;
+export default AutoComplate;
