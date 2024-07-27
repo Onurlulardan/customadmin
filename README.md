@@ -25,7 +25,7 @@ npm install
 Projeyi başlatmak için:
 
 ```bash
-npm start
+npm run dev
 ```
 
 ### Form Bileşeni
