@@ -53,7 +53,7 @@ const columns = [
   { key: "email", header: "Email", type: "String", isRequired: true, order: 3 },
 ];
 
-//ContexMenu itemleri
+// ContexMenu itemleri
 const contextMenuItems = [
   { key: "Edit", text: "Düzenle", icon: MdEdit },
   { key: "Delete", text: "Sil", icon: MdDeleteForever },

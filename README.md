@@ -190,4 +190,92 @@ const columns = [
   { key: "email", header: "Email", type: "String", isRequired: true, order: 3 },
 ];
 ```
+
+#### ContexMenu itemleri
+```bash
+const contextMenuItems = [
+  { key: "Edit", text: "Düzenle", icon: MdEdit },
+  { key: "Delete", text: "Sil", icon: MdDeleteForever },
+];
+```
+
+#### Toolbar butonları
+```bash
+const toolbarButtons = [
+  { key: "Export", header: "Export", icon: MdFileDownload },
+  { key: "Import", header: "Import", icon: MdFileUpload },
+];
+```
+
+#### DataTable Kullanım örneği
+```bash
+
+// Search ve Pagination gibi istekleri yönetebileceğimiz event
+const fetchData = ({ currentPage, rowsPerPageState, searchTerm }) => {
+console.log("Fetching data with params:", {
+    currentPage,
+    rowsPerPageState,
+    searchTerm,
+});
+
+setTableData(data);
+setTotalCount(data.length);
+};
+
+// ContexMenu Tıklama eventi
+const handleItemClick = (key, rowData) => {
+if (key === "Edit") {
+    console.log(key, rowData);
+} else if (key === "Delete") {
+    console.log(key, rowData);
+}
+};
+
+// ToolbarButton tıklama eventi
+const handleToolbarButtonClick = (key, selectedRowsData) => {
+console.log("Tıklanan Buton:", key);
+console.log("Seçili Satırlar:", selectedRowsData);
+};
+
+// yeni eklenen veya düzenlenen veriler
+const handleSaveData = (formData) => {
+console.log("Form Verileri:", formData);
+};
+
+<DataTable
+columns={columns}
+data={tableData}
+totalCount={totalCount}
+rowsPerPage={5}
+onDataChange={fetchData}
+handleRefresh={() => {
+return data;
+}}
+deleteActive={true}
+onDelete={(e) => {
+console.log(e);
+}}
+editActive={true}
+selectable={true}
+onDeleteSelected={(e) => {
+console.log(e);
+}}
+contextMenuItems={contextMenuItems}
+onItemClick={handleItemClick}
+toolbarButtons={toolbarButtons}
+onToolbarButtonClick={(key) =>
+handleToolbarButtonClick(
+    key,
+    tableData.filter((row) => row.selected)
+)
+}
+defaultAddButton={true}
+onSave={handleSaveData}
+showOn={"drawer"}
+/>
+```
+
+
+
+
 Daha fazla bilgi ve bileşenlerin detayları için proje dosyalarını inceleyebilirsiniz.
