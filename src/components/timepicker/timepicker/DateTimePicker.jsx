@@ -12,6 +12,16 @@ import {
   InputRightAddon,
 } from "@chakra-ui/react";
 
+const getCurrentDateTime = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const date = String(now.getDate()).padStart(2, "0");
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  return `${year}-${month}-${date}T${hours}:${minutes}`;
+};
+
 const DateTimePicker = ({
   name,
   label,
@@ -28,6 +38,7 @@ const DateTimePicker = ({
   leftAddon,
   rightAddon,
   defaultValue,
+  setTodayAsDefault = false,
   ...props
 }) => {
   const [value, setValue] = useState(initialValue);
@@ -36,8 +47,12 @@ const DateTimePicker = ({
   const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
-    if (defaultValue) setValue(defaultValue);
-  }, [defaultValue]);
+    if (setTodayAsDefault && !defaultValue && !initialValue) {
+      setValue(getCurrentDateTime());
+    } else if (defaultValue) {
+      setValue(defaultValue);
+    }
+  }, [defaultValue, initialValue, setTodayAsDefault]);
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -116,6 +131,7 @@ DateTimePicker.propTypes = {
   customErrorMessage: PropTypes.string,
   leftAddon: PropTypes.node,
   rightAddon: PropTypes.node,
+  setTodayAsDefault: PropTypes.bool,
 };
 
 export default DateTimePicker;

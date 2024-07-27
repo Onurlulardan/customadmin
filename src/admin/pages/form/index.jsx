@@ -110,6 +110,7 @@ const MyForm = () => {
           isRequired={true}
           helpText="Doğum tarihiniz"
           leftAddon={"#"}
+          setTodayAsDefault={true}
         />
       </Form>
     </Box>
