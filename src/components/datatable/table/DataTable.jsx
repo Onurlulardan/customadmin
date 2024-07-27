@@ -252,6 +252,7 @@ DataTable.propTypes = {
       render: PropTypes.func,
       width: PropTypes.string,
       type: PropTypes.string.isRequired,
+      order: PropTypes.number,
     })
   ).isRequired,
   data: PropTypes.array.isRequired,
