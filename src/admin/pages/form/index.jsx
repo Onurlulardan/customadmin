@@ -8,7 +8,7 @@ import Form from "../../../components/form";
 import { useDispatch } from "react-redux";
 import { setPageHeader } from "../../../store/root/rootSlice";
 import { DateTimePicker } from "../../../components/timepicker";
-import { RadioGroup } from "../../../components/selectioncontrol";
+import { RadioGroup, SwitchGroup } from "../../../components/selectioncontrol";
 
 const MyForm = () => {
   const dispatch = useDispatch();
@@ -137,6 +137,12 @@ const MyForm = () => {
           isRequired={true}
           helpText="Evli misiniz?"
           defaultValue="no"
+        />
+        <SwitchGroup
+          label="Aktif mi?"
+          name="isActive"
+          helpText="Aktif misiniz?"
+          defaultValue={true}
         />
       </Form>
     </Box>
