@@ -8,6 +8,7 @@ import Form from "../../../components/form";
 import { useDispatch } from "react-redux";
 import { setPageHeader } from "../../../store/root/rootSlice";
 import { DateTimePicker } from "../../../components/timepicker";
+import { RadioGroup } from "../../../components/selectioncontrol";
 
 const MyForm = () => {
   const dispatch = useDispatch();
@@ -125,6 +126,17 @@ const MyForm = () => {
           isRequired={false}
           helpText="Şehir"
           defaultValue="ist"
+        />
+        <RadioGroup
+          label="Evli mi?"
+          name="isMarried"
+          options={[
+            { value: "yes", label: "Evet" },
+            { value: "no", label: "Hayır" },
+          ]}
+          isRequired={true}
+          helpText="Evli misiniz?"
+          defaultValue="no"
         />
       </Form>
     </Box>
