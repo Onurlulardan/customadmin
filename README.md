@@ -1,4 +1,3 @@
-
 # Yönetim Paneli
 
 Bu proje, kişisel kullanım için hazırlanmış bir yönetim panelidir. İçerisinde Chakra UI ile yapılmış özelleştirilmiş bileşenler bulunur. Projedeki en önemli bileşenler `DataTable` ve `Form` bileşenleridir.
@@ -36,9 +35,9 @@ Form bileşeni, dinamik form oluşturma ve yönetme imkanı sağlar. Kullanıcı
 ```bash
 // Form bileşeni onSubmit eventinde bileşen içindeki childrenlardan aldığı verileri geri döner
 const handleSubmit = (values) => {
- console.log("Form values:", values);
- alert(JSON.stringify(values, null, 2));
-}; 
+    console.log("Form values:", values);
+    alert(JSON.stringify(values, null, 2));
+};
 ```
 
 #### Props
@@ -54,13 +53,13 @@ const handleSubmit = (values) => {
 ### Kullanım
 
 1. **TextBox**: Metin girişi için kullanılır.
-    - `label`: Bileşenin etiketi.
-    - `name`: Bileşenin adı.
-    - `placeholder`: Girdi alanı için yer tutucu.
-    - `isRequired`: Girdinin zorunlu olup olmadığı.
-    - `maxLength`: Maksimum karakter sayısı.
-    - `helpText`: Yardımcı metin.
-    - `showCharacterCount`: Karakter sayısını gösterme.
+   - `label`: Bileşenin etiketi.
+   - `name`: Bileşenin adı.
+   - `placeholder`: Girdi alanı için yer tutucu.
+   - `isRequired`: Girdinin zorunlu olup olmadığı.
+   - `maxLength`: Maksimum karakter sayısı.
+   - `helpText`: Yardımcı metin.
+   - `showCharacterCount`: Karakter sayısını gösterme.
 
 ```bash
 <TextBox
@@ -74,79 +73,193 @@ const handleSubmit = (values) => {
     leftAddon="#"
     defaultValue="onur"
 />
-}; 
 ```
 
 2. **NumberBox**: Sayısal değer girişi için kullanılır.
-    - `label`: Bileşenin etiketi.
-    - `name`: Bileşenin adı.
-    - `placeholder`: Girdi alanı için yer tutucu.
-    - `isRequired`: Girdinin zorunlu olup olmadığı.
-    - `min`: Minimum değer.
-    - `max`: Maksimum değer.
-    - `precision`: Değerin hassasiyeti.
-    - `step`: Adım değeri.
-    - `helpText`: Yardımcı metin.
+
+   - `label`: Bileşenin etiketi.
+   - `name`: Bileşenin adı.
+   - `placeholder`: Girdi alanı için yer tutucu.
+   - `isRequired`: Girdinin zorunlu olup olmadığı.
+   - `min`: Minimum değer.
+   - `max`: Maksimum değer.
+   - `precision`: Değerin hassasiyeti.
+   - `step`: Adım değeri.
+   - `helpText`: Yardımcı metin.
+
+```bash
+<NumberBox
+    label="Yaş"
+    name="age"
+    placeholder="Yaşınızı girin"
+    isRequired={true}
+    min={0}
+    max={120}
+    precision={2}
+    step={0.2}
+    helpText="Yaşınız"
+/>
+```
 
 3. **TextArea**: Uzun metin girişi için kullanılır.
-    - `label`: Bileşenin etiketi.
-    - `name`: Bileşenin adı.
-    - `placeholder`: Girdi alanı için yer tutucu.
-    - `isRequired`: Girdinin zorunlu olup olmadığı.
-    - `maxLength`: Maksimum karakter sayısı.
-    - `helpText`: Yardımcı metin.
-    - `showCharacterCount`: Karakter sayısını gösterme.
+
+   - `label`: Bileşenin etiketi.
+   - `name`: Bileşenin adı.
+   - `placeholder`: Girdi alanı için yer tutucu.
+   - `isRequired`: Girdinin zorunlu olup olmadığı.
+   - `maxLength`: Maksimum karakter sayısı.
+   - `helpText`: Yardımcı metin.
+   - `showCharacterCount`: Karakter sayısını gösterme.
+
+```bash
+<TextArea
+    label="Açıklama"
+    name="description"
+    placeholder="Açıklamanızı girin"
+    isRequired={true}
+    maxLength={100}
+    helpText="Açıklamanız"
+    showCharacterCount={true}
+/>
+```
 
 4. **AutoComplate**: Otomatik tamamlama özelliği olan seçim bileşeni.
-    - `label`: Bileşenin etiketi.
-    - `name`: Bileşenin adı.
-    - `placeholder`: Girdi alanı için yer tutucu.
-    - `options`: Seçenekler listesi.
-    - `isMulti`: Çoklu seçim.
-    - `isSearchable`: Arama özelliği.
-    - `helpText`: Yardımcı metin.
-    - `isRequired`: Girdinin zorunlu olup olmadığı.
+
+   - `label`: Bileşenin etiketi.
+   - `name`: Bileşenin adı.
+   - `placeholder`: Girdi alanı için yer tutucu.
+   - `options`: Seçenekler listesi.
+   - `isMulti`: Çoklu seçim.
+   - `isSearchable`: Arama özelliği.
+   - `helpText`: Yardımcı metin.
+   - `isRequired`: Girdinin zorunlu olup olmadığı.
+
+```bash
+<AutoComplate
+    label="Cinsiyet"
+    name="gender"
+    placeholder="Cinsiyetinizi seçin"
+    options={[
+    { value: "male", label: "Erkek" },
+    { value: "female", label: "Kadın" },
+    { value: "other", label: "Diğer" },
+    ]}
+    isMulti={true}
+    isSearchable={true}
+    helpText="Cinsiyetiniz"
+    isRequired={true}
+/>
+```
 
 5. **SelectBox**: Açılır kutu bileşeni.
-    - `label`: Bileşenin etiketi.
-    - `name`: Bileşenin adı.
-    - `placeholder`: Girdi alanı için yer tutucu.
-    - `options`: Seçenekler listesi.
-    - `isRequired`: Girdinin zorunlu olup olmadığı.
-    - `helpText`: Yardımcı metin.
+
+   - `label`: Bileşenin etiketi.
+   - `name`: Bileşenin adı.
+   - `placeholder`: Girdi alanı için yer tutucu.
+   - `options`: Seçenekler listesi.
+   - `isRequired`: Girdinin zorunlu olup olmadığı.
+   - `helpText`: Yardımcı metin.
+
+```bash
+<SelectBox
+    label="Şehir"
+    name="city"
+    placeholder="Şehrinizi seçin"
+    options={[
+    { value: "ist", label: "İstanbul" },
+    { value: "skr", label: "Sakarya" },
+    { value: "kce", label: "Kocaeli" },
+    ]}
+    isRequired={false}
+    helpText="Şehir"
+    defaultValue="ist"
+/>
+```
 
 6. **FileUpload**: Dosya yükleme bileşeni.
-    - `label`: Bileşenin etiketi.
-    - `name`: Bileşenin adı.
-    - `acceptedFileTypes`: Kabul edilen dosya türleri.
-    - `maxFileSize`: Maksimum dosya boyutu.
-    - `isRequired`: Girdinin zorunlu olup olmadığı.
-    - `valueType`: Dosya verisinin türü.
-    - `helpText`: Yardımcı metin.
+
+   - `label`: Bileşenin etiketi.
+   - `name`: Bileşenin adı.
+   - `acceptedFileTypes`: Kabul edilen dosya türleri.
+   - `maxFileSize`: Maksimum dosya boyutu.
+   - `isRequired`: Girdinin zorunlu olup olmadığı.
+   - `valueType`: Dosya verisinin türü.
+   - `helpText`: Yardımcı metin.
+
+```bash
+<FileUpload
+    label="Dosya Yükle"
+    name="file"
+    acceptedFileTypes={FileTypes.IMAGE}
+    maxFileSize={2}
+    isRequired={true}
+    valueType="base64"
+    helpText="Yüklemek istediğiniz dosyayı seçin."
+/>
+```
 
 7. **DateTimePicker**: Tarih ve saat seçimi için kullanılır.
-    - `label`: Bileşenin etiketi.
-    - `name`: Bileşenin adı.
-    - `placeholder`: Girdi alanı için yer tutucu.
-    - `isRequired`: Girdinin zorunlu olup olmadığı.
-    - `helpText`: Yardımcı metin.
-    - `leftAddon`: Sol taraf ek bileşeni.
-    - `setTodayAsDefault`: Bugünü varsayılan olarak ayarlama.
-    - `includeTime`: Saat dahil etme.
+
+   - `label`: Bileşenin etiketi.
+   - `name`: Bileşenin adı.
+   - `placeholder`: Girdi alanı için yer tutucu.
+   - `isRequired`: Girdinin zorunlu olup olmadığı.
+   - `helpText`: Yardımcı metin.
+   - `leftAddon`: Sol taraf ek bileşeni.
+   - `setTodayAsDefault`: Bugünü varsayılan olarak ayarlama.
+   - `includeTime`: Saat dahil etme.
+
+```bash
+<DateTimePicker
+    label="Doğum Tarihi"
+    name="birthDate"
+    placeholder="Doğum tarihinizi seçin"
+    isRequired={true}
+    helpText="Doğum tarihiniz"
+    leftAddon={"#"}
+    setTodayAsDefault={true}
+    includeTime={false}
+/>
+```
 
 8. **RadioGroup**: Radyo düğmeleri grubu.
-    - `label`: Bileşenin etiketi.
-    - `name`: Bileşenin adı.
-    - `options`: Seçenekler listesi.
-    - `isRequired`: Girdinin zorunlu olup olmadığı.
-    - `helpText`: Yardımcı metin.
-    - `defaultValue`: Varsayılan değer.
+
+   - `label`: Bileşenin etiketi.
+   - `name`: Bileşenin adı.
+   - `options`: Seçenekler listesi.
+   - `isRequired`: Girdinin zorunlu olup olmadığı.
+   - `helpText`: Yardımcı metin.
+   - `defaultValue`: Varsayılan değer.
+
+```bash
+<RadioGroup
+    label="Evli mi?"
+    name="isMarried"
+    options={[
+    { value: "yes", label: "Evet" },
+    { value: "no", label: "Hayır" },
+    ]}
+    isRequired={true}
+    helpText="Evli misiniz?"
+    defaultValue="no"
+/>
+```
 
 9. **SwitchGroup**: Anahtar bileşeni.
-    - `label`: Bileşenin etiketi.
-    - `name`: Bileşenin adı.
-    - `helpText`: Yardımcı metin.
-    - `defaultValue`: Varsayılan değer.
+
+   - `label`: Bileşenin etiketi.
+   - `name`: Bileşenin adı.
+   - `helpText`: Yardımcı metin.
+   - `defaultValue`: Varsayılan değer.
+
+```bash
+<SwitchGroup
+    label="Aktif mi?"
+    name="isActive"
+    helpText="Aktif misiniz?"
+    defaultValue={true}
+/>
+```
 
 10. **CheckboxGroup**: Onay kutuları grubu.
     - `label`: Bileşenin etiketi.
@@ -155,6 +268,21 @@ const handleSubmit = (values) => {
     - `isRequired`: Girdinin zorunlu olup olmadığı.
     - `helpText`: Yardımcı metin.
     - `defaultValue`: Varsayılan değer.
+
+```bash
+<CheckboxGroup
+    label="Hobiler"
+    name="hobbies"
+    options={[
+    { value: "football", label: "Futbol" },
+    { value: "basketball", label: "Basketbol" },
+    { value: "swimming", label: "Yüzme" },
+    ]}
+    isRequired={true}
+    helpText="Hobileriniz"
+    defaultValue={["football"]}
+/>
+```
 
 ### DataTable Bileşeni
 
@@ -174,6 +302,7 @@ const handleSubmit = (values) => {
 - **showOn (string)**: Veri ekleme/düzenleme formunun nasıl gösterileceği. Değerler: `"drawer"`, `"modal"`.
 
 #### Örnek veri ve sütunlar
+
 ```bash
 const columns = [
   { key: "id", header: "ID", primaryKey: true, visible: false, type: "Number" },
@@ -215,6 +344,7 @@ const columns = [
 ```
 
 #### ContexMenu itemleri
+
 ```bash
 const contextMenuItems = [
   { key: "Edit", text: "Düzenle", icon: MdEdit },
@@ -223,6 +353,7 @@ const contextMenuItems = [
 ```
 
 #### Toolbar butonları
+
 ```bash
 const toolbarButtons = [
   { key: "Export", header: "Export", icon: MdFileDownload },
@@ -231,74 +362,72 @@ const toolbarButtons = [
 ```
 
 #### DataTable Kullanım örneği
+
 ```bash
 
 // Search ve Pagination gibi istekleri yönetebileceğimiz event
 const fetchData = ({ currentPage, rowsPerPageState, searchTerm }) => {
-console.log("Fetching data with params:", {
-    currentPage,
-    rowsPerPageState,
-    searchTerm,
-});
+    console.log("Fetching data with params:", {
+        currentPage,
+        rowsPerPageState,
+        searchTerm,
+    });
 
-setTableData(data);
-setTotalCount(data.length);
+    setTableData(data);
+    setTotalCount(data.length);
 };
 
 // ContexMenu Tıklama eventi
 const handleItemClick = (key, rowData) => {
-if (key === "Edit") {
-    console.log(key, rowData);
-} else if (key === "Delete") {
-    console.log(key, rowData);
-}
+    if (key === "Edit") {
+        console.log(key, rowData);
+    } else if (key === "Delete") {
+        console.log(key, rowData);
+    }
 };
 
 // ToolbarButton tıklama eventi
 const handleToolbarButtonClick = (key, selectedRowsData) => {
-console.log("Tıklanan Buton:", key);
-console.log("Seçili Satırlar:", selectedRowsData);
+    console.log("Tıklanan Buton:", key);
+    console.log("Seçili Satırlar:", selectedRowsData);
 };
 
 // yeni eklenen veya düzenlenen veriler
-const handleSaveData = (formData) => {
-console.log("Form Verileri:", formData);
+    const handleSaveData = (formData) => {
+    console.log("Form Verileri:", formData);
 };
 
 <DataTable
-columns={columns}
-data={tableData}
-totalCount={totalCount}
-rowsPerPage={5}
-onDataChange={fetchData}
-handleRefresh={() => {
-return data;
-}}
-deleteActive={true}
-onDelete={(e) => {
-console.log(e);
-}}
-editActive={true}
-selectable={true}
-onDeleteSelected={(e) => {
-console.log(e);
-}}
-contextMenuItems={contextMenuItems}
-onItemClick={handleItemClick}
-toolbarButtons={toolbarButtons}
-onToolbarButtonClick={(key) =>
-handleToolbarButtonClick(
-    key,
-    tableData.filter((row) => row.selected)
-)
-}
-defaultAddButton={true}
-onSave={handleSaveData}
-showOn={"drawer"}
+    columns={columns}
+    data={tableData}
+    totalCount={totalCount}
+    rowsPerPage={5}
+    onDataChange={fetchData}
+    handleRefresh={() => {
+    return data;
+    }}
+    deleteActive={true}
+    onDelete={(e) => {
+    console.log(e);
+    }}
+    editActive={true}
+    selectable={true}
+    onDeleteSelected={(e) => {
+    console.log(e);
+    }}
+    contextMenuItems={contextMenuItems}
+    onItemClick={handleItemClick}
+    toolbarButtons={toolbarButtons}
+    onToolbarButtonClick={(key) =>
+    handleToolbarButtonClick(
+        key,
+        tableData.filter((row) => row.selected)
+    )
+    }
+    defaultAddButton={true}
+    onSave={handleSaveData}
+    showOn={"drawer"}
 />
 ```
-
-
-
 
 Daha fazla bilgi ve bileşenlerin detayları için proje dosyalarını inceleyebilirsiniz.
