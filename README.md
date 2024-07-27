@@ -33,6 +33,14 @@ npm start
 
 Form bileşeni, dinamik form oluşturma ve yönetme imkanı sağlar. Kullanıcıdan alınan girdiler, bileşen içinde otomatik olarak bir state objesinde toplanır ve `onSubmit` fonksiyonu ile işlenir. Form bileşeni içinde kullanılan bileşenler, form bileşenine özel props alarak özelleştirilir ve doğrulama yapılabilir.
 
+```bash
+// Form bileşeni onSubmit eventinde bileşen içindeki children'lardan aldığı verileri geri döner
+const handleSubmit = (values) => {
+console.log("Form values:", values);
+alert(JSON.stringify(values, null, 2));
+}; 
+```
+
 #### Props
 
 - **onSubmit (func)**: Form gönderildiğinde çağrılacak fonksiyon.
@@ -53,6 +61,21 @@ Form bileşeni, dinamik form oluşturma ve yönetme imkanı sağlar. Kullanıcı
     - `maxLength`: Maksimum karakter sayısı.
     - `helpText`: Yardımcı metin.
     - `showCharacterCount`: Karakter sayısını gösterme.
+
+```bash
+<TextBox
+label="İsim"
+name="name"
+placeholder="İsminizi girin"
+isRequired={true}
+maxLength={20}
+helpText="Tam isminiz"
+showCharacterCount={true}
+leftAddon="#"
+defaultValue="onur"
+/>
+}; 
+```
 
 2. **NumberBox**: Sayısal değer girişi için kullanılır.
     - `label`: Bileşenin etiketi.
