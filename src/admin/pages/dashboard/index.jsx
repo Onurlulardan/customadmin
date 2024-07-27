@@ -31,7 +31,7 @@ const columns = [
     type: "File",
     acceptedFileTypes: "image/*",
     valueType: "base64",
-    order: 4,
+    order: 0,
   },
   {
     key: "name",
