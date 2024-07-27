@@ -64,15 +64,15 @@ alert(JSON.stringify(values, null, 2));
 
 ```bash
 <TextBox
-label="İsim"
-name="name"
-placeholder="İsminizi girin"
-isRequired={true}
-maxLength={20}
-helpText="Tam isminiz"
-showCharacterCount={true}
-leftAddon="#"
-defaultValue="onur"
+    label="İsim"
+    name="name"
+    placeholder="İsminizi girin"
+    isRequired={true}
+    maxLength={20}
+    helpText="Tam isminiz"
+    showCharacterCount={true}
+    leftAddon="#"
+    defaultValue="onur"
 />
 }; 
 ```
