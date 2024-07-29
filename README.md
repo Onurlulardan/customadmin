@@ -32,7 +32,7 @@ npm run dev
 
 Form bileşeni, dinamik form oluşturma ve yönetme imkanı sağlar. Kullanıcıdan alınan girdiler, bileşen içinde otomatik olarak bir state objesinde toplanır ve `onSubmit` fonksiyonu ile işlenir. Form bileşeni içinde kullanılan bileşenler, form bileşenine özel props alarak özelleştirilir ve doğrulama yapılabilir.
 
-```bash
+```javascript
 // Form bileşeni onSubmit eventinde bileşen içindeki childrenlardan aldığı verileri geri döner
 const handleSubmit = (values) => {
     console.log("Form values:", values);
@@ -61,7 +61,7 @@ const handleSubmit = (values) => {
    - `helpText`: Yardımcı metin.
    - `showCharacterCount`: Karakter sayısını gösterme.
 
-```bash
+```javascript
 <TextBox
     label="İsim"
     name="name"
@@ -87,7 +87,7 @@ const handleSubmit = (values) => {
    - `step`: Adım değeri.
    - `helpText`: Yardımcı metin.
 
-```bash
+```javascript
 <NumberBox
     label="Yaş"
     name="age"
@@ -111,7 +111,7 @@ const handleSubmit = (values) => {
    - `helpText`: Yardımcı metin.
    - `showCharacterCount`: Karakter sayısını gösterme.
 
-```bash
+```javascript
 <TextArea
     label="Açıklama"
     name="description"
@@ -134,7 +134,7 @@ const handleSubmit = (values) => {
    - `helpText`: Yardımcı metin.
    - `isRequired`: Girdinin zorunlu olup olmadığı.
 
-```bash
+```javascript
 <AutoComplate
     label="Cinsiyet"
     name="gender"
@@ -160,7 +160,7 @@ const handleSubmit = (values) => {
    - `isRequired`: Girdinin zorunlu olup olmadığı.
    - `helpText`: Yardımcı metin.
 
-```bash
+```javascript
 <SelectBox
     label="Şehir"
     name="city"
@@ -186,7 +186,7 @@ const handleSubmit = (values) => {
    - `valueType`: Dosya verisinin türü.
    - `helpText`: Yardımcı metin.
 
-```bash
+```javascript
 <FileUpload
     label="Dosya Yükle"
     name="file"
@@ -209,7 +209,7 @@ const handleSubmit = (values) => {
    - `setTodayAsDefault`: Bugünü varsayılan olarak ayarlama.
    - `includeTime`: Saat dahil etme.
 
-```bash
+```javascript
 <DateTimePicker
     label="Doğum Tarihi"
     name="birthDate"
@@ -231,7 +231,7 @@ const handleSubmit = (values) => {
    - `helpText`: Yardımcı metin.
    - `defaultValue`: Varsayılan değer.
 
-```bash
+```javascript
 <RadioGroup
     label="Evli mi?"
     name="isMarried"
@@ -252,7 +252,7 @@ const handleSubmit = (values) => {
    - `helpText`: Yardımcı metin.
    - `defaultValue`: Varsayılan değer.
 
-```bash
+```javascript
 <SwitchGroup
     label="Aktif mi?"
     name="isActive"
@@ -269,7 +269,7 @@ const handleSubmit = (values) => {
     - `helpText`: Yardımcı metin.
     - `defaultValue`: Varsayılan değer.
 
-```bash
+```javascript
 <CheckboxGroup
     label="Hobiler"
     name="hobbies"
@@ -303,7 +303,7 @@ const handleSubmit = (values) => {
 
 #### Örnek veri ve sütunlar
 
-```bash
+```javascript
 const columns = [
   { key: "id", header: "ID", primaryKey: true, visible: false, type: "Number" },
   {
@@ -345,7 +345,7 @@ const columns = [
 
 #### ContexMenu itemleri
 
-```bash
+```javascript
 const contextMenuItems = [
   { key: "Edit", text: "Düzenle", icon: MdEdit },
   { key: "Delete", text: "Sil", icon: MdDeleteForever },
@@ -354,7 +354,7 @@ const contextMenuItems = [
 
 #### Toolbar butonları
 
-```bash
+```javascript
 const toolbarButtons = [
   { key: "Export", header: "Export", icon: MdFileDownload },
   { key: "Import", header: "Import", icon: MdFileUpload },
@@ -363,7 +363,7 @@ const toolbarButtons = [
 
 #### DataTable Kullanım örneği
 
-```bash
+```javascript
 
 // Search ve Pagination gibi istekleri yönetebileceğimiz event
 const fetchData = ({ currentPage, rowsPerPageState, searchTerm }) => {
