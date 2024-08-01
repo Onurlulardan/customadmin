@@ -31,7 +31,6 @@ const columns = [
     type: "File",
     acceptedFileTypes: "image/*",
     valueType: "base64",
-    order: 0,
   },
   {
     key: "name",
@@ -39,7 +38,6 @@ const columns = [
     type: "String",
     isRequired: true,
     maxLength: 50,
-    order: 1,
     formControl: "group1",
   },
   {
@@ -49,7 +47,6 @@ const columns = [
     isRequired: true,
     min: 0,
     max: 120,
-    order: 2,
   },
   {
     key: "email",
@@ -57,7 +54,6 @@ const columns = [
     type: "String",
     isRequired: true,
     formControl: "group1",
-    order: 3,
   },
 ];
 
