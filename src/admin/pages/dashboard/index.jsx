@@ -40,6 +40,7 @@ const columns = [
     isRequired: true,
     maxLength: 50,
     order: 1,
+    formControl: "group1",
   },
   {
     key: "age",
@@ -50,7 +51,14 @@ const columns = [
     max: 120,
     order: 2,
   },
-  { key: "email", header: "Email", type: "String", isRequired: true, order: 3 },
+  {
+    key: "email",
+    header: "Email",
+    type: "String",
+    isRequired: true,
+    formControl: "group1",
+    order: 3,
+  },
 ];
 
 // ContexMenu itemleri

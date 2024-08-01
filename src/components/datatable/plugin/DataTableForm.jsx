@@ -18,6 +18,7 @@ import {
   Box,
   useColorModeValue,
   Divider,
+  Flex,
 } from "@chakra-ui/react";
 import Form from "../../form";
 import { TextBox, NumberBox, TextArea } from "../../textbox";
@@ -194,21 +195,47 @@ const DataTableForm = ({
     }
   };
 
-  const renderForm = () => (
-    <Box bg={bgColor} color={textColor} p={4}>
-      <Form
-        onSubmit={handleSubmit}
-        buttonPositionY="bottom"
-        buttonPositionX="right"
-        buttonLabel={editMode ? "Güncelle" : "Kaydet"}
-        colorScheme="blue"
-      >
-        {columns
-          .sort((a, b) => a.order - b.order)
-          .map((column) => renderInput(column))}
-      </Form>
-    </Box>
-  );
+  const renderForm = () => {
+    const groupedColumns = [];
+    const unGroupedColumns = [];
+
+    columns.forEach((column) => {
+      if (column.formControl) {
+        const existingGroup = groupedColumns.find(
+          (group) => group.formControl === column.formControl
+        );
+        if (existingGroup) {
+          existingGroup.columns.push(column);
+        } else {
+          groupedColumns.push({
+            formControl: column.formControl,
+            columns: [column],
+          });
+        }
+      } else {
+        unGroupedColumns.push(column);
+      }
+    });
+
+    return (
+      <Box bg={bgColor} color={textColor} p={4}>
+        <Form
+          onSubmit={handleSubmit}
+          buttonPositionY="bottom"
+          buttonPositionX="right"
+          buttonLabel={editMode ? "Güncelle" : "Kaydet"}
+          colorScheme="blue"
+        >
+          {unGroupedColumns.map((column) => renderInput(column))}
+          {groupedColumns.map((group) => (
+            <Flex key={group.formControl} flexDirection="row" gap={4}>
+              {group.columns.map((column) => renderInput(column))}
+            </Flex>
+          ))}
+        </Form>
+      </Box>
+    );
+  };
 
   if (showOn === "modal") {
     return (
