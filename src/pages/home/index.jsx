@@ -8,7 +8,7 @@ const Home = () => {
     navigate("/admin/dashboard");
   }, [navigate]);
 
-  return <div>Home</div>;
+  return <div>Home Page Hikmet</div>;
 };
 
 export default Home;
